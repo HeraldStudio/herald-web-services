@@ -38,6 +38,7 @@ CREATE  TABLE IF NOT EXISTS `herald_curriculum`.`select` (
   `select_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `card_no` INT UNSIGNED NOT NULL ,
   `course_id` INT UNSIGNED NOT NULL ,
+  `term` VARCHAR(7) NOT NULL ,
   PRIMARY KEY (`select_id`) ,
   INDEX `student_fk_idx` (`card_no` ASC) ,
   INDEX `course_fk_idx` (`course_id` ASC) ,

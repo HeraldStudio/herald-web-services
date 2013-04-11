@@ -23,16 +23,36 @@
  */
 package cn.edu.seu.herald.ws.dao;
 
-import cn.edu.seu.herald.ws.api.Curriculum;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.sql.DataSource;
 
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
-public interface CurriculumDataAccess {
+abstract class AbstractDataAccess {
 
-    Curriculum getCurriculum(String cardNumber) throws DataAccessException;
+    private DataSource dataSource;
 
-    Curriculum getCurriculum(String cardNumber, String term)
-            throws DataAccessException;
+    AbstractDataAccess(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    protected Connection getConnection() throws DataAccessException {
+        try {
+            return dataSource.getConnection();
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        }
+    }
+
+    protected void closeConnection(Connection connection)
+            throws DataAccessException {
+        try {
+            connection.close();
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        }
+    }
 }

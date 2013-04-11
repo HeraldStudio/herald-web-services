@@ -23,16 +23,17 @@
  */
 package cn.edu.seu.herald.ws.dao;
 
-import cn.edu.seu.herald.ws.api.Curriculum;
-
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
-public interface CurriculumDataAccess {
+public class DataAccessException extends RuntimeException {
 
-    Curriculum getCurriculum(String cardNumber) throws DataAccessException;
+    public DataAccessException() {
+        super("Data access exception occurred.");
+    }
 
-    Curriculum getCurriculum(String cardNumber, String term)
-            throws DataAccessException;
+    public DataAccessException(Exception cause) {
+        super("Data access exception occurred.", cause);
+    }
 }
