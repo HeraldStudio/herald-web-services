@@ -23,10 +23,15 @@
  */
 package cn.edu.seu.herald.ws.dao;
 
+import cn.edu.seu.herald.ws.api.Curriculum;
+
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
 public interface CurriculumDataAccess {
 
+    Curriculum getCurriculum(String cardNumber);
+
+    Curriculum getCurriculum(String cardNumber, String term);
 }
