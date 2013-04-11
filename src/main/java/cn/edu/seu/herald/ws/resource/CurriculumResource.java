@@ -47,24 +47,18 @@ public class CurriculumResource {
 
     @Autowired
     private CurriculumDataAccess curriculumDataAccess;
-    @Autowired
-    private String currentTerm;
 
     public void setCurriculumDataAccess(
             CurriculumDataAccess curriculumDataAccess) {
         this.curriculumDataAccess = curriculumDataAccess;
     }
 
-    public void setCurrentTerm(String currentTerm) {
-        this.currentTerm = currentTerm;
-    }
-
     @GET
     @Path("/curriculum")
     @Produces(MediaType.APPLICATION_XML)
     public Curriculum getCurriculum(
             @MatrixParam("cardNumber") String cardNumber) {
-        return getCurriculum(cardNumber, currentTerm);
+        return curriculumDataAccess.getCurriculum(cardNumber);
     }
 
     @GET
@@ -73,90 +67,6 @@ public class CurriculumResource {
     public Curriculum getCurriculum(
             @MatrixParam("cardNumber") String cardNumber,
             @MatrixParam("term") String term) {
-        return null;
-    }
-
-    @GET
-    @Path("/curriculum/timeTable")
-    @Produces(MediaType.APPLICATION_XML)
-    public TimeTable getTimeTable(
-            @MatrixParam("cardNumber") String cardNumber) {
-        return getTimeTable(cardNumber, currentTerm);
-    }
-
-    @GET
-    @Path("/curriculum/timeTable")
-    @Produces(MediaType.APPLICATION_XML)
-    public TimeTable getTimeTable(
-            @MatrixParam("cardNumber") String cardNumber,
-            @MatrixParam("term") String term) {
-        return null;
-    }
-
-    @GET
-    @Path("/curriculum/timeTable/schdule")
-    @Produces(MediaType.APPLICATION_XML)
-    public Schedule getSchedule(
-            @MatrixParam("cardNumber") String cardNumber) {
-        return getSchedule(cardNumber, currentTerm);
-    }
-
-    @GET
-    @Path("/curriculum/timeTable/schdule")
-    @Produces(MediaType.APPLICATION_XML)
-    public Schedule getSchedule(
-            @MatrixParam("cardNumber") String cardNumber,
-            @MatrixParam("term") String term) {
-        return null;
-    }
-
-    @GET
-    @Path("/curriculum/timeTable/schdule")
-    @Produces(MediaType.APPLICATION_XML)
-    public Schedule getSchedule(
-            @MatrixParam("cardNumber") String cardNumber,
-            @MatrixParam("day") Day day) {
-        return getSchedule(cardNumber, currentTerm, day);
-    }
-
-    @GET
-    @Path("/curriculum/timeTable/schdule")
-    @Produces(MediaType.APPLICATION_XML)
-    public Schedule getSchedule(
-            @MatrixParam("cardNumber") String cardNumber,
-            @MatrixParam("term") String term,
-            @MatrixParam("day") Day day) {
-        return null;
-    }
-
-    @GET
-    @Path("/curriculum/timeTable/schedule/attendance")
-    @Produces(MediaType.APPLICATION_XML)
-    public Attendance getAttendance(
-            @MatrixParam("cardNumber") String cardNumber,
-            @MatrixParam("day") Day day,
-            @MatrixParam("from") int from,
-            @MatrixParam("to") int to) {
-        return getAttendance(cardNumber, currentTerm, day, from, to);
-    }
-
-    @GET
-    @Path("/curriculum/timeTable/schedule/attendance")
-    @Produces(MediaType.APPLICATION_XML)
-    public Attendance getAttendance(
-            @MatrixParam("cardNumber") String cardNumber,
-            @MatrixParam("term") String term,
-            @MatrixParam("day") Day day,
-            @MatrixParam("from") int from,
-            @MatrixParam("to") int to) {
-        return null;
-    }
-
-    @GET
-    @Path("/curriculum/timeTable/schedule/attendance")
-    @Produces(MediaType.APPLICATION_XML)
-    public Attendance getNextAttendance(
-            @MatrixParam("cardNumber") String cardNumber) {
-        return null;
+        return curriculumDataAccess.getCurriculum(cardNumber, term);
     }
 }
