@@ -23,15 +23,23 @@
  */
 package cn.edu.seu.herald.ws.dao;
 
+import cn.edu.seu.herald.ws.api.Attendance;
 import cn.edu.seu.herald.ws.api.Course;
 import cn.edu.seu.herald.ws.api.Curriculum;
+import cn.edu.seu.herald.ws.api.Day;
 import cn.edu.seu.herald.ws.api.Period;
+import cn.edu.seu.herald.ws.api.Schedule;
+import cn.edu.seu.herald.ws.api.StrategyType;
+import cn.edu.seu.herald.ws.api.TimeTable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
@@ -55,23 +63,47 @@ public class CurriculumDataAccessImpl
             "SELECT * FROM `course` WHERE course_id IN ("
             + "SELECT course_id FROM `select` WHERE card_no=? "
             + "AND term=(SELECT MAX(term) FROM `select`));";
-    private static final String GET_ATTENDS = null;
+    private static final String GET_ATTENDS =
+            "SELECT name, day, strategy, place, period_from, period_to "
+            + "FROM `attend` NATURAL JOIN `select` NATURAL JOIN `course` "
+            + "WHERE select_id IN ("
+            + "SELECT select_id FROM `select` NATURAL JOIN `course` "
+            + "WHERE card_no=? AND term=("
+            + "SELECT MAX(term) FROM `select`));";
+    private static final String GET_MAX_TERM =
+            "SELECT MAX(term) FROM `select`;";
     @Override
     public Curriculum getCurriculum(String cardNumber)
             throws DataAccessException {
         int cardNo = Integer.valueOf(cardNumber);
         Connection connection = getConnection();
         try {
+            // get courses selected
             PreparedStatement ps4Courses =
                     connection.prepareStatement(GET_COURSES);
             ps4Courses.setInt(1, cardNo);
-            ResultSet rs = ps4Courses.executeQuery();
-            List<Course> courses = getCoursesFromResultSet(rs);
+            ResultSet rs1 = ps4Courses.executeQuery();
+            List<Course> courses = getCoursesFromResultSet(rs1);
             ps4Courses.close();
 
+            // get schedules
             PreparedStatement ps4Schedules =
                     connection.prepareStatement(GET_ATTENDS);
-            // TODO get schdules
+            ps4Schedules.setInt(1, cardNo);
+            ResultSet rs2 = ps4Schedules.executeQuery();
+            TimeTable timeTable = getTimeTableFromResultSet(rs2);
+
+            // get max term
+            PreparedStatement ps4MaxTerm =
+                    connection.prepareStatement(GET_MAX_TERM);
+            ResultSet rs3 = ps4MaxTerm.executeQuery();
+            String term = getMaxTermFromResultSet(rs3);
+
+            Curriculum curr = new Curriculum();
+            curr.setCardNumber(cardNumber);
+            curr.setTerm(term);
+            curr.setCourses(courses);
+            curr.setTimeTable(timeTable);
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DataAccessException(ex);
@@ -110,5 +142,57 @@ public class CurriculumDataAccessImpl
             courses.add(course);
         }
         return courses;
+    }
+
+    private Attendance getAttendanceFromResultSet(ResultSet rs)
+            throws SQLException {
+        String courseName = rs.getString("name");
+        Day day = Day.valueOf(rs.getString("day"));
+        String place = rs.getString("place");
+        StrategyType str = StrategyType.valueOf(rs.getString("strategy"));
+        int from = rs.getInt("period_from");
+        int to = rs.getInt("period_to");
+        Period p = new Period(from, to);
+        Attendance att = new Attendance();
+        att.setCourseName(courseName);
+        att.setPeriod(p);
+        att.setPlace(place);
+        att.setStrategy(str);
+        return att;
+    }
+
+    private TimeTable getTimeTableFromResultSet(ResultSet rs)
+            throws SQLException {
+        Map<Day, List<Attendance>> atts = new HashMap<Day, List<Attendance>>();
+        while (rs.next()) {
+            Day day = Day.valueOf(rs.getString("day"));
+            if (!atts.containsKey(day)) {
+                atts.put(day, new LinkedList<Attendance>());
+            }
+            atts.get(day).add(getAttendanceFromResultSet(rs));
+        }
+
+        List<Schedule> schLst = new LinkedList<Schedule>();
+        for (Entry<Day, List<Attendance>> ent : atts.entrySet()) {
+            Day day = ent.getKey();
+            List<Attendance> attLst = ent.getValue();
+            Schedule sch = new Schedule();
+            sch.setAttendances(attLst);
+            sch.setDay(day);
+            schLst.add(sch);
+        }
+
+        TimeTable tt = new TimeTable();
+        tt.setSchedules(schLst);
+        return tt;
+    }
+
+    private String getMaxTermFromResultSet(ResultSet rs)
+            throws SQLException, DataAccessException {
+        if (!rs.next()) {
+            throw new DataAccessException();
+        }
+        String term = rs.getString(1);
+        return term;
     }
 }
