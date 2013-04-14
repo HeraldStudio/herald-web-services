@@ -105,7 +105,6 @@ public class CurriculumDataAccessImplTest {
 
     private void testGetCurriculum(Curriculum result,
             String expCardNumber, String expTerm) {
-        System.out.println("getCurriculum");
         assertCurriculumInfo(result, expCardNumber, expTerm);
         List<Course> courses = result.getCourses();
         assertContainsCourses(courses, "IT新技术讲座", "Web技术及其应用", "XML技术");
