@@ -57,16 +57,10 @@ public class CurriculumResource {
     @Path("/curriculum")
     @Produces(MediaType.APPLICATION_XML)
     public Curriculum getCurriculum(
-            @MatrixParam("cardNumber") String cardNumber) {
-        return curriculumDataAccess.getCurriculum(cardNumber);
-    }
-
-    @GET
-    @Path("/curriculum")
-    @Produces(MediaType.APPLICATION_XML)
-    public Curriculum getCurriculum(
             @MatrixParam("cardNumber") String cardNumber,
             @MatrixParam("term") String term) {
-        return curriculumDataAccess.getCurriculum(cardNumber, term);
+        return (term == null)
+                ? curriculumDataAccess.getCurriculum(cardNumber)
+                : curriculumDataAccess.getCurriculum(cardNumber, term);
     }
 }

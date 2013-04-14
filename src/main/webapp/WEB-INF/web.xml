@@ -7,6 +7,17 @@
         <session-timeout>30</session-timeout>
     </session-config>
 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:cn/edu/seu/herald/ws/applicationContext.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>jersey-serlvet</servlet-name>
         <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
