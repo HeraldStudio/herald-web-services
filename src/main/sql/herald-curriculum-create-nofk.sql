@@ -17,7 +17,7 @@ CREATE  TABLE IF NOT EXISTS `herald_curriculum`.`student` (
   `name` VARCHAR(20) NOT NULL ,
   PRIMARY KEY (`card_no`) ,
   UNIQUE INDEX `student_no_UNIQUE` (`student_no` ASC) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -33,7 +33,7 @@ CREATE  TABLE IF NOT EXISTS `herald_curriculum`.`course` (
   `week_from` TINYINT UNSIGNED NOT NULL ,
   `week_to` TINYINT UNSIGNED NOT NULL ,
   PRIMARY KEY (`course_id`) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -47,7 +47,7 @@ CREATE  TABLE IF NOT EXISTS `herald_curriculum`.`select` (
   `course_id` INT UNSIGNED NOT NULL ,
   `term` VARCHAR(7) NOT NULL ,
   PRIMARY KEY (`select_id`) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -64,7 +64,7 @@ CREATE  TABLE IF NOT EXISTS `herald_curriculum`.`attend` (
   `period_from` TINYINT NOT NULL ,
   `period_to` TINYINT NOT NULL ,
   PRIMARY KEY (`attend_id`) )
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 USE `herald_curriculum` ;
 
