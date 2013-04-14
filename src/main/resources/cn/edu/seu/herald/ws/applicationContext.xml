@@ -7,4 +7,22 @@
           http://www.springframework.org/schema/context/spring-context-2.5.xsd http://www.springframework.org/schema/context/spring-context-2.5.xsd/spring-spring-context-2.5.xsd-3.2.2.RELEASE.xsd
 ">
     <context:component-scan base-package="cn.edu.seu.herald.ws.resources"/>
+
+    <bean id="dbcpPropertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:cn/edu/seu/herald/ws/dbcp.properties" />
+    </bean>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${dbcp.driverClassName}"/>
+        <property name="url" value="${dbcp.url}"/>
+        <property name="username" value="${dbcp.username}"/>
+        <property name="password" value="${dbcp.password}"/>
+        <property name="initialSize" value="${dbcp.initialSize}"/>
+        <property name="maxActive" value="${dbcp.maxActive}"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="validationQuery" value="SELECT 1;"/>
+    </bean>
+    <bean id="curriculumDataAccess" class="cn.edu.seu.herald.ws.dao.CurriculumDataAccessImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
 </beans>

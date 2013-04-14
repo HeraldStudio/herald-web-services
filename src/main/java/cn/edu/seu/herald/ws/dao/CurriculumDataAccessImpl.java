@@ -54,16 +54,10 @@ public class CurriculumDataAccessImpl
 
     private static final Logger LOGGER = Logger.getLogger(
             CurriculumDataAccessImpl.class.getName());
-
-    public CurriculumDataAccessImpl(DataSource dataSource) {
-        super(dataSource);
-    }
-
-    private static final String GET_COURSES =
-            "SELECT * FROM `course` WHERE course_id IN ("
-            + "SELECT course_id FROM `select` WHERE card_no=? "
-            + "AND term=(SELECT MAX(term) FROM `select`));";
-    private static final String GET_ATTENDS =
+    private static final String GET_COURSES_1 =
+            "SELECT * FROM `course` NATURAL JOIN `select` "
+            + "WHERE card_no=? AND term=(SELECT MAX(term) FROM `select`);";
+    private static final String GET_ATTENDS_1 =
             "SELECT name, day, strategy, place, period_from, period_to "
             + "FROM `attend` NATURAL JOIN `select` NATURAL JOIN `course` "
             + "WHERE select_id IN ("
@@ -72,6 +66,20 @@ public class CurriculumDataAccessImpl
             + "SELECT MAX(term) FROM `select`));";
     private static final String GET_MAX_TERM =
             "SELECT MAX(term) FROM `select`;";
+    private static final String GET_COURSES_2 =
+            "SELECT * FROM `course` NATURAL JOIN `select` "
+            + "WHERE card_no=? AND term=?;";
+    private static final String GET_ATTENDS_2 =
+            "SELECT name, day, strategy, place, period_from, period_to "
+            + "FROM `attend` NATURAL JOIN `select` NATURAL JOIN `course` "
+            + "WHERE select_id IN ("
+            + "SELECT select_id FROM `select` NATURAL JOIN `course` "
+            + "WHERE card_no=? AND term=?);";
+
+    public CurriculumDataAccessImpl(DataSource dataSource) {
+        super(dataSource);
+    }
+
     @Override
     public Curriculum getCurriculum(String cardNumber)
             throws DataAccessException {
@@ -80,7 +88,7 @@ public class CurriculumDataAccessImpl
         try {
             // get courses selected
             PreparedStatement ps4Courses =
-                    connection.prepareStatement(GET_COURSES);
+                    connection.prepareStatement(GET_COURSES_1);
             ps4Courses.setInt(1, cardNo);
             ResultSet rs1 = ps4Courses.executeQuery();
             List<Course> courses = getCoursesFromResultSet(rs1);
@@ -88,7 +96,7 @@ public class CurriculumDataAccessImpl
 
             // get schedules
             PreparedStatement ps4Schedules =
-                    connection.prepareStatement(GET_ATTENDS);
+                    connection.prepareStatement(GET_ATTENDS_1);
             ps4Schedules.setInt(1, cardNo);
             ResultSet rs2 = ps4Schedules.executeQuery();
             TimeTable timeTable = getTimeTableFromResultSet(rs2);
@@ -104,23 +112,54 @@ public class CurriculumDataAccessImpl
             curr.setTerm(term);
             curr.setCourses(courses);
             curr.setTimeTable(timeTable);
+            return curr;
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DataAccessException(ex);
         } finally {
             closeConnection(connection);
         }
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public Curriculum getCurriculum(String cardNumber, String term)
             throws DataAccessException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        int cardNo = Integer.valueOf(cardNumber);
+        Connection connection = getConnection();
+        try {
+            // get courses selected
+            PreparedStatement ps4Courses =
+                    connection.prepareStatement(GET_COURSES_2);
+            ps4Courses.setInt(1, cardNo);
+            ps4Courses.setString(2, term);
+            ResultSet rs1 = ps4Courses.executeQuery();
+            List<Course> courses = getCoursesFromResultSet(rs1);
+            ps4Courses.close();
+
+            // get schedules
+            PreparedStatement ps4Schedules =
+                    connection.prepareStatement(GET_ATTENDS_2);
+            ps4Schedules.setInt(1, cardNo);
+            ps4Schedules.setString(2, term);
+            ResultSet rs2 = ps4Schedules.executeQuery();
+            TimeTable timeTable = getTimeTableFromResultSet(rs2);
+
+            Curriculum curr = new Curriculum();
+            curr.setCardNumber(cardNumber);
+            curr.setTerm(term);
+            curr.setCourses(courses);
+            curr.setTimeTable(timeTable);
+            return curr;
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
+        }
     }
 
     private Course getCourseFromResultSet(ResultSet rs) throws SQLException {
-        String courseName = rs.getString("course_name");
+        String courseName = rs.getString("name");
         String lecturer = rs.getString("lecturer");
         double credit = rs.getDouble("credit");
         int weekFrom = rs.getInt("week_from");
