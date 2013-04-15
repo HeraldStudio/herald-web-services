@@ -30,7 +30,7 @@
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>
-        <url-pattern>/doc</url-pattern>
+        <url-pattern>/doc/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>jersey-serlvet</servlet-name>
