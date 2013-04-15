@@ -4,10 +4,10 @@
 
     <groupId>cn.edu.seu.herald</groupId>
     <artifactId>herald-web-services</artifactId>
-    <version>1.0.ALPHA2-SHAPSHOT</version>
+    <version>1.0.ALPHA2</version>
     <packaging>war</packaging>
 
-    <name>herald-web-services</name>
+    <name>Herald Web Services</name>
     <organization>
         <name>Herald Studio, Southeast University</name>
         <url>http://herald.seu.edu.cn/</url>
