@@ -75,6 +75,8 @@ public class CurriculumDataAccessImpl
             + "WHERE select_id IN ("
             + "SELECT select_id FROM `select` NATURAL JOIN `course` "
             + "WHERE card_no=? AND term=?);";
+    private static final String CONTAINS_CARD_NO =
+            "SELECT COUNT(1) FROM `student` WHERE card_no=? LIMIT 1";
 
     public CurriculumDataAccessImpl(DataSource dataSource) {
         super(dataSource);
@@ -155,6 +157,25 @@ public class CurriculumDataAccessImpl
             throw new DataAccessException(ex);
         } finally {
             closeConnection(connection);
+        }
+    }
+
+    @Override
+    public boolean contains(String cardNumber) throws DataAccessException {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement ps =
+                    connection.prepareStatement(CONTAINS_CARD_NO);
+            ps.setString(1, cardNumber);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                throw new DataAccessException();
+            }
+            int count = rs.getInt(1);
+            return (count >= 1);
+        } catch (SQLException ex) {
+            closeConnection(connection);
+            throw new DataAccessException(ex);
         }
     }
 

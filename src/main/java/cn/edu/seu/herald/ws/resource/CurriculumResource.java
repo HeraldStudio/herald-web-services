@@ -29,10 +29,13 @@ import cn.edu.seu.herald.ws.api.Day;
 import cn.edu.seu.herald.ws.api.Schedule;
 import cn.edu.seu.herald.ws.api.TimeTable;
 import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
+import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.MatrixParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -58,7 +61,12 @@ public class CurriculumResource {
     @Produces(MediaType.APPLICATION_XML)
     public Curriculum getCurriculum(
             @MatrixParam("cardNumber") String cardNumber,
-            @MatrixParam("term") String term) {
+            @MatrixParam("term") String term,
+            @Context HttpServletResponse response) throws IOException {
+        if (!curriculumDataAccess.contains(cardNumber)) {
+            response.sendError(404, "Curriculum not found");
+            return null;
+        }
         return (term == null)
                 ? curriculumDataAccess.getCurriculum(cardNumber)
                 : curriculumDataAccess.getCurriculum(cardNumber, term);

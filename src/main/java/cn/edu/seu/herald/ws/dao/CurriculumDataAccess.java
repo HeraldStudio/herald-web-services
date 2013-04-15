@@ -31,6 +31,8 @@ import cn.edu.seu.herald.ws.api.Curriculum;
  */
 public interface CurriculumDataAccess {
 
+    boolean contains(String cardNumber) throws DataAccessException;
+
     Curriculum getCurriculum(String cardNumber) throws DataAccessException;
 
     Curriculum getCurriculum(String cardNumber, String term)
