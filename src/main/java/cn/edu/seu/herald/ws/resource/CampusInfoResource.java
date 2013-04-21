@@ -23,16 +23,13 @@
  */
 package cn.edu.seu.herald.ws.resource;
 
-import cn.edu.seu.herald.ws.api.Curriculum;
-import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
-import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
+import cn.edu.seu.herald.ws.dao.CampusInfoDataAccess;
 import javax.ws.rs.GET;
-import javax.ws.rs.MatrixParam;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import org.apache.wink.common.model.atom.AtomFeed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,30 +38,21 @@ import org.springframework.stereotype.Component;
  * @author rAy <predator.ray@gmail.com>
  */
 @Component
-@Path("/curriculum")
-public class CurriculumResource {
+@Path("/campus")
+public class CampusInfoResource {
 
     @Autowired
-    private CurriculumDataAccess curriculumDataAccess;
+    private CampusInfoDataAccess campusInfoDataAccess;
 
-    public void setCurriculumDataAccess(
-            CurriculumDataAccess curriculumDataAccess) {
-        this.curriculumDataAccess = curriculumDataAccess;
+    public void setCampusInfoDataAccess(
+            CampusInfoDataAccess campusInfoDataAccess) {
+        this.campusInfoDataAccess = campusInfoDataAccess;
     }
 
     @GET
-    @Path("/")
-    @Produces(MediaType.APPLICATION_XML)
-    public Curriculum getCurriculum(
-            @MatrixParam("cardNumber") String cardNumber,
-            @MatrixParam("term") String term,
-            @Context HttpServletResponse response) throws IOException {
-        if (!curriculumDataAccess.contains(cardNumber)) {
-            response.sendError(404, "Curriculum not found");
-            return null;
-        }
-        return (term == null)
-                ? curriculumDataAccess.getCurriculum(cardNumber)
-                : curriculumDataAccess.getCurriculum(cardNumber, term);
+    @Path("/{name}")
+    @Produces(MediaType.APPLICATION_ATOM_XML)
+    public AtomFeed getFeedByName(@PathParam("name") String name) {
+        return campusInfoDataAccess.getAtomFeedByName(name);
     }
 }
