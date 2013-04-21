@@ -55,28 +55,36 @@ public class CurriculumDataAccessImpl
     private static final Logger LOGGER = Logger.getLogger(
             CurriculumDataAccessImpl.class.getName());
     private static final String GET_COURSES_1 =
-            "SELECT * FROM `course` NATURAL JOIN `select` "
+            "SELECT * FROM `herald_curriculum`.`course` NATURAL JOIN `select` "
             + "WHERE card_no=? AND term=(SELECT MAX(term) FROM `select`);";
     private static final String GET_ATTENDS_1 =
             "SELECT name, day, strategy, place, period_from, period_to "
-            + "FROM `attend` NATURAL JOIN `select` NATURAL JOIN `course` "
+            + "FROM `herald_curriculum`.`attend` "
+            + "NATURAL JOIN `herald_curriculum`.`select` "
+            + "NATURAL JOIN `herald_curriculum`.`course` "
             + "WHERE select_id IN ("
-            + "SELECT select_id FROM `select` NATURAL JOIN `course` "
+            + "SELECT select_id FROM `herald_curriculum`.`select` "
+            + "NATURAL JOIN `herald_curriculum`.`course` "
             + "WHERE card_no=? AND term=("
-            + "SELECT MAX(term) FROM `select`));";
+            + "SELECT MAX(term) FROM `herald_curriculum`.`select`));";
     private static final String GET_MAX_TERM =
-            "SELECT MAX(term) FROM `select`;";
+            "SELECT MAX(term) FROM `herald_curriculum`.`select`;";
     private static final String GET_COURSES_2 =
-            "SELECT * FROM `course` NATURAL JOIN `select` "
+            "SELECT * FROM `herald_curriculum`.`course` "
+            + "NATURAL JOIN `herald_curriculum`.`select` "
             + "WHERE card_no=? AND term=?;";
     private static final String GET_ATTENDS_2 =
             "SELECT name, day, strategy, place, period_from, period_to "
-            + "FROM `attend` NATURAL JOIN `select` NATURAL JOIN `course` "
+            + "FROM `herald_curriculum`.`attend` "
+            + "NATURAL JOIN `herald_curriculum`.`select` "
+            + "NATURAL JOIN `herald_curriculum`.`course` "
             + "WHERE select_id IN ("
-            + "SELECT select_id FROM `select` NATURAL JOIN `course` "
+            + "SELECT select_id FROM `herald_curriculum`.`select` "
+            + "NATURAL JOIN `herald_curriculum`.`course` "
             + "WHERE card_no=? AND term=?);";
     private static final String CONTAINS_CARD_NO =
-            "SELECT COUNT(1) FROM `student` WHERE card_no=? LIMIT 1";
+            "SELECT COUNT(1) FROM `herald_curriculum`.`student` "
+            + "WHERE card_no=? LIMIT 1";
 
     public CurriculumDataAccessImpl(DataSource dataSource) {
         super(dataSource);

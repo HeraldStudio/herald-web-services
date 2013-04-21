@@ -43,9 +43,11 @@ public class CampusInfoDataAccessImpl extends AbstractDataAccess
         implements CampusInfoDataAccess {
 
     private static final String GET_FEED_BY_NAME =
-            "SELECT uuid, title, url, updated FROM feed WHERE name=?;";
+            "SELECT uuid, title, url, updated "
+            + "FROM `herald_campus_info`.`feed` WHERE name=?;";
     private static final String GET_ENTRIES_BY_FEED_UUID =
-            "SELECT uuid, title, url, updated, summary WHERE feed_uuid=?";
+            "SELECT uuid, title, url, updated, summary "
+            + "FROM `herald_campus_info`.`entry` WHERE feed_uuid=?";
 
     public CampusInfoDataAccessImpl(DataSource dataSource) {
         super(dataSource);
