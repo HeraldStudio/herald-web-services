@@ -23,7 +23,7 @@
  */
 package cn.edu.seu.herald.ws.dao;
 
-import org.apache.wink.common.model.atom.AtomFeed;
+import org.apache.wink.common.model.synd.SyndFeed;
 
 /**
  *
@@ -31,5 +31,8 @@ import org.apache.wink.common.model.atom.AtomFeed;
  */
 public interface CampusInfoDataAccess {
 
-    AtomFeed getAtomFeedByName(String name) throws DataAccessException;
+    SyndFeed getFeedByName(String name) throws DataAccessException;
+
+    SyndFeed getFeedByName(String name, String afterUUID)
+            throws DataAccessException;
 }

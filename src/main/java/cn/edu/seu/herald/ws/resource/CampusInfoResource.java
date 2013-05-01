@@ -30,6 +30,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.apache.wink.common.model.atom.AtomFeed;
+import org.apache.wink.common.model.rss.RssFeed;
+import org.apache.wink.common.model.synd.SyndFeed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,8 +53,17 @@ public class CampusInfoResource {
 
     @GET
     @Path("/{name}")
-    @Produces(MediaType.APPLICATION_ATOM_XML)
-    public AtomFeed getFeedByName(@PathParam("name") String name) {
-        return campusInfoDataAccess.getAtomFeedByName(name);
+    @Produces({MediaType.WILDCARD, MediaType.APPLICATION_ATOM_XML})
+    public AtomFeed getAtomFeedByName(@PathParam("name") String name) {
+        SyndFeed syndFeed = campusInfoDataAccess.getFeedByName(name);
+        return new AtomFeed(syndFeed);
+    }
+
+    @GET
+    @Path("/{name}")
+    @Produces("application/rss+xml")
+    public RssFeed getRssFeedByName(@PathParam("name") String name) {
+        SyndFeed syndFeed = campusInfoDataAccess.getFeedByName(name);
+        return new RssFeed(syndFeed);
     }
 }

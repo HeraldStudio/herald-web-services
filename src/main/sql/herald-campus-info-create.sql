@@ -14,8 +14,8 @@ DROP TABLE IF EXISTS `herald_campus_info`.`feed` ;
 CREATE  TABLE IF NOT EXISTS `herald_campus_info`.`feed` (
   `uuid` VARCHAR(40) NOT NULL ,
   `name` VARCHAR(45) NOT NULL ,
-  `url` TINYTEXT NOT NULL ,
-  `link` VARCHAR(128) NOT NULL ,
+  `title` TINYTEXT NOT NULL ,
+  `url` VARCHAR(128) NOT NULL ,
   `updated` DATETIME NOT NULL ,
   PRIMARY KEY (`uuid`) ,
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) )
