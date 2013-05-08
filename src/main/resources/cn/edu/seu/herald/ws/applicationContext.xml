@@ -29,4 +29,7 @@
     <bean id="campusInfoDataAccess" class="cn.edu.seu.herald.ws.dao.CampusInfoDataAccessImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
+    <bean id="classroomDataAccess" class="cn.edu.seu.herald.ws.dao.ClassroomDataAccessImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
 </beans>
