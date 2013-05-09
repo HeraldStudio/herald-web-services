@@ -31,6 +31,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.MatrixParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +57,8 @@ public class CurriculumResource {
     @Path("/")
     @Produces(MediaType.APPLICATION_XML)
     public Curriculum getCurriculum(
-            @MatrixParam("cardNumber") String cardNumber,
-            @MatrixParam("term") String term,
+            @QueryParam("cardNumber") String cardNumber,
+            @QueryParam("term") String term,
             @Context HttpServletResponse response) throws IOException {
         if (!curriculumDataAccess.contains(cardNumber)) {
             response.sendError(404, "Curriculum not found");
