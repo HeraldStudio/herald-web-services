@@ -52,6 +52,8 @@ public class CampusInfoDataAccessImpl extends AbstractDataAccess
     private static final String GET_ENTRIES_BY_FEED_UUID =
             "SELECT uuid, title, url, updated, summary "
             + "FROM `herald_campus_info`.`entry` WHERE feed_uuid=?";
+    private static final String GET_LATEST_UUID_BY_NAME =
+            "SELECT MAX(uuid) FROM `herald_campus_info`.`feed` WHERE name=?;";
 
     public CampusInfoDataAccessImpl(DataSource dataSource) {
         super(dataSource);
@@ -135,11 +137,29 @@ public class CampusInfoDataAccessImpl extends AbstractDataAccess
         }
     }
 
+    @Override
+    public String getLatestUUID(String name) throws DataAccessException {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    GET_LATEST_UUID_BY_NAME);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+            return rs.getString(1);
+        } catch (SQLException ex) {
+            closeConnection(connection);
+            throw new DataAccessException(ex);
+        }
+    }
+
     private String getUrnUuid(String uuid) {
         return "urn:uuid:" + uuid;
     }
 
     private SyndLink getAltLink(String url) {
-        return new SyndLink("alternate", "text/html", url);
+        return new SyndLink(null, "text/html", url);
     }
 }
