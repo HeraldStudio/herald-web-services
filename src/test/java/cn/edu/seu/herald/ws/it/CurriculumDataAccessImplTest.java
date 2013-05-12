@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package cn.edu.seu.herald.ws.dao;
+package cn.edu.seu.herald.ws.it;
 
 import cn.edu.seu.herald.ws.api.Attendance;
 import cn.edu.seu.herald.ws.api.Course;
@@ -35,7 +35,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import javax.sql.DataSource;
+
+import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
+import cn.edu.seu.herald.ws.dao.CurriculumDataAccessImpl;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -86,9 +88,9 @@ public class CurriculumDataAccessImplTest {
     public void testGetCurriculum_String() {
         System.out.println("getCurriculum");
         String cardNumber = "213100434";
-        String lastestTerm = "12-13-3";
+        String latestTerm = "12-13-3";
         Curriculum result = instance.getCurriculum(cardNumber);
-        testGetCurriculum(result, cardNumber, lastestTerm);
+        testGetCurriculum(result, cardNumber, latestTerm);
     }
 
     /**

@@ -67,6 +67,9 @@ public class CampusInfoDataAccessImpl extends AbstractDataAccess
                     GET_FEED_BY_NAME);
             ps1.setString(1, name);
             ResultSet rs1 = ps1.executeQuery();
+            if (!rs1.next()) {
+                return null;
+            }
             String uuid = rs1.getString("uuid");
             String title = rs1.getString("title");
             String url = rs1.getString("url");
@@ -107,6 +110,9 @@ public class CampusInfoDataAccessImpl extends AbstractDataAccess
             ps1.setString(1, name);
             ps1.setString(2, afterUUID);
             ResultSet rs1 = ps1.executeQuery();
+            if (!rs1.next()) {
+                return null;
+            }
             String uuid = rs1.getString("uuid");
             String title = rs1.getString("title");
             String url = rs1.getString("url");

@@ -55,8 +55,10 @@ public class CurriculumDataAccessImpl
     private static final Logger LOGGER = Logger.getLogger(
             CurriculumDataAccessImpl.class.getName());
     private static final String GET_COURSES_1 =
-            "SELECT * FROM `herald_curriculum`.`course` NATURAL JOIN `select` "
-            + "WHERE card_no=? AND term=(SELECT MAX(term) FROM `select`);";
+            "SELECT * FROM `herald_curriculum`.`course` NATURAL JOIN "
+            + "`herald_curriculum`.`select` "
+            + "WHERE card_no=? AND term=(SELECT MAX(term) FROM "
+            + "`herald_curriculum`.`select`);";
     private static final String GET_ATTENDS_1 =
             "SELECT name, day, strategy, place, period_from, period_to "
             + "FROM `herald_curriculum`.`attend` "

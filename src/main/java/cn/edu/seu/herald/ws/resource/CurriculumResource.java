@@ -28,7 +28,6 @@ import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
-import javax.ws.rs.MatrixParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -55,7 +54,10 @@ public class CurriculumResource {
 
     @GET
     @Path("/")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({
+            "application/vnd.herald.curriculum+xml",
+            MediaType.APPLICATION_XML
+    })
     public Curriculum getCurriculum(
             @QueryParam("cardNumber") String cardNumber,
             @QueryParam("term") String term,

@@ -24,20 +24,17 @@
 package cn.edu.seu.herald.ws.resource;
 
 import cn.edu.seu.herald.ws.dao.CampusInfoDataAccess;
-import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import org.apache.wink.common.model.atom.AtomFeed;
 import org.apache.wink.common.model.rss.RssFeed;
 import org.apache.wink.common.model.synd.SyndFeed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 
 /**
  *
@@ -53,26 +50,6 @@ public class CampusInfoResource {
     public void setCampusInfoDataAccess(
             CampusInfoDataAccess campusInfoDataAccess) {
         this.campusInfoDataAccess = campusInfoDataAccess;
-    }
-
-    @GET
-    @Path("/{name}")
-    @Produces({MediaType.WILDCARD, MediaType.APPLICATION_ATOM_XML})
-    public AtomFeed getAtomFeedByName(@PathParam("name") String name,
-            @HeaderParam("If-None-Match") String clientUUID,
-            @Context HttpServletResponse response) throws IOException {
-        String latestUUID = campusInfoDataAccess.getLatestUUID(name);
-        boolean match = (latestUUID != null) && latestUUID.equals(clientUUID);
-        if (match) {
-            response.sendError(304);
-            return null;
-        }
-
-        SyndFeed syndFeed = (clientUUID == null)
-                ? campusInfoDataAccess.getFeedByName(name)
-                : campusInfoDataAccess.getFeedByName(name, clientUUID);
-        response.setHeader("ETag", latestUUID);
-        return new AtomFeed(syndFeed);
     }
 
     @GET
