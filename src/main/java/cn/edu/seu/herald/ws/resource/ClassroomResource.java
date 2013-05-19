@@ -23,15 +23,11 @@
  */
 package cn.edu.seu.herald.ws.resource;
 
-import cn.edu.seu.herald.ws.api.Day;
+import cn.edu.seu.herald.ws.api.curriculum.Day;
 import cn.edu.seu.herald.ws.dao.ClassroomDataAccess;
 import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -52,9 +48,8 @@ public class ClassroomResource {
     @Produces("text/csv")
     public String getUnusedClassrooms(
             @QueryParam("day") Day day,
-            @QueryParam("from") int from,
-            @QueryParam("to") int to,
-            @Context HttpServletResponse response) {
+            @DefaultValue("1") @QueryParam("from") int from,
+            @DefaultValue("13") @QueryParam("to") int to) {
         List<String> classrooms = classroomDataAccess
                 .getClassroomsUnused(day, from, to);
         return csvBuilder.getCsv(classrooms);

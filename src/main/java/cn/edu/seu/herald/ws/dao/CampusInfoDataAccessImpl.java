@@ -95,8 +95,9 @@ public class CampusInfoDataAccessImpl extends AbstractDataAccess
             }
             return syndFeed;
         } catch (SQLException ex) {
-            closeConnection(connection);
             throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
         }
     }
 
@@ -138,8 +139,9 @@ public class CampusInfoDataAccessImpl extends AbstractDataAccess
             }
             return syndFeed;
         } catch (SQLException ex) {
-            closeConnection(connection);
             throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
         }
     }
 
@@ -156,8 +158,9 @@ public class CampusInfoDataAccessImpl extends AbstractDataAccess
             }
             return rs.getString(1);
         } catch (SQLException ex) {
-            closeConnection(connection);
             throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
         }
     }
 

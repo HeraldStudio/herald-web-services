@@ -23,7 +23,7 @@
  */
 package cn.edu.seu.herald.ws.dao;
 
-import cn.edu.seu.herald.ws.api.Curriculum;
+import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
 
 /**
  *

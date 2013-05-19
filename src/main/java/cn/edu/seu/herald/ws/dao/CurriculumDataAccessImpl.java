@@ -23,14 +23,10 @@
  */
 package cn.edu.seu.herald.ws.dao;
 
-import cn.edu.seu.herald.ws.api.Attendance;
-import cn.edu.seu.herald.ws.api.Course;
-import cn.edu.seu.herald.ws.api.Curriculum;
-import cn.edu.seu.herald.ws.api.Day;
-import cn.edu.seu.herald.ws.api.Period;
-import cn.edu.seu.herald.ws.api.Schedule;
-import cn.edu.seu.herald.ws.api.StrategyType;
-import cn.edu.seu.herald.ws.api.TimeTable;
+import cn.edu.seu.herald.ws.api.curriculum.*;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -103,7 +99,7 @@ public class CurriculumDataAccessImpl
                     connection.prepareStatement(GET_COURSES_1);
             ps4Courses.setInt(1, cardNo);
             ResultSet rs1 = ps4Courses.executeQuery();
-            List<Course> courses = getCoursesFromResultSet(rs1);
+            List<Course> courseList = getCoursesFromResultSet(rs1);
             ps4Courses.close();
 
             // get schedules
@@ -122,6 +118,8 @@ public class CurriculumDataAccessImpl
             Curriculum curr = new Curriculum();
             curr.setCardNumber(cardNumber);
             curr.setTerm(term);
+            Courses courses = new Courses();
+            courses.setCourses(courseList);
             curr.setCourses(courses);
             curr.setTimeTable(timeTable);
             return curr;
@@ -145,7 +143,7 @@ public class CurriculumDataAccessImpl
             ps4Courses.setInt(1, cardNo);
             ps4Courses.setString(2, term);
             ResultSet rs1 = ps4Courses.executeQuery();
-            List<Course> courses = getCoursesFromResultSet(rs1);
+            List<Course> courseList = getCoursesFromResultSet(rs1);
             ps4Courses.close();
 
             // get schedules
@@ -159,7 +157,8 @@ public class CurriculumDataAccessImpl
             Curriculum curr = new Curriculum();
             curr.setCardNumber(cardNumber);
             curr.setTerm(term);
-            curr.setCourses(courses);
+            Courses courses = new Courses();
+            courses.setCourses(courseList);
             curr.setTimeTable(timeTable);
             return curr;
         } catch (SQLException ex) {
@@ -195,10 +194,12 @@ public class CurriculumDataAccessImpl
         double credit = rs.getDouble("credit");
         int weekFrom = rs.getInt("week_from");
         int weekTo = rs.getInt("week_to");
-        Period p = new Period(weekFrom, weekTo);
+        Period p = new Period();
+        p.setFrom(BigInteger.valueOf(weekFrom));
+        p.setTo(BigInteger.valueOf(weekTo));
         Course course = new Course();
         course.setName(courseName);
-        course.setCredit(credit);
+        course.setCredit(BigDecimal.valueOf(credit));
         course.setLecturer(lecturer);
         course.setWeek(p);
         return course;
@@ -219,10 +220,12 @@ public class CurriculumDataAccessImpl
         String courseName = rs.getString("name");
         Day day = Day.valueOf(rs.getString("day"));
         String place = rs.getString("place");
-        StrategyType str = StrategyType.valueOf(rs.getString("strategy"));
+        Strategy str = Strategy.valueOf(rs.getString("strategy"));
         int from = rs.getInt("period_from");
         int to = rs.getInt("period_to");
-        Period p = new Period(from, to);
+        Period p = new Period();
+        p.setFrom(BigInteger.valueOf(from));
+        p.setTo(BigInteger.valueOf(to));
         Attendance att = new Attendance();
         att.setCourseName(courseName);
         att.setPeriod(p);

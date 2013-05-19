@@ -23,7 +23,7 @@
  */
 package cn.edu.seu.herald.ws.resource;
 
-import cn.edu.seu.herald.ws.api.Curriculum;
+import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
 import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
@@ -66,8 +66,9 @@ public class CurriculumResource {
             response.sendError(404, "Curriculum not found");
             return null;
         }
-        return (term == null)
+        Curriculum curriculum = (term == null)
                 ? curriculumDataAccess.getCurriculum(cardNumber)
                 : curriculumDataAccess.getCurriculum(cardNumber, term);
+        return curriculum;
     }
 }

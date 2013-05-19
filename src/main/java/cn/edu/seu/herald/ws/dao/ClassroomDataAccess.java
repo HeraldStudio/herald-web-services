@@ -23,7 +23,7 @@
  */
 package cn.edu.seu.herald.ws.dao;
 
-import cn.edu.seu.herald.ws.api.Day;
+import cn.edu.seu.herald.ws.api.curriculum.Day;
 import java.util.List;
 
 /**

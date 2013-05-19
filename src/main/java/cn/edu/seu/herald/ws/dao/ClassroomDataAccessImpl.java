@@ -23,7 +23,7 @@
  */
 package cn.edu.seu.herald.ws.dao;
 
-import cn.edu.seu.herald.ws.api.Day;
+import cn.edu.seu.herald.ws.api.curriculum.Day;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,8 +73,9 @@ public class ClassroomDataAccessImpl extends AbstractDataAccess
             }
             return classrooms;
         } catch (SQLException ex) {
-            closeConnection(connection);
             throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
         }
     }
 }
