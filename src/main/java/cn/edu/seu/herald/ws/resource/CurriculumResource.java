@@ -23,6 +23,7 @@
  */
 package cn.edu.seu.herald.ws.resource;
 
+import cn.edu.seu.herald.ws.api.curriculum.Course;
 import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
 import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
 import java.io.IOException;
@@ -54,10 +55,7 @@ public class CurriculumResource {
 
     @GET
     @Path("/")
-    @Produces({
-            "application/vnd.herald.curriculum+xml",
-            MediaType.APPLICATION_XML
-    })
+    @Produces("application/vnd.herald.curriculum+xml")
     public Curriculum getCurriculum(
             @QueryParam("cardNumber") String cardNumber,
             @QueryParam("term") String term,
