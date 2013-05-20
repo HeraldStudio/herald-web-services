@@ -24,6 +24,7 @@
 package cn.edu.seu.herald.ws.dao;
 
 import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
+import cn.edu.seu.herald.ws.api.curriculum.StudentList;
 
 /**
  *
@@ -31,10 +32,14 @@ import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
  */
 public interface CurriculumDataAccess {
 
-    boolean contains(String cardNumber) throws DataAccessException;
+    boolean containsStudent(String cardNumber) throws DataAccessException;
 
     Curriculum getCurriculum(String cardNumber) throws DataAccessException;
 
     Curriculum getCurriculum(String cardNumber, String term)
             throws DataAccessException;
+
+    boolean containsCourse(int courseId) throws DataAccessException;
+
+    StudentList getStudentsOfCourse(int courseId) throws DataAccessException;
 }

@@ -25,15 +25,17 @@ package cn.edu.seu.herald.ws.resource;
 
 import cn.edu.seu.herald.ws.api.curriculum.Course;
 import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
+import cn.edu.seu.herald.ws.api.curriculum.Student;
+import cn.edu.seu.herald.ws.api.curriculum.StudentList;
 import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
 import java.io.IOException;
+import java.net.URI;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriBuilder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -59,14 +61,53 @@ public class CurriculumResource {
     public Curriculum getCurriculum(
             @QueryParam("cardNumber") String cardNumber,
             @QueryParam("term") String term,
+            @Context ServletContext context,
             @Context HttpServletResponse response) throws IOException {
-        if (!curriculumDataAccess.contains(cardNumber)) {
+        if (!curriculumDataAccess.containsStudent(cardNumber)) {
             response.sendError(404, "Curriculum not found");
             return null;
         }
+        String contextPath = context.getContextPath();
         Curriculum curriculum = (term == null)
                 ? curriculumDataAccess.getCurriculum(cardNumber)
                 : curriculumDataAccess.getCurriculum(cardNumber, term);
+        for (Course course : curriculum.getCourses().getCourses()) {
+            URI uri = UriBuilder
+                    .fromPath(getAbstractPath(contextPath,
+                            "/curriculum/course/{id}"))
+                    .build(course.getId());
+            course.setStudents(uri.toString());
+        }
         return curriculum;
+    }
+
+    @GET
+    @Path("/course/{id}")
+    @Produces("application/vnd.herald.curriculum+xml")
+    public StudentList getStudentsOfCourse(@PathParam("id") int id,
+            @Context ServletContext context,
+            @Context HttpServletResponse response) throws IOException {
+        if (!curriculumDataAccess.containsCourse(id)) {
+            response.sendError(404, "Course not found");
+            return null;
+        }
+        String contextPath = context.getContextPath();
+        StudentList studentList = curriculumDataAccess.getStudentsOfCourse(id);
+        for (Student student : studentList.getStudents()) {
+            URI uri = UriBuilder
+                    .fromPath(getAbstractPath(contextPath, "/curriculum"))
+                    .queryParam("cardNumber", student.getCardNumber())
+                    .build();
+            student.setCurriculum(uri.toString());
+        }
+        return studentList;
+    }
+
+    private String getAbstractPath(String ...path) {
+        StringBuilder pathBuilder = new StringBuilder();
+        for (String p : path) {
+            pathBuilder.append(p);
+        }
+        return pathBuilder.toString();
     }
 }

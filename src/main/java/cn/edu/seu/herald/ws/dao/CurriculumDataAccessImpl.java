@@ -82,7 +82,16 @@ public class CurriculumDataAccessImpl
             + "WHERE card_no=? AND term=?);";
     private static final String CONTAINS_CARD_NO =
             "SELECT COUNT(1) FROM `herald_curriculum`.`student` "
-            + "WHERE card_no=? LIMIT 1";
+            + "WHERE card_no=? LIMIT 1;";
+    private static final String GET_STUDENTS_OF_COURSE =
+            "SELECT card_no, student_no, name "
+            + "FROM `herald_curriculum`.`student` NATURAL JOIN ("
+            + "SELECT card_no FROM `herald_curriculum`.`select` "
+            + "WHERE course_id = ?"
+            + ") AS t;";
+    private static final String CONTAINS_COURSE =
+            "SELECT COUNT(1) FROM `herald_curriculum`.`course` "
+            + "WHERE course_id=? LIMIT 1;";
 
     public CurriculumDataAccessImpl(DataSource dataSource) {
         super(dataSource);
@@ -170,7 +179,46 @@ public class CurriculumDataAccessImpl
     }
 
     @Override
-    public boolean contains(String cardNumber) throws DataAccessException {
+    public boolean containsCourse(int courseId) throws DataAccessException {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement ps =
+                    connection.prepareStatement(CONTAINS_COURSE);
+            ps.setInt(1, courseId);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                throw new DataAccessException();
+            }
+            int count = rs.getInt(1);
+            return (count >= 1);
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    @Override
+    public StudentList getStudentsOfCourse(int courseId)
+            throws DataAccessException {
+        Connection connection = getConnection();
+        try {
+            // get courses selected
+            PreparedStatement ps =
+                    connection.prepareStatement(GET_STUDENTS_OF_COURSE);
+            ps.setInt(1, courseId);
+            ResultSet rs = ps.executeQuery();
+            return getStudentListFromResultSet(rs);
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    @Override
+    public boolean containsStudent(String cardNumber) throws DataAccessException {
         Connection connection = getConnection();
         try {
             PreparedStatement ps =
@@ -183,12 +231,14 @@ public class CurriculumDataAccessImpl
             int count = rs.getInt(1);
             return (count >= 1);
         } catch (SQLException ex) {
-            closeConnection(connection);
             throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
         }
     }
 
     private Course getCourseFromResultSet(ResultSet rs) throws SQLException {
+        int id = rs.getInt("course_id");
         String courseName = rs.getString("name");
         String lecturer = rs.getString("lecturer");
         double credit = rs.getDouble("credit");
@@ -198,6 +248,7 @@ public class CurriculumDataAccessImpl
         p.setFrom(BigInteger.valueOf(weekFrom));
         p.setTo(BigInteger.valueOf(weekTo));
         Course course = new Course();
+        course.setId(id);
         course.setName(courseName);
         course.setCredit(BigDecimal.valueOf(credit));
         course.setLecturer(lecturer);
@@ -268,4 +319,26 @@ public class CurriculumDataAccessImpl
         String term = rs.getString(1);
         return term;
     }
+
+    private StudentList getStudentListFromResultSet(ResultSet rs)
+            throws SQLException, DataAccessException {
+        StudentList studentList = new StudentList();
+        while (rs.next()) {
+            studentList.getStudents().add(getStudentFromResultSet(rs));
+        }
+        return studentList;
+    }
+
+    private Student getStudentFromResultSet(ResultSet rs)
+            throws SQLException, DataAccessException {
+        String cardNo = rs.getString("card_no");
+        String studentNo = rs.getString("student_no");
+        String name = rs.getString("name");
+        Student student = new Student();
+        student.setCardNumber(cardNo);
+        student.setStudentNumber(studentNo);
+        student.setName(name);
+        return student;
+    }
+
 }
