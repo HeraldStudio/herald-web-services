@@ -32,6 +32,11 @@
             <version>1.17.1</version>
         </dependency>
         <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+            <version>1.17.1</version>
+        </dependency>
+        <dependency>
             <groupId>cn.edu.seu.herald</groupId>
             <artifactId>herald-web-services-api</artifactId>
             <version>1.1-SHAPSHOT</version>
