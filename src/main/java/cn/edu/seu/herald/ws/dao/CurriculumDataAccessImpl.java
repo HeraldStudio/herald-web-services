@@ -89,6 +89,9 @@ public class CurriculumDataAccessImpl
             + "SELECT card_no FROM `herald_curriculum`.`select` "
             + "WHERE course_id = ?"
             + ") AS t;";
+    private static final String GET_COURSE_BY_ID =
+            "SELECT course_id, name, lecturer, credit, week_from, week_to "
+            + "FROM `herald_curriculum`.`course` WHERE course_id=?";
     private static final String CONTAINS_COURSE =
             "SELECT COUNT(1) FROM `herald_curriculum`.`course` "
             + "WHERE course_id=? LIMIT 1;";
@@ -199,16 +202,27 @@ public class CurriculumDataAccessImpl
     }
 
     @Override
-    public StudentList getStudentsOfCourse(int courseId)
+    public Course getCourseById(int courseId)
             throws DataAccessException {
         Connection connection = getConnection();
         try {
-            // get courses selected
-            PreparedStatement ps =
+            PreparedStatement ps1 =
                     connection.prepareStatement(GET_STUDENTS_OF_COURSE);
-            ps.setInt(1, courseId);
-            ResultSet rs = ps.executeQuery();
-            return getStudentListFromResultSet(rs);
+            ps1.setInt(1, courseId);
+            ResultSet rs1 = ps1.executeQuery();
+            StudentList studentList = getStudentListFromResultSet(rs1);
+
+            PreparedStatement ps2 =
+                    connection.prepareStatement(GET_COURSE_BY_ID);
+            ps2.setInt(1, courseId);
+            ResultSet rs2 = ps2.executeQuery();
+            if (!rs2.next()) {
+                throw new DataAccessException();
+            }
+
+            Course course = getCourseFromResultSet(rs2);
+            course.setStudents(studentList);
+            return course;
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DataAccessException(ex);

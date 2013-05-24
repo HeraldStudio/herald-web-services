@@ -71,36 +71,37 @@ public class CurriculumResource {
         Curriculum curriculum = (term == null)
                 ? curriculumDataAccess.getCurriculum(cardNumber)
                 : curriculumDataAccess.getCurriculum(cardNumber, term);
-        for (Course course : curriculum.getCourses().getCourses()) {
-            URI uri = UriBuilder
-                    .fromPath(getAbstractPath(contextPath,
-                            "/curriculum/course/{id}"))
-                    .build(course.getId());
-            course.setStudents(uri.toString());
-        }
         return curriculum;
     }
 
     @GET
     @Path("/course/{id}")
     @Produces("application/vnd.herald.curriculum+xml")
-    public StudentList getStudentsOfCourse(@PathParam("id") int id,
+    public Course getCourseById(@PathParam("id") int id,
             @Context ServletContext context,
             @Context HttpServletResponse response) throws IOException {
         if (!curriculumDataAccess.containsCourse(id)) {
             response.sendError(404, "Course not found");
             return null;
         }
+        Course course = curriculumDataAccess.getCourseById(id);
+        return course;
+    }
+
+    private void addCourseHref(ServletContext context, Course course) {
         String contextPath = context.getContextPath();
-        StudentList studentList = curriculumDataAccess.getStudentsOfCourse(id);
-        for (Student student : studentList.getStudents()) {
+        for (Student student : course.getStudents().getStudents()) {
             URI uri = UriBuilder
                     .fromPath(getAbstractPath(contextPath, "/curriculum"))
                     .queryParam("cardNumber", student.getCardNumber())
                     .build();
             student.setCurriculum(uri.toString());
         }
-        return studentList;
+        URI uri = UriBuilder
+                .fromPath(getAbstractPath(contextPath,
+                        "/curriculum/course/{id}"))
+                .build(course.getId());
+        course.setHref(uri.toString());
     }
 
     private String getAbstractPath(String ...path) {

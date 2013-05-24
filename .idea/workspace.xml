@@ -2,17 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98314585-4724-4547-971f-bfa156f3c4bf" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/aspect/CurriculumResourceAspect.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_2_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_servlet_1_17_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjrt_1_6_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Attendance.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Attendance.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Course.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Course.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Courses.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Courses.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Curriculum.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Curriculum.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccess.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccess.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccessImpl.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccessImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CurriculumResource.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CurriculumResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/ObjectFactory.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/ObjectFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Period.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Period.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Schedule.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Schedule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Strategy.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Strategy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Student.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Student.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/StudentList.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/StudentList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/TimeTable.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/TimeTable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/cn/edu/seu/herald/ws/applicationContext.xml" afterPath="$PROJECT_DIR$/src/main/resources/cn/edu/seu/herald/ws/applicationContext.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/xsd/curriculum.xsd" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/xsd/curriculum.xsd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/herald-web-services.iml" afterPath="$PROJECT_DIR$/herald-web-services.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/package-info.java" afterPath="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/package-info.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="herald-web-services.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369056801407" ignored="false" />
-    <file path="/fragment.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368348416913" ignored="false" />
-    <file path="/CurriculumResource.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369055548818" ignored="false" />
+    <file path="/Dummy.txt" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369389039485" ignored="false" />
+    <file path="/fragment.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369388596858" ignored="false" />
+    <file path="/CurriculumResource.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369395897736" ignored="false" />
     <file path="/ClassroomResource.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368362400606" ignored="false" />
     <file path="/WebServicesIntegration.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368180606470" ignored="false" />
-    <file path="/pom.xml" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369057953481" ignored="false" />
+    <file path="/pom.xml" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369398435817" ignored="false" />
     <file path="/CurriculumDataAccessImplTest.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368180782702" ignored="false" />
     <file path="/CampusInfoDataAccessImpl.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368873644046" ignored="false" />
     <file path="/CampusInfoResource.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368347828424" ignored="false" />
@@ -32,8 +55,8 @@
     <file path="/AbstractXmlService.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368416872803" ignored="false" />
     <file path="/LibraryResourse.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368601512034" ignored="false" />
     <file path="/AbstractWebService.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368619141142" ignored="false" />
-    <file path="/curriculum.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368953636380" ignored="false" />
-    <file path="/Course.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368957206345" ignored="false" />
+    <file path="/curriculum.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369388430681" ignored="false" />
+    <file path="/Course.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369389089270" ignored="false" />
     <file path="/MorningExerciseService.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368712712321" ignored="false" />
     <file path="/GradePointService.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368712753761" ignored="false" />
     <file path="/AndroidUpdateService.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368712981273" ignored="false" />
@@ -42,14 +65,17 @@
     <file path="/ClassroomDataAccessImpl.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368873590176" ignored="false" />
     <file path="/Curriculum.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368877794351" ignored="false" />
     <file path="/gradePoint.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368949386877" ignored="false" />
-    <file path="/Courses.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368945566335" ignored="false" />
-    <file path="/CurriculumDataAccessImpl.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369054549288" ignored="false" />
-    <file path="/Schedule.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368945834722" ignored="false" />
-    <file path="/TimeTable.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368945860830" ignored="false" />
+    <file path="/Courses.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369388991858" ignored="false" />
+    <file path="/CurriculumDataAccessImpl.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369392432926" ignored="false" />
+    <file path="/Schedule.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369392470884" ignored="false" />
+    <file path="/TimeTable.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369392500376" ignored="false" />
     <file path="/CurriculumServiceImpl.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368946030572" ignored="false" />
     <file path="/AppTest.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368946105990" ignored="false" />
-    <file path="/CurriculumDataAccess.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369053648195" ignored="false" />
-    <file path="/dbcp.properties" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369057743837" ignored="false" />
+    <file path="/CurriculumDataAccess.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369388801974" ignored="false" />
+    <file path="/dbcp.properties" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369058322096" ignored="false" />
+    <file path="/CourseAdvice.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369398536047" ignored="false" />
+    <file path="/CurriculumResourceAspect.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369398192982" ignored="false" />
+    <file path="/applicationContext.xml" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369397462783" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,10 +136,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CurriculumResource.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CurriculumResource.java">
+      <file leaf-file-name="CurriculumDataAccess.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="105" column="53" selection-start="4220" selection-end="4220" vertical-scroll-proportion="0.0">
+            <state line="44" column="24" selection-start="1785" selection-end="1798" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CurriculumResourceAspect.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/aspect/CurriculumResourceAspect.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="20" selection-start="881" selection-end="881" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -121,55 +156,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Student.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Student.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="25" selection-start="2143" selection-end="2143" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CurriculumDataAccess.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccess.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="39" selection-start="1651" selection-end="1651" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dbcp.properties" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/cn/edu/seu/herald/ws/dbcp.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="42" selection-start="1316" selection-end="1316" vertical-scroll-proportion="0.73568285">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="38" selection-start="1395" selection-end="1395" vertical-scroll-proportion="0.0">
+            <state line="13" column="19" selection-start="589" selection-end="589" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CurriculumDataAccessImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccessImpl.java">
+      <file leaf-file-name="applicationContext.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/cn/edu/seu/herald/ws/applicationContext.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="191" column="36" selection-start="7896" selection-end="7896" vertical-scroll-proportion="0.0">
+            <state line="14" column="29" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StudentList.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/StudentList.java">
+      <file leaf-file-name="CurriculumResource.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CurriculumResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="13" selection-start="1410" selection-end="1410" vertical-scroll-proportion="0.0">
+            <state line="86" column="63" selection-start="3401" selection-end="3401" vertical-scroll-proportion="1.6129032">
               <folding />
             </state>
           </provider>
@@ -199,22 +207,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/gpa/GradePoint.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/cn/edu/seu/herald/ws/dbcp.properties" />
+        <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/xsd/curriculum.xsd" />
+        <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/package-info.java" />
+        <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/package-info.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccess.java" />
         <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Courses.java" />
         <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Schedule.java" />
         <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/TimeTable.java" />
-        <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Day.java" />
-        <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/impl/CurriculumServiceImpl.java" />
-        <option value="$PROJECT_DIR$/../herald-web-services-api/src/test/java/cn/edu/seu/herald/ws/api/AppTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/cn/edu/seu/herald/ws/it/CurriculumDataAccessImplTest.java" />
-        <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/xsd/gradePoint.xsd" />
-        <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/xsd/curriculum.xsd" />
         <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Course.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccess.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccessImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CurriculumResource.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/cn/edu/seu/herald/ws/dbcp.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/advice/CourseAdvice.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/advice/CurriculumResourceAspect.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/cn/edu/seu/herald/ws/applicationContext.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/aspect/CurriculumResourceAspect.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CurriculumResource.java" />
       </list>
     </option>
   </component>
@@ -248,8 +256,54 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="Herald Web Services API" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="Herald Web Services" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Herald Web Services" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Herald Web Services" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="glassfish" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -308,8 +362,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -386,41 +438,69 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="herald-web-services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="herald-web-services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="preferences.externalResources" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="true" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/../herald-web-services-api/src/main/xml" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="cn.edu.seu.herald.ws.it" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum" />
       <recent name="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="cn.edu.seu.herald.ws.it" />
     </key>
   </component>
   <component name="RunManager" selected="Maven.tomcat7:redeploy">
@@ -460,6 +540,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -485,19 +578,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -621,6 +701,11 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SliceManager">
+    <option name="analysisUIOptions">
+      <AnalysisUIOptions />
+    </option>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="98314585-4724-4547-971f-bfa156f3c4bf" name="Default" comment="" />
@@ -679,7 +764,11 @@
       <created>1368949519914</created>
       <updated>1368949519914</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="添加tomcat上需要的依赖">
+      <created>1369058000096</created>
+      <updated>1369058000096</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -696,10 +785,10 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2382496" sideWeight="0.73579544" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21474878" sideWeight="0.73504275" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24149108" sideWeight="0.73579544" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26420453" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24149108" sideWeight="0.73504275" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26495728" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -750,7 +839,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加gpa的属性" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加tomcat上需要的依赖" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -775,117 +864,124 @@
     <MESSAGE value="修改支持的media type" />
     <MESSAGE value="合并master" />
     <MESSAGE value="添加gpa的属性" />
+    <MESSAGE value="添加tomcat上需要的依赖" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Courses.java">
+    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Curriculum.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="22" selection-start="1317" selection-end="1317" vertical-scroll-proportion="0.022624435">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/src.zip!/javax/xml/bind/annotation/XmlElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="18" selection-start="3810" selection-end="3810" vertical-scroll-proportion="0.35656402" />
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/src.zip!/javax/xml/bind/annotation/XmlTransient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="18" selection-start="2495" selection-end="2495" vertical-scroll-proportion="1.6190476" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Course.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="10" selection-start="1487" selection-end="1487" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/ClassroomDataAccess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="17" selection-start="1334" selection-end="1334" vertical-scroll-proportion="0.20673813">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Period.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="13" selection-start="1344" selection-end="1344" vertical-scroll-proportion="0.3328125">
+        <state line="28" column="22" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Attendance.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="16" selection-start="1665" selection-end="1665" vertical-scroll-proportion="0.403125">
+        <state line="49" column="21" selection-start="1767" selection-end="1767" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/pom.xml">
+    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Courses.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.9139073">
+        <state line="76" column="31" selection-start="2260" selection-end="2260" vertical-scroll-proportion="0.859375">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/StudentList.java">
+    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Schedule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="13" selection-start="1410" selection-end="1410" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccessImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="191" column="36" selection-start="7896" selection-end="7896" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Student.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="25" selection-start="2143" selection-end="2143" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/xsd/curriculum.xsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="33" selection-start="4875" selection-end="4875" vertical-scroll-proportion="0.53642386">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CurriculumResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="53" selection-start="4220" selection-end="4220" vertical-scroll-proportion="0.0">
+        <state line="104" column="39" selection-start="2978" selection-end="2978" vertical-scroll-proportion="0.8295626">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/TimeTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="35" selection-start="2310" selection-end="2310" vertical-scroll-proportion="0.859375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/curriculum/Course.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="26" selection-start="1922" selection-end="1922" vertical-scroll-proportion="1.171875">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/DataAccessException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="13" selection-start="1258" selection-end="1258" vertical-scroll-proportion="0.21516393">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/herald-web-services.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/aspectj/aspectjrt/1.6.2/aspectjrt-1.6.2.jar!/org/aspectj/lang/JoinPoint.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="21" selection-start="1088" selection-end="1088" vertical-scroll-proportion="1.039604">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccessImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="127" column="55" selection-start="5615" selection-end="5615" vertical-scroll-proportion="0.34736842">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CurriculumDataAccess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="39" selection-start="1651" selection-end="1651" vertical-scroll-proportion="0.0">
+        <state line="44" column="24" selection-start="1785" selection-end="1798" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="38" selection-start="1395" selection-end="1395" vertical-scroll-proportion="0.0">
+        <state line="13" column="19" selection-start="589" selection-end="589" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/cn/edu/seu/herald/ws/dbcp.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/aspect/CurriculumResourceAspect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="42" selection-start="1316" selection-end="1316" vertical-scroll-proportion="0.73568285">
+        <state line="28" column="20" selection-start="881" selection-end="881" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/cn/edu/seu/herald/ws/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="29" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CurriculumResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="63" selection-start="3401" selection-end="3401" vertical-scroll-proportion="1.6129032">
           <folding />
         </state>
       </provider>
@@ -954,7 +1050,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>herald-web-services</last-edited>
+          <last-edited>herald-web-services-api</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
