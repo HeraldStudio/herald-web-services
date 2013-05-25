@@ -32,7 +32,7 @@ public class CurriculumResourceAspect implements ServletContextAware {
                     "cn.edu.seu.herald.ws.api.curriculum.Course " +
                     "cn.edu.seu.herald.ws.resource.CurriculumResource." +
                     "getCourseById(..))",
-            returning= "result"
+            returning = "result"
     )
     public void afterReturningCourse(JoinPoint joinPoint, Object result) {
         Course course = (Course) result;
@@ -45,7 +45,7 @@ public class CurriculumResourceAspect implements ServletContextAware {
                     "cn.edu.seu.herald.ws.api.curriculum.Curriculum " +
                     "cn.edu.seu.herald.ws.resource.CurriculumResource." +
                     "getCurriculum(..))",
-            returning= "result"
+            returning = "result"
     )
     public void afterReturningCurriculum(JoinPoint joinPoint, Object result) {
         Curriculum curriculum = (Curriculum) result;

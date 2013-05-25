@@ -67,7 +67,6 @@ public class CurriculumResource {
             response.sendError(404, "Curriculum not found");
             return null;
         }
-        String contextPath = context.getContextPath();
         Curriculum curriculum = (term == null)
                 ? curriculumDataAccess.getCurriculum(cardNumber)
                 : curriculumDataAccess.getCurriculum(cardNumber, term);
@@ -86,29 +85,5 @@ public class CurriculumResource {
         }
         Course course = curriculumDataAccess.getCourseById(id);
         return course;
-    }
-
-    private void addCourseHref(ServletContext context, Course course) {
-        String contextPath = context.getContextPath();
-        for (Student student : course.getStudents().getStudents()) {
-            URI uri = UriBuilder
-                    .fromPath(getAbstractPath(contextPath, "/curriculum"))
-                    .queryParam("cardNumber", student.getCardNumber())
-                    .build();
-            student.setCurriculum(uri.toString());
-        }
-        URI uri = UriBuilder
-                .fromPath(getAbstractPath(contextPath,
-                        "/curriculum/course/{id}"))
-                .build(course.getId());
-        course.setHref(uri.toString());
-    }
-
-    private String getAbstractPath(String ...path) {
-        StringBuilder pathBuilder = new StringBuilder();
-        for (String p : path) {
-            pathBuilder.append(p);
-        }
-        return pathBuilder.toString();
     }
 }

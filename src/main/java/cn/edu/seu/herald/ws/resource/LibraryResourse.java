@@ -3,6 +3,8 @@ package cn.edu.seu.herald.ws.resource;
 import cn.edu.seu.herald.ws.api.library.Book;
 import cn.edu.seu.herald.ws.api.library.Booklist;
 import cn.edu.seu.herald.ws.api.library.User;
+import cn.edu.seu.herald.ws.dao.LibraryDataAccess;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -17,6 +19,8 @@ public class LibraryResourse {
 
     protected static final String APPLICATION_VND_HERALD_LIB =
             "application/vnd.herald.library+xml";
+    @Autowired
+    private LibraryDataAccess libraryDataAccess;
 
     @POST
     @Path("/user")

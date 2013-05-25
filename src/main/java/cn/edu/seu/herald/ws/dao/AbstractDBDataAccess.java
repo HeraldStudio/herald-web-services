@@ -31,11 +31,11 @@ import javax.sql.DataSource;
  *
  * @author rAy <predator.ray@gmail.com>
  */
-abstract class AbstractDataAccess {
+abstract class AbstractDBDataAccess {
 
     private DataSource dataSource;
 
-    AbstractDataAccess(DataSource dataSource) {
+    AbstractDBDataAccess(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

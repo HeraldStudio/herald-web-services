@@ -36,7 +36,7 @@ import javax.sql.DataSource;
  *
  * @author rAy <predator.ray@gmail.com>
  */
-public class ClassroomDataAccessImpl extends AbstractDataAccess
+public class ClassroomDataAccessImpl extends AbstractDBDataAccess
         implements ClassroomDataAccess {
 
     private static final String GET_CLASSROOMS_UNUSED =

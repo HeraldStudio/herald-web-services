@@ -33,6 +33,10 @@ public class DataAccessException extends RuntimeException {
         super("Data access exception occurred.");
     }
 
+    public DataAccessException(String msg) {
+        super(msg);
+    }
+
     public DataAccessException(Exception cause) {
         super("Data access exception occurred.", cause);
     }

@@ -38,7 +38,7 @@ import org.apache.wink.common.model.synd.SyndText;
  *
  * @author rAy <predator.ray@gmail.com>
  */
-public class CampusInfoDataAccessImpl extends AbstractDataAccess
+public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
         implements CampusInfoDataAccess {
 
     private static final String GET_FEED_BY_NAME =

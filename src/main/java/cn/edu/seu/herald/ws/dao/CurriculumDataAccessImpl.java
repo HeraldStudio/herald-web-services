@@ -45,7 +45,7 @@ import javax.sql.DataSource;
  * @author rAy <predator.ray@gmail.com>
  */
 public class CurriculumDataAccessImpl
-        extends AbstractDataAccess
+        extends AbstractDBDataAccess
         implements CurriculumDataAccess {
 
     private static final Logger LOGGER = Logger.getLogger(
