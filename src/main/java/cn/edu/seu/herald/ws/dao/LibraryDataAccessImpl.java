@@ -7,6 +7,8 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
 import java.io.IOException;
@@ -31,20 +33,19 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
     @Override
     public Booklist search(String keyword, int page)
             throws DataAccessException {
-        PostMethod postMethod = new PostMethod(endPointUri);
-        postMethod.setParameter("control", "opac");
-        postMethod.setParameter("action", "user_check");
-        postMethod.setParameter("searchtype", "0");
-        postMethod.setParameter("sourceType", "0");
-        postMethod.setParameter("page", String.valueOf(page));
-        postMethod.setParameter("k", keyword);
-        try {
-            int status = executeMethod(postMethod);
-            if (status != HttpStatus.SC_OK) {
-                throw new DataAccessException("Unexpected status: " + status);
-            }
+        GetMethod getMethod = new GetMethod(endPointUri);
+        NameValuePair[] query = new NameValuePair[]{
+                new NameValuePair("control", "opac"),
+                new NameValuePair("action", "user_check"),
+                new NameValuePair("searchtype", "0"),
+                new NameValuePair("sourceType", "0"),
+                new NameValuePair("page", String.valueOf(page)),
+                new NameValuePair("k", keyword)
+        };
+        getMethod.setQueryString(query);
 
-            String responseBody = postMethod.getResponseBodyAsString();
+        try {
+            String responseBody = getResponseBody(getMethod);
             Booklist booklist = new Booklist();
             JSONObject jsonObject = JSONObject.fromObject(responseBody);
             JSONArray jsonArray = JSONArray.fromObject(
@@ -59,16 +60,31 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
                 booklist.getBooks().add(book);
             }
             return booklist;
-        } catch (IOException ex) {
-            throw new DataAccessException(ex);
         } finally {
-            releaseConnection(postMethod);
+            releaseConnection(getMethod);
         }
     }
 
     @Override
     public Book getBookByMarcNo(String marcNo) throws DataAccessException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        GetMethod getMethod = new GetMethod(endPointUri);
+        NameValuePair[] query = new NameValuePair[] {
+                new NameValuePair("control", "search_opac_detail"),
+                new NameValuePair("action", "user_check"),
+                new NameValuePair("marc_no", marcNo)
+        };
+
+        try {
+            String responseBody = getResponseBody(getMethod);
+            Book book = new Book();
+            JSONObject jsonObject = JSONObject.fromObject(responseBody);
+            String cnt1 = jsonObject.getString("cnt1");
+            String cnt2 = jsonObject.getString("cnt2");
+            // TODO parse html from cnt
+            return book;
+        } finally {
+            releaseConnection(getMethod);
+        }
     }
 
     @Override

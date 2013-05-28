@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Path("/library")
-public class LibraryResourse {
+public class LibraryResource {
 
     protected static final String APPLICATION_VND_HERALD_LIB =
             "application/vnd.herald.library+xml";
