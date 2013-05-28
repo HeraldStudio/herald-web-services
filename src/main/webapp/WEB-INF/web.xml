@@ -19,6 +19,10 @@
     </listener>
 
     <servlet>
+        <servlet-name>default-servlet</servlet-name>
+        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>jersey-serlvet</servlet-name>
         <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
         <init-param>
@@ -27,6 +31,15 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>default-servlet</servlet-name>
+        <url-pattern>/doc/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default-servlet</servlet-name>
+        <url-pattern>/static/*</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>jersey-serlvet</servlet-name>
         <url-pattern>/*</url-pattern>
