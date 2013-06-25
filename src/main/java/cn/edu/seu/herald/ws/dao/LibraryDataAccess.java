@@ -17,4 +17,19 @@ public interface LibraryDataAccess {
             throws DataAccessException;
 
     User getUserWithToken(String token) throws DataAccessException;
+
+    Booklist getBooksBorrowedByUser(String token)
+            throws AuthenticationFailure, DataAccessException;
+
+    Booklist getBooksReservedByUser(String token)
+            throws AuthenticationFailure, DataAccessException;
+
+    Booklist getBorrowHistory(String token)
+            throws AuthenticationFailure, DataAccessException;
+
+    boolean reserveBookByMarcNo(String marcNo, String token)
+            throws AuthenticationFailure, DataAccessException;
+
+    boolean renewBookByMarcNo(String marcNo, String token)
+            throws AuthenticationFailure, DataAccessException;
 }

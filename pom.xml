@@ -212,7 +212,7 @@
                     <autoCreate>true</autoCreate>
                     <debug>true</debug>
                     <echo>true</echo>
-                    <skip>${test.int.skip}</skip>
+                    <skip>true</skip>
                     <domain>
                         <name>${project.artifactId}</name>
                         <adminPort>4848</adminPort>
@@ -239,5 +239,16 @@
             <url>http://download.java.net/maven/2</url>
         </pluginRepository>
     </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>herald-releases</id>
+            <url>http://herald.seu.edu.cn/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>herald-snapshots</id>
+            <url>http://herald.seu.edu.cn/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

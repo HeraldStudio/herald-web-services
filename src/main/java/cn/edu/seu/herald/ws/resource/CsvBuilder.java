@@ -29,7 +29,7 @@ import java.util.List;
  *
  * @author rAy <predator.ray@gmail.com>
  */
-public class CsvBuilder {
+class CsvBuilder {
 
     private static final String DEFAULT_ESCAPE = "\\,";
     private final String escape;
