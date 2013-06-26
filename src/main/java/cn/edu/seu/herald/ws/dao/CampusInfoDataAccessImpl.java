@@ -165,7 +165,7 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
     }
 
     private String getUrnUuid(String uuid) {
-        return "urn:uuid:" + uuid;
+        return uuid;
     }
 
     private SyndLink getAltLink(String url) {
