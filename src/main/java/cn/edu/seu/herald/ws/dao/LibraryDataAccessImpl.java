@@ -97,4 +97,29 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
     public User getUserWithToken(String token) throws DataAccessException {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    @Override
+    public Booklist getBooksBorrowedByUser(String token) throws AuthenticationFailure, DataAccessException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Booklist getBooksReservedByUser(String token) throws AuthenticationFailure, DataAccessException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Booklist getBorrowHistory(String token) throws AuthenticationFailure, DataAccessException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean reserveBookByMarcNo(String marcNo, String token) throws AuthenticationFailure, DataAccessException {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean renewBookByMarcNo(String marcNo, String token) throws AuthenticationFailure, DataAccessException {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }
