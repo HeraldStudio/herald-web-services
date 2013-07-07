@@ -1,3 +1,4 @@
+# Java Compiled Code #
 *.class
 
 # Package Files #
@@ -5,3 +6,6 @@
 *.war
 *.ear
 /target/
+
+# Idea Project Files #
+/.idea/
