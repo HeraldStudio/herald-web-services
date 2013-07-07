@@ -36,5 +36,7 @@ public interface CampusInfoDataAccess {
     SyndFeed getFeedByName(String name, String afterUUID)
             throws DataAccessException;
 
+    boolean containsFeed(String name) throws DataAccessException;
+
     String getLatestUUID(String name) throws DataAccessException;
 }

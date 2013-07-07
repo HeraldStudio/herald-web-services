@@ -2,23 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98314585-4724-4547-971f-bfa156f3c4bf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/LibraryDataAccessImpl.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/LibraryDataAccessImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_wiscom_is_2_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ice_ice_1_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_ws_rs_javax_ws_rs_api_2_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_jaxb_impl_2_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CampusInfoDataAccess.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CampusInfoDataAccess.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CampusInfoDataAccessImpl.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CampusInfoDataAccessImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CampusInfoResource.java" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CampusInfoResource.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/README.md" afterPath="$PROJECT_DIR$/../herald-web-services-api/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/herald-web-services-api.iml" afterPath="$PROJECT_DIR$/../herald-web-services-api/herald-web-services-api.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../herald-web-services-api/pom.xml" afterPath="$PROJECT_DIR$/../herald-web-services-api/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="herald-web-services.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372508791467" ignored="false" />
+    <file path="/Dummy.txt" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1373203869100" ignored="false" />
     <file path="/fragment.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369388596858" ignored="false" />
     <file path="/CurriculumResource.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369573357421" ignored="false" />
     <file path="/ClassroomResource.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368362400606" ignored="false" />
     <file path="/WebServicesIntegration.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368180606470" ignored="false" />
-    <file path="/pom.xml" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1370169088604" ignored="false" />
+    <file path="/pom.xml" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1373091400559" ignored="false" />
     <file path="/CurriculumDataAccessImplTest.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368180782702" ignored="false" />
-    <file path="/CampusInfoDataAccessImpl.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368873644046" ignored="false" />
-    <file path="/CampusInfoResource.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368347828424" ignored="false" />
-    <file path="$USER_HOME$/.m2/settings.xml" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1370168802023" ignored="false" />
+    <file path="/CampusInfoDataAccessImpl.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1373095392323" ignored="false" />
+    <file path="/CampusInfoResource.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1373093192325" ignored="false" />
+    <file path="$USER_HOME$/.m2/settings.xml" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1373091261090" ignored="false" />
     <file path="/web.xml" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369752942322" ignored="false" />
     <file path="/AtomFeed.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368349905807" ignored="false" />
     <file path="/CampusInfoServiceImpl.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368358455185" ignored="false" />
@@ -49,7 +65,7 @@
     <file path="/Schedule.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369392470884" ignored="false" />
     <file path="/TimeTable.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369392500376" ignored="false" />
     <file path="/CurriculumServiceImpl.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1368946030572" ignored="false" />
-    <file path="/AppTest.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1370009095064" ignored="false" />
+    <file path="/AppTest.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372586677879" ignored="false" />
     <file path="/CurriculumDataAccess.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369388801974" ignored="false" />
     <file path="/dbcp.properties" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369058322096" ignored="false" />
     <file path="/CourseAdvice.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1369398536047" ignored="false" />
@@ -78,6 +94,26 @@
     <file path="/a.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372490193057" ignored="false" />
     <file path="/CampusInfoService.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372508717509" ignored="false" />
     <file path="/AaoServiceImpl.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372508650658" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven.jar!/schemas/maven-4.0.0.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672733" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven.jar!/schemas/settings-1.0.0.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672733" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven.jar!/schemas/profiles-1.0.0.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672733" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xhtml1-strict.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672733" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/plugins/xpath/lib/xpath.jar!/org/intellij/lang/xpath/xslt/resources/documentation.xml" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672733" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xslt-1_0.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672733" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/plugins/xpath/lib/xpath.jar!/org/intellij/lang/xpath/xslt/resources/xslt-schema.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/plugins/xpath/lib/xpath.jar!/org/intellij/lang/xpath/xslt/resources/documentation.xsl" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/catalog.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/resources/relaxng.rng" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/XMLSchema.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xhtml1-frameset.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xinclude.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xml.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/XMLSchema-instance.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xslt-2_0.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xhtml1-transitional.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/html5/xhtml5.xsd" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372518672734" ignored="false" />
+    <file path="/CommaSeparatedValue.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1372584153566" ignored="false" />
+    <file path="/CampusInfoDataAccess.java" changelist="98314585-4724-4547-971f-bfa156f3c4bf" time="1373092970734" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,37 +179,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LibraryDataAccessImpl.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/LibraryDataAccessImpl.java">
+      <file leaf-file-name="CampusInfoResource.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CampusInfoResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="83" column="28" selection-start="3180" selection-end="3180" vertical-scroll-proportion="-0.61083746">
+            <state line="58" column="21" selection-start="2187" selection-end="2187" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AaoInfoService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/AaoInfoService.java">
+      <file leaf-file-name="CampusInfoDataAccess.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CampusInfoDataAccess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="43" selection-start="1575" selection-end="1575" vertical-scroll-proportion="0.0">
+            <state line="31" column="26" selection-start="1323" selection-end="1323" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AaoInfoServiceImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/impl/AaoInfoServiceImpl.java">
+      <file leaf-file-name="CampusInfoDataAccessImpl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CampusInfoDataAccessImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="28" selection-start="1932" selection-end="1932" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractXmlService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/impl/AbstractXmlService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="20" selection-start="1936" selection-end="1936" vertical-scroll-proportion="0.0">
+            <state line="55" column="42" selection-start="2463" selection-end="2463" vertical-scroll-proportion="0.5325444">
               <folding />
             </state>
           </provider>
@@ -203,22 +230,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/../herald-authentication-api/src/main/java/cn/edu/seu/herald/auth/AuthenticationServiceImpl.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/../herald-web-services-api/pom.xml" />
-        <option value="$PROJECT_DIR$/../herald-authentication-api/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CsvBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/aspect/LibraryTokenAuthenticator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/AuthenticationFailure.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/LibraryDataAccess.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/LibraryResource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/LibraryDataAccessImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CampusInfoDataAccessImpl.java" />
-        <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/impl/CampusInfoServiceImpl.java" />
         <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/impl/AaoServiceImpl.java" />
         <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/CampusInfoService.java" />
         <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/impl/AaoInfoServiceImpl.java" />
         <option value="$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/AaoInfoService.java" />
+        <option value="$PROJECT_DIR$/../herald-authentication-api/pom.xml" />
+        <option value="$PROJECT_DIR$/../herald-authentication-api/src/test/java/cn/edu/seu/herald/auth/AppTest.java" />
+        <option value="$PROJECT_DIR$/../herald-authentication/src/main/java/cn/edu/seu/herald/authentication/CommaSeparatedValue.java" />
+        <option value="$PROJECT_DIR$/../herald-authentication/src/main/java/cn/edu/seu/herald/authentication/AuthenticationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/../herald-authentication/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/../herald-authentication/src/test/java/cn/edu/seu/herald/authentication/AppTest.java" />
+        <option value="$PROJECT_DIR$/../herald-authentication/pom.xml" />
+        <option value="$PROJECT_DIR$/../herald-web-services-api/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CampusInfoDataAccess.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CampusInfoResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CampusInfoDataAccessImpl.java" />
       </list>
     </option>
   </component>
@@ -229,6 +256,11 @@
         <option name="importAutomatically" value="true" />
       </MavenImportingSettings>
     </option>
+    <option name="enabledProfiles">
+      <list>
+        <option value="tomcat7-profile" />
+      </list>
+    </option>
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
@@ -237,8 +269,14 @@
           <option name="myItemId" value="" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
+      </PATH>
+      <PATH>
         <PATH_ELEMENT>
-          <option name="myItemId" value="Herald Web Services API" />
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Herald Web Services" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -248,18 +286,44 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="Herald Web Services API" />
+          <option name="myItemId" value="Herald Web Services" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Herald Web Services" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="tomcat7" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Herald Web Services" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="Lifecycle" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
       </PATH>
     </treeState>
@@ -452,12 +516,56 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="herald-web-services" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="herald-web-services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="herald-web-services-api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="herald-web-services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="herald-web-services-api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="herald-web-services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="herald-web-services-api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -560,8 +668,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -573,7 +679,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="preferences.pathVariables" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JellyJollyPersistenceAPI" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -599,7 +705,29 @@
       <recent name="cn.edu.seu.herald.ws.it" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.tomcat7:redeploy">
+  <component name="RunManager" selected="JUnit.AppTest">
+    <configuration default="false" name="AppTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="herald-authentication" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="cn.edu.seu.herald.authentication" />
+      <option name="MAIN_CLASS_NAME" value="cn.edu.seu.herald.authentication.AppTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -802,11 +930,18 @@
       </MavenSettings>
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Maven.tomcat7:deploy" />
       <item index="1" class="java.lang.String" itemvalue="Maven.tomcat7:redeploy" />
       <item index="2" class="java.lang.String" itemvalue="Maven.tomcat7:undeploy" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.AppTest" />
     </list>
+    <recent_temporary>
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.AppTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.AppTest" />
+      </list>
+    </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -961,7 +1096,23 @@
       <created>1372508803628</created>
       <updated>1372508803628</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="添加遗漏的图书馆访问接口实现类的方法">
+      <created>1372509055696</created>
+      <updated>1372509055696</updated>
+    </task>
+    <task id="LOCAL-00032" summary="修正Csv空指针问题">
+      <created>1372586653215</created>
+      <updated>1372586653215</updated>
+    </task>
+    <task id="LOCAL-00033" summary="添加测试用例">
+      <created>1372586706559</created>
+      <updated>1372586706559</updated>
+    </task>
+    <task id="LOCAL-00034" summary="修改项目名称">
+      <created>1372594586448</created>
+      <updated>1372594586448</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -971,21 +1122,21 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22285251" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33048433" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33048433" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24635333" sideWeight="0.66951567" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23014587" sideWeight="0.7386364" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22771475" sideWeight="0.66951567" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2627841" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22771475" sideWeight="0.7386364" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26136363" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33048433" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33048433" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1032,7 +1183,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加客户端实现的limit参数；添加对于空供稿的javadoc说明" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改项目名称" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1046,10 +1197,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="修改图书馆服务api" />
-    <MESSAGE value="修改图书馆服务api，实现客户端" />
-    <MESSAGE value="添加遗漏的接口设计" />
-    <MESSAGE value="使用自动生成的课程接口，添加遗漏的接口设计" />
     <MESSAGE value="根据修改的接口修改实现" />
     <MESSAGE value="修改支持的media type" />
     <MESSAGE value="合并master" />
@@ -1071,6 +1218,10 @@
     <MESSAGE value="取出urn:uuid:前缀" />
     <MESSAGE value="修改教务处接口" />
     <MESSAGE value="添加客户端实现的limit参数；添加对于空供稿的javadoc说明" />
+    <MESSAGE value="添加遗漏的图书馆访问接口实现类的方法" />
+    <MESSAGE value="修正Csv空指针问题" />
+    <MESSAGE value="添加测试用例" />
+    <MESSAGE value="修改项目名称" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1080,110 +1231,92 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CsvBuilder.java">
+    <entry file="file://$PROJECT_DIR$/../herald-authentication-api/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="1274" selection-end="1274" vertical-scroll-proportion="0.112426035" />
+        <state line="104" column="27" selection-start="3752" selection-end="4160" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CurriculumResource.java">
+    <entry file="file://$PROJECT_DIR$/../herald-authentication-api/src/test/java/cn/edu/seu/herald/auth/AppTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="9" selection-start="2405" selection-end="2405" vertical-scroll-proportion="0.42307693" />
+        <state line="62" column="40" selection-start="0" selection-end="2381" vertical-scroll-proportion="1.1632653" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/LibraryDataAccess.java">
+    <entry file="file://$PROJECT_DIR$/../herald-authentication/src/main/java/cn/edu/seu/herald/authentication/AuthenticationServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="17" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.6891271">
+        <state line="46" column="24" selection-start="1702" selection-end="1702" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../herald-authentication/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="39" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-client/1.17.1/jersey-client-1.17.1.pom">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.0625" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="51" selection-start="1516" selection-end="1516" vertical-scroll-proportion="1.1273487">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/DataAccessException.java">
+    <entry file="file://$PROJECT_DIR$/../herald-authentication/src/test/java/cn/edu/seu/herald/authentication/AppTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="13" selection-start="1258" selection-end="1258" vertical-scroll-proportion="0.15532544">
+        <state line="69" column="23" selection-start="2491" selection-end="2491" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="65" selection-start="712" selection-end="712" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/cn/edu/seu/herald/herald-web-services-api/1.1-SHAPSHOT/herald-web-services-api-1.1-SHAPSHOT.jar!/cn/edu/seu/herald/ws/api/library/Book.class">
+    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/impl/LibraryServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="35" selection-start="1427" selection-end="1431" vertical-scroll-proportion="0.034883723">
+        <state line="46" column="56" selection-start="1996" selection-end="1996" vertical-scroll-proportion="0.5487805" />
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_11.jdk/Contents/Home/src.zip!/java/sql/PreparedStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="17" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.33333334" />
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wink/wink-common/1.3.0/wink-common-1.3.0-sources.jar!/org/apache/wink/common/model/synd/SyndBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="27" selection-start="2864" selection-end="2864" vertical-scroll-proportion="-2.9144738" />
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wink/wink-common/1.3.0/wink-common-1.3.0-sources.jar!/org/apache/wink/common/model/synd/SyndLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="11" selection-start="1277" selection-end="1277" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wink/wink-common/1.3.0/wink-common-1.3.0-sources.jar!/org/apache/wink/common/model/rss/RssFeed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="112" column="53" selection-start="4311" selection-end="4311" vertical-scroll-proportion="-0.39035088" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/resource/CampusInfoResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="21" selection-start="2187" selection-end="2187" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wink/wink-common/1.3.0/wink-common-1.3.0-sources.jar!/org/apache/wink/common/model/rss/RssItem.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CampusInfoDataAccess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="36" selection-start="7581" selection-end="7585" vertical-scroll-proportion="0.031380754">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/cn/edu/seu/herald/herald-web-services-api/1.1-SHAPSHOT/herald-web-services-api-1.1-SHAPSHOT.jar!/cn/edu/seu/herald/ws/api/library/User.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="19" selection-start="509" selection-end="509" vertical-scroll-proportion="0.03311258">
+        <state line="31" column="26" selection-start="1323" selection-end="1323" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/CampusInfoDataAccessImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="50" selection-start="3210" selection-end="3210" vertical-scroll-proportion="0.031380754">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="30" selection-start="453" selection-end="453" vertical-scroll-proportion="0.26373628">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wink/wink-common/1.3.0/wink-common-1.3.0-sources.jar!/org/apache/wink/common/model/rss/RssChannel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="262" column="33" selection-start="11790" selection-end="11790" vertical-scroll-proportion="2.8556485">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/wink/wink-common/1.3.0/wink-common-1.3.0-sources.jar!/org/apache/wink/common/model/rss/RssFeed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="17" selection-start="4563" selection-end="4563" vertical-scroll-proportion="0.42677826">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/impl/HeraldWebServicesFactoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="13" selection-start="1328" selection-end="1328" vertical-scroll-proportion="0.3146853">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/impl/AbstractXmlService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="20" selection-start="1936" selection-end="1936" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/AaoInfoService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="43" selection-start="1575" selection-end="1575" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../herald-web-services-api/src/main/java/cn/edu/seu/herald/ws/api/impl/AaoInfoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="28" selection-start="1932" selection-end="1932" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/edu/seu/herald/ws/dao/LibraryDataAccessImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="28" selection-start="3180" selection-end="3180" vertical-scroll-proportion="-0.61083746">
+        <state line="55" column="42" selection-start="2463" selection-end="2463" vertical-scroll-proportion="0.5325444">
           <folding />
         </state>
       </provider>

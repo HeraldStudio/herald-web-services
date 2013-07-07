@@ -22,12 +22,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="herald-authentication" />
         <module name="herald-authentication-api" />
         <module name="herald-web-services" />
         <module name="herald-web-services-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="herald-authentication" target="1.6" />
       <module name="herald-web-services" target="1.6" />
     </bytecodeTargetLevel>
   </component>

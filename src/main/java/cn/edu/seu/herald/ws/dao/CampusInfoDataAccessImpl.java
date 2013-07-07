@@ -49,6 +49,8 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
             + "FROM `herald_campus_info`.`feed` "
             + "WHERE name=? AND updated > ("
             + "SELECT updated FROM `herald_campus_info`.`feed` WHERE uuid=?);";
+    private static final String CONTAINS_FEED =
+            "SELECT COUNT(1) FROM `herald_campus_info`.`feed` WHERE name=?";
     private static final String GET_ENTRIES_BY_FEED_UUID =
             "SELECT uuid, title, url, updated, summary "
             + "FROM `herald_campus_info`.`entry` WHERE feed_uuid=?";
@@ -66,34 +68,9 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
             PreparedStatement ps1 = connection.prepareStatement(
                     GET_FEED_BY_NAME);
             ps1.setString(1, name);
-            ResultSet rs1 = ps1.executeQuery();
-            if (!rs1.next()) {
-                return null;
-            }
-            String uuid = rs1.getString("uuid");
-            String title = rs1.getString("title");
-            String url = rs1.getString("url");
-            Date updated = rs1.getDate("updated");
-
-            SyndFeed syndFeed = new SyndFeed();
-            syndFeed.setId(getUrnUuid(uuid));
-            syndFeed.setTitle(new SyndText(title));
-            syndFeed.setUpdated(updated);
-            syndFeed.addLink(getAltLink(url));
-
             PreparedStatement ps2 = connection.prepareStatement(
                     GET_ENTRIES_BY_FEED_UUID);
-            ps2.setString(1, uuid);
-            ResultSet rs2 = ps2.executeQuery();
-            while (rs2.next()) {
-                SyndEntry entry = new SyndEntry();
-                entry.setId(getUrnUuid(rs2.getString("uuid")));
-                entry.setTitle(new SyndText(rs2.getString("title")));
-                entry.setPublished(rs2.getDate("updated"));
-                entry.setSummary(new SyndText(rs2.getString("summary")));
-                syndFeed.addEntry(entry);
-            }
-            return syndFeed;
+            return getSyndFeed(ps1, ps2);
         } catch (SQLException ex) {
             throw new DataAccessException(ex);
         } finally {
@@ -110,34 +87,28 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
                     GET_FEED_BY_NAME_AFTER_UUID);
             ps1.setString(1, name);
             ps1.setString(2, afterUUID);
-            ResultSet rs1 = ps1.executeQuery();
-            if (!rs1.next()) {
-                return null;
-            }
-            String uuid = rs1.getString("uuid");
-            String title = rs1.getString("title");
-            String url = rs1.getString("url");
-            Date updated = rs1.getDate("updated");
-
-            SyndFeed syndFeed = new SyndFeed();
-            syndFeed.setId(getUrnUuid(uuid));
-            syndFeed.setTitle(new SyndText(title));
-            syndFeed.setUpdated(updated);
-            syndFeed.addLink(getAltLink(url));
-
             PreparedStatement ps2 = connection.prepareStatement(
                     GET_ENTRIES_BY_FEED_UUID);
-            ps2.setString(1, uuid);
-            ResultSet rs2 = ps2.executeQuery();
-            while (rs2.next()) {
-                SyndEntry entry = new SyndEntry();
-                entry.setId(getUrnUuid(rs2.getString("uuid")));
-                entry.setTitle(new SyndText(rs2.getString("title")));
-                entry.setPublished(rs2.getDate("updated"));
-                entry.setSummary(new SyndText(rs2.getString("summary")));
-                syndFeed.addEntry(entry);
+            return getSyndFeed(ps1, ps2);
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    @Override
+    public boolean containsFeed(String name) throws DataAccessException {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement ps = connection.prepareStatement(
+                    CONTAINS_FEED);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                throw new DataAccessException("No result set returned");
             }
-            return syndFeed;
+            return rs.getInt(1) > 0;
         } catch (SQLException ex) {
             throw new DataAccessException(ex);
         } finally {
@@ -164,11 +135,43 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
         }
     }
 
+    private SyndFeed getSyndFeed(PreparedStatement feed,
+                                 PreparedStatement entries)
+            throws SQLException {
+        ResultSet feedRs = feed.executeQuery();
+        if (!feedRs.next()) {
+            return null;
+        }
+        String uuid = feedRs.getString("uuid");
+        String title = feedRs.getString("title");
+        String url = feedRs.getString("url");
+        Date updated = feedRs.getDate("updated");
+
+        SyndFeed syndFeed = new SyndFeed();
+        syndFeed.setId(uuid);
+        syndFeed.setTitle(new SyndText(title));
+        syndFeed.setUpdated(updated);
+        syndFeed.addLink(getAltLink(url));
+
+        entries.setString(1, uuid);
+        ResultSet entriesRs = entries.executeQuery();
+        while (entriesRs.next()) {
+            SyndEntry entry = new SyndEntry();
+            entry.setId(getUrnUuid(entriesRs.getString("uuid")));
+            entry.setTitle(new SyndText(entriesRs.getString("title")));
+            entry.addLink(getAltLink(entriesRs.getString("url")));
+            entry.setPublished(entriesRs.getDate("updated"));
+            entry.setSummary(new SyndText(entriesRs.getString("summary")));
+            syndFeed.addEntry(entry);
+        }
+        return syndFeed;
+    }
+
     private String getUrnUuid(String uuid) {
         return uuid;
     }
 
     private SyndLink getAltLink(String url) {
-        return new SyndLink(null, "text/html", url);
+        return new SyndLink("alternate", "text/html", url);
     }
 }

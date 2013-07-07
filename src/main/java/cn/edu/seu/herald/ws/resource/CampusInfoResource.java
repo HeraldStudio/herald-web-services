@@ -58,6 +58,10 @@ public class CampusInfoResource {
     public RssFeed getRssFeedByName(@PathParam("name") String name,
             @HeaderParam("If-None-Match") String clientUUID,
             @Context HttpServletResponse response) throws IOException {
+        if (!campusInfoDataAccess.containsFeed(name)) {
+            response.sendError(404);
+            return null;
+        }
         String latestUUID = campusInfoDataAccess.getLatestUUID(name);
         boolean match = (latestUUID != null) && latestUUID.equals(clientUUID);
         if (match) {

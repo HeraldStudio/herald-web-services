@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../herald-web-services-api/pom.xml" />
         <option value="$PROJECT_DIR$/../herald-authentication-api/pom.xml" />
+        <option value="$PROJECT_DIR$/../herald-authentication/pom.xml" />
       </list>
     </option>
   </component>
