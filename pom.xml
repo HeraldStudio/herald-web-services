@@ -17,11 +17,12 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <netbeans.hint.license>mit</netbeans.hint.license>
-        <tomcat.deploy.path>/ws</tomcat.deploy.path>
+        <tomcat.context>ws</tomcat.context>
+        <tomcat.deploy.path>/${tomcat.context}</tomcat.deploy.path>
         <spring.version>3.2.2.RELEASE</spring.version>
         <jersey.version>1.17.1</jersey.version>
         <aspectj.version>1.6.2</aspectj.version>
+        <aopalliance.version>1.0</aopalliance.version>
     </properties>
 
     <dependencies>
@@ -66,14 +67,14 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>${aspectj.version}</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>${aopalliance.version}</version>
         </dependency>
         <dependency>
             <groupId>cglib</groupId>
@@ -148,6 +149,7 @@
     </dependencies>
 
     <build>
+        <finalName>${tomcat.context}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
