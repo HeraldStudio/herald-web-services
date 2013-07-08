@@ -6,6 +6,7 @@ import cn.edu.seu.herald.ws.api.library.User;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -33,8 +34,8 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
     @Override
     public Booklist search(String keyword, int page)
             throws DataAccessException {
-        GetMethod getMethod = new GetMethod(endPointUri);
-        NameValuePair[] query = new NameValuePair[]{
+        GetMethod getMethod = newGetMethod(endPointUri);
+        NameValuePair[] query = new NameValuePair[] {
                 new NameValuePair("control", "opac"),
                 new NameValuePair("action", "user_check"),
                 new NameValuePair("searchtype", "0"),
@@ -67,12 +68,14 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
 
     @Override
     public Book getBookByMarcNo(String marcNo) throws DataAccessException {
-        GetMethod getMethod = new GetMethod(endPointUri);
+        GetMethod getMethod = newGetMethod(endPointUri);
         NameValuePair[] query = new NameValuePair[] {
                 new NameValuePair("control", "search_opac_detail"),
                 new NameValuePair("action", "user_check"),
                 new NameValuePair("marc_no", marcNo)
         };
+        getMethod.setQueryString(query);
+        executeMethod(getMethod);
 
         try {
             String responseBody = getResponseBody(getMethod);
@@ -90,36 +93,84 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
     @Override
     public User getUserIfAuthenticated(String username, String password)
             throws DataAccessException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        GetMethod getMethod = newGetMethod(endPointUri);
+        NameValuePair[] query = new NameValuePair[] {
+                new NameValuePair("control", "CheckUser"),
+                new NameValuePair("action", "user_check"),
+                new NameValuePair("username", username),
+                new NameValuePair("password", password)
+        };
+        getMethod.setQueryString(query);
+        executeMethod(getMethod);
+
+        try {
+            String responseBody = getResponseBody(getMethod);
+            // TODO check, get the cookie token, set urls with the token
+            if (false) {
+                return null;
+            }
+            String token = null;
+            return getUserWithToken(token);
+        } finally {
+            releaseConnection(getMethod);
+        }
     }
 
     @Override
     public User getUserWithToken(String token) throws DataAccessException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        GetMethod getMethod = newGetMethod(endPointUri);
+        NameValuePair[] query = new NameValuePair[] {
+                new NameValuePair("control", "redr_info"),
+                new NameValuePair("action", "user_check"),
+                new NameValuePair("act", "1")
+        };
+        getMethod.setQueryString(query);
+        addTokenToRequest(getMethod, token);
+        executeMethod(getMethod);
+
+        try {
+            String responseBody = getResponseBody(getMethod);
+            User user = new User();
+            // TODO parse JSON, get user info
+            return user;
+        } finally {
+            releaseConnection(getMethod);
+        }
     }
 
     @Override
-    public Booklist getBooksBorrowedByUser(String token) throws AuthenticationFailure, DataAccessException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public Booklist getBooksBorrowedByUser(String token)
+            throws AuthenticationFailure, DataAccessException {
+        return null;
     }
 
     @Override
-    public Booklist getBooksReservedByUser(String token) throws AuthenticationFailure, DataAccessException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public Booklist getBooksReservedByUser(String token)
+            throws AuthenticationFailure, DataAccessException {
+        return null;
     }
 
     @Override
-    public Booklist getBorrowHistory(String token) throws AuthenticationFailure, DataAccessException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public Booklist getBorrowHistory(String token)
+            throws AuthenticationFailure, DataAccessException {
+        return null;
     }
 
     @Override
-    public boolean reserveBookByMarcNo(String marcNo, String token) throws AuthenticationFailure, DataAccessException {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public boolean reserveBookByMarcNo(String marcNo, String token)
+            throws AuthenticationFailure, DataAccessException {
+        return false;
     }
 
     @Override
-    public boolean renewBookByMarcNo(String marcNo, String token) throws AuthenticationFailure, DataAccessException {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public boolean renewBookByMarcNo(String marcNo, String token)
+            throws AuthenticationFailure, DataAccessException {
+        return false;
+    }
+
+    private void addTokenToRequest(HttpMethod httpMethod, String token) {
+        httpMethod.setRequestHeader("Cookie",
+                String.format("PHPSESSID=%s", token));
+
     }
 }
