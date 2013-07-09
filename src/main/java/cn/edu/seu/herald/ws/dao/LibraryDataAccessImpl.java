@@ -9,6 +9,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
@@ -105,10 +106,18 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
 
         try {
             String responseBody = getResponseBody(getMethod);
-            // TODO check, get the cookie token, set urls with the token
-            if (false) {
+            JSONObject jsonObject = JSONObject.fromObject(responseBody);
+            String status = jsonObject.getString("status");
+            if ("fail!".equals(status)) { // not authenticated
                 return null;
             }
+            if (!"ok!".equals(status)) { // unrecognizable response
+                throw new DataAccessException(String.format("Unrecognizable " +
+                        "response from the library service: %s",
+                        status));
+            }
+            // TODO check, get the cookie token, set urls with the token
+            getMethod.getResponseHeader("Cookie");
             String token = null;
             return getUserWithToken(token);
         } finally {
