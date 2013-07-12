@@ -7,13 +7,9 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
-
-import java.io.IOException;
+import org.springframework.util.Assert;
 
 /**
  * Copyright (c) 2013 Ray <predator.ray@gmail.com>
@@ -35,6 +31,8 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
     @Override
     public Booklist search(String keyword, int page)
             throws DataAccessException {
+        Assert.notNull(keyword);
+
         GetMethod getMethod = newGetMethod(endPointUri);
         NameValuePair[] query = new NameValuePair[] {
                 new NameValuePair("control", "opac"),
@@ -69,6 +67,8 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
 
     @Override
     public Book getBookByMarcNo(String marcNo) throws DataAccessException {
+        Assert.notNull(marcNo);
+
         GetMethod getMethod = newGetMethod(endPointUri);
         NameValuePair[] query = new NameValuePair[] {
                 new NameValuePair("control", "search_opac_detail"),
@@ -85,6 +85,11 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
             String cnt1 = jsonObject.getString("cnt1");
             String cnt2 = jsonObject.getString("cnt2");
             // TODO parse html from cnt
+            book.setAuthor(null);
+            book.setName(null);
+            book.setHref(null);
+            book.setIsbn(null);
+            book.setPress(null);
             return book;
         } finally {
             releaseConnection(getMethod);
@@ -94,6 +99,9 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
     @Override
     public User getUserIfAuthenticated(String username, String password)
             throws DataAccessException {
+        Assert.notNull(username);
+        Assert.notNull(password);
+
         GetMethod getMethod = newGetMethod(endPointUri);
         NameValuePair[] query = new NameValuePair[] {
                 new NameValuePair("control", "CheckUser"),
@@ -127,6 +135,8 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
 
     @Override
     public User getUserWithToken(String token) throws DataAccessException {
+        Assert.notNull(token);
+
         GetMethod getMethod = newGetMethod(endPointUri);
         NameValuePair[] query = new NameValuePair[] {
                 new NameValuePair("control", "redr_info"),

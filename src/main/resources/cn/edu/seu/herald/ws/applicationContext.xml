@@ -17,10 +17,13 @@
 
     <bean class="cn.edu.seu.herald.ws.resource.aspect.CurriculumResourceAspect"/>
 
+    <bean id="httpClient" class="org.apache.commons.httpclient.HttpClient"/>
+
     <bean id="dbcpPropertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:cn/edu/seu/herald/ws/dbcp.properties" />
     </bean>
+
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${dbcp.driverClassName}"/>
         <property name="url" value="${dbcp.url}"/>
@@ -31,6 +34,7 @@
         <property name="testOnBorrow" value="true"/>
         <property name="validationQuery" value="SELECT 1;"/>
     </bean>
+
     <bean id="curriculumDataAccess" class="cn.edu.seu.herald.ws.dao.CurriculumDataAccessImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
@@ -41,8 +45,6 @@
         <constructor-arg ref="dataSource"/>
     </bean>
     <bean id="libraryDataAccess" class="cn.edu.seu.herald.ws.dao.LibraryDataAccessImpl">
-        <constructor-arg>
-            <null/>
-        </constructor-arg>
+        <constructor-arg ref="httpClient"/>
     </bean>
 </beans>

@@ -46,7 +46,13 @@ public class LibraryResource {
     @Produces(APPLICATION_VND_HERALD_LIB)
     public Booklist searchBooks(@QueryParam("keyword") String keyword,
                                 @QueryParam("page")
-                                @DefaultValue("1") int page) {
+                                @DefaultValue("1") int page,
+                                @Context HttpServletResponse response)
+            throws IOException {
+        if (keyword == null) {
+            response.sendError(400, "keyword is null");
+            return null;
+        }
         Booklist result = libraryDataAccess.search(keyword, page);
         return result;
     }
@@ -57,6 +63,11 @@ public class LibraryResource {
     public Booklist getBooksBorrowed(@QueryParam("token") String token,
                                      @Context HttpServletResponse response)
             throws IOException {
+        if (token == null) {
+            response.sendError(400, "token is null");
+            return null;
+        }
+
         try {
             return libraryDataAccess.getBooksBorrowedByUser(token);
         } catch (AuthenticationFailure failure) {
@@ -71,6 +82,11 @@ public class LibraryResource {
     public Booklist getBooksReserved(@QueryParam("token") String token,
                                      @Context HttpServletResponse response)
             throws IOException {
+        if (token == null) {
+            response.sendError(400, "token is null");
+            return null;
+        }
+
         try {
             return libraryDataAccess.getBooksReservedByUser(token);
         } catch (AuthenticationFailure failure) {
@@ -85,6 +101,11 @@ public class LibraryResource {
     public Booklist getBorrowHistory(@QueryParam("token") String token,
                                      @Context HttpServletResponse response)
             throws IOException {
+        if (token == null) {
+            response.sendError(400, "token is null");
+            return null;
+        }
+
         try {
             return libraryDataAccess.getBorrowHistory(token);
         } catch (AuthenticationFailure failure) {
@@ -96,7 +117,14 @@ public class LibraryResource {
     @GET
     @Path("/book/{id}")
     @Produces(APPLICATION_VND_HERALD_LIB)
-    public Book getBook(@PathParam("id") String id) {
+    public Book getBook(@PathParam("id") String id,
+                        @Context HttpServletResponse response)
+            throws IOException {
+        if (id == null) {
+            response.sendError(400, "book id is null");
+            return null;
+        }
+
         return libraryDataAccess.getBookByMarcNo(id);
     }
 
@@ -106,6 +134,15 @@ public class LibraryResource {
                         @QueryParam("token") String token,
                         @Context HttpServletResponse response)
             throws IOException {
+        if (id == null) {
+            response.sendError(400, "book id is null");
+            return null;
+        }
+        if (token == null) {
+            response.sendError(400, "token is null");
+            return null;
+        }
+
         try {
             boolean accepted = libraryDataAccess.reserveBookByMarcNo(id, token);
             return (accepted)
@@ -119,7 +156,18 @@ public class LibraryResource {
     @POST
     @Path("/book/{id}/renewal")
     public Response renew(@PathParam("id") String id,
-                      @QueryParam("token") String token) {
+                      @QueryParam("token") String token,
+                      @Context HttpServletResponse response)
+            throws IOException {
+        if (id == null) {
+            response.sendError(400, "book id is null");
+            return null;
+        }
+        if (token == null) {
+            response.sendError(400, "token is null");
+            return null;
+        }
+
         try {
             boolean accepted = libraryDataAccess.renewBookByMarcNo(id, token);
             return (accepted)
