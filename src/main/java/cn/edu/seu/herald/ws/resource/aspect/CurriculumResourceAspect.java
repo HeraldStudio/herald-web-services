@@ -7,6 +7,7 @@ import cn.edu.seu.herald.ws.api.curriculum.StudentList;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.util.Assert;
 import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
@@ -23,6 +24,7 @@ public class CurriculumResourceAspect implements ServletContextAware {
 
     @Override
     public void setServletContext(ServletContext servletContext) {
+        Assert.notNull(servletContext);
         contextPath = servletContext.getContextPath();
     }
 
@@ -35,6 +37,8 @@ public class CurriculumResourceAspect implements ServletContextAware {
             returning = "result"
     )
     public void afterReturningCourse(JoinPoint joinPoint, Object result) {
+        Assert.isInstanceOf(Course.class, result);
+
         Course course = (Course) result;
         addCourseHref(course);
     }
@@ -48,6 +52,8 @@ public class CurriculumResourceAspect implements ServletContextAware {
             returning = "result"
     )
     public void afterReturningCurriculum(JoinPoint joinPoint, Object result) {
+        Assert.isInstanceOf(Curriculum.class, result);
+
         Curriculum curriculum = (Curriculum) result;
         for (Course course : curriculum.getCourses().getCourses()) {
             addCourseHref(course);
@@ -59,23 +65,17 @@ public class CurriculumResourceAspect implements ServletContextAware {
         if (studentList != null) {
             for (Student student : course.getStudents().getStudents()) {
                 URI uri = UriBuilder
-                        .fromPath(linkPath(contextPath, "/curriculum"))
+                        .fromPath(ResourceAspectUtils.linkPath(
+                                contextPath, "/curriculum"))
                         .queryParam("cardNumber", student.getCardNumber())
                         .build();
                 student.setCurriculum(uri.toString());
             }
         }
         URI uri = UriBuilder
-                .fromPath(linkPath(contextPath, "/curriculum/course/{id}"))
+                .fromPath(ResourceAspectUtils.linkPath(
+                        contextPath, "/curriculum/course/{id}"))
                 .build(course.getId());
         course.setHref(uri.toString());
-    }
-
-    private String linkPath(String... path) {
-        StringBuilder pathBuilder = new StringBuilder();
-        for (String p : path) {
-            pathBuilder.append(p);
-        }
-        return pathBuilder.toString();
     }
 }

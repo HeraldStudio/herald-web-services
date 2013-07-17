@@ -1,10 +1,32 @@
+/*
+ * The MIT License
+ *
+ * Copyright 2013 Herald Studio, Southeast University.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package cn.edu.seu.herald.ws.dao;
 
-import cn.edu.seu.herald.ws.api.library.Book;
-import cn.edu.seu.herald.ws.api.library.Booklist;
-import cn.edu.seu.herald.ws.api.library.User;
+import cn.edu.seu.herald.ws.api.library.*;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.NameValuePair;
@@ -54,9 +76,11 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
                 JSONObject bookObj = JSONObject.fromObject(item);
                 String title = bookObj.getString("title");
                 String author = bookObj.getString("author");
+                String marcNo = bookObj.getString("marc_no");
                 Book book = new Book();
                 book.setName(title);
                 book.setAuthor(author);
+                book.setMarcNo(marcNo);
                 booklist.getBooks().add(book);
             }
             return booklist;
@@ -124,9 +148,19 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
                         "response from the library service: %s",
                         status));
             }
-            // TODO check, get the cookie token, set urls with the token
-            getMethod.getResponseHeader("Cookie");
-            String token = null;
+
+            // check, get the cookie token, set urls with the token
+            Header cookieHeader = getMethod.getResponseHeader("Set-Cookie");
+            if (cookieHeader == null) {
+                throw new DataAccessException(
+                        "Cannot get cookie from the response");
+            }
+            String cookieStr = cookieHeader.getValue();
+            String token = CookieUtils.getCookieValue(cookieStr, "PHPSESSID");
+            if (token == null) {
+                throw new DataAccessException(
+                        "Cannot get PHPSESSID from the cookies");
+            }
             return getUserWithToken(token);
         } finally {
             releaseConnection(getMethod);
@@ -150,8 +184,16 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
         try {
             String responseBody = getResponseBody(getMethod);
             User user = new User();
-            // TODO parse JSON, get user info
+            // parse JSON, get user info
+            JSONObject jsonObject = JSONObject.fromObject(responseBody);
+            user.setStudentNumber(jsonObject.getString("xjh"));
+            user.setName(jsonObject.getString("name"));
+            user.setGender(GenderType.valueOf(jsonObject.getString("sex")));
+            user.setCollege(jsonObject.getString("pubment"));
+            user.setEmail(jsonObject.getString("em"));
             return user;
+        } catch (Exception ex) {
+            throw new DataAccessException(ex);
         } finally {
             releaseConnection(getMethod);
         }
