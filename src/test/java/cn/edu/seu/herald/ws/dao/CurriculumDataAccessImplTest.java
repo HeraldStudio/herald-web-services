@@ -21,36 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package cn.edu.seu.herald.ws.it;
+package cn.edu.seu.herald.ws.dao;
 
-import cn.edu.seu.herald.ws.api.curriculum.Attendance;
-import cn.edu.seu.herald.ws.api.curriculum.Course;
-import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
-import cn.edu.seu.herald.ws.api.curriculum.Day;
-import cn.edu.seu.herald.ws.api.curriculum.Schedule;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
-import cn.edu.seu.herald.ws.dao.CurriculumDataAccessImpl;
+import junit.framework.TestCase;
 import org.apache.commons.dbcp.BasicDataSource;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.*;
 
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
-public class CurriculumDataAccessImplTest {
+public class CurriculumDataAccessImplTest extends TestCase {
 
     private BasicDataSource dataSource;
     private CurriculumDataAccess instance;

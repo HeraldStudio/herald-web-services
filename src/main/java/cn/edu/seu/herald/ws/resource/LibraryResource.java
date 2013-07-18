@@ -64,6 +64,7 @@ public class LibraryResource {
         }
         return user;
     }
+
     @GET
     @Path("/books")
     @Produces(APPLICATION_VND_HERALD_LIB)

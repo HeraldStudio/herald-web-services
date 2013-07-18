@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 class CookieUtils {
 
     private static final String COOKIE_REGEX =
-            "([^;,]+)=([^;,]+);Domain=([^;,]+);Path=([^;,]+)";
+            "([^=]+)=([^\\;]*);?\\s?";
 
     public static String getCookieValue(String cookieStr, String name) {
         Assert.notNull(cookieStr);
@@ -20,8 +20,8 @@ class CookieUtils {
         Pattern cookiePattern = Pattern.compile(COOKIE_REGEX);
         Matcher matcher = cookiePattern.matcher(cookieStr);
         while (matcher.find()) {
-            String key = matcher.group(0);
-            String value = matcher.group(1);
+            String key = matcher.group(1);
+            String value = matcher.group(2);
             if (name.equals(key)) {
                 return value;
             }

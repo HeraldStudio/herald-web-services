@@ -130,8 +130,8 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
         NameValuePair[] query = new NameValuePair[] {
                 new NameValuePair("control", "CheckUser"),
                 new NameValuePair("action", "user_check"),
-                new NameValuePair("username", username),
-                new NameValuePair("password", password)
+                new NameValuePair("ui", username),
+                new NameValuePair("up", password)
         };
         getMethod.setQueryString(query);
         executeMethod(getMethod);
@@ -158,8 +158,9 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
             String cookieStr = cookieHeader.getValue();
             String token = CookieUtils.getCookieValue(cookieStr, "PHPSESSID");
             if (token == null) {
-                throw new DataAccessException(
-                        "Cannot get PHPSESSID from the cookies");
+                throw new DataAccessException(String.format(
+                        "Cannot get PHPSESSID from the cookies: %s",
+                        cookieStr));
             }
             return getUserWithToken(token);
         } finally {
@@ -186,9 +187,10 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
             User user = new User();
             // parse JSON, get user info
             JSONObject jsonObject = JSONObject.fromObject(responseBody);
-            user.setStudentNumber(jsonObject.getString("xjh"));
+            user.setStudentNumber(jsonObject.getString("zjh"));
             user.setName(jsonObject.getString("name"));
-            user.setGender(GenderType.valueOf(jsonObject.getString("sex")));
+            user.setGender(GenderUtils.fromChinese(
+                    jsonObject.getString("sex")));
             user.setCollege(jsonObject.getString("pubment"));
             user.setEmail(jsonObject.getString("em"));
             return user;
