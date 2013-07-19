@@ -120,7 +120,6 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
 
         try {
             String responseBody = getResponseBody(getMethod);
-            System.out.println("responseBody:\n" + responseBody);  // TODO
             JSONObject jsonObject = JSONObject.fromObject(responseBody);
             String status = jsonObject.getString("status");
             if ("fail!".equals(status)) { // not authenticated
