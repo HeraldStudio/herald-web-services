@@ -30,6 +30,7 @@ import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.springframework.util.Assert;
 
@@ -55,69 +56,52 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
             throws DataAccessException {
         Assert.notNull(keyword);
 
-        GetMethod getMethod = newGetMethod(endPointUri);
-        NameValuePair[] query = new NameValuePair[] {
+        String responseBody = query(endPointUri, new NameValuePair[] {
                 new NameValuePair("control", "opac"),
                 new NameValuePair("action", "user_check"),
                 new NameValuePair("searchtype", "0"),
                 new NameValuePair("sourceType", "0"),
                 new NameValuePair("page", String.valueOf(page)),
                 new NameValuePair("k", keyword)
-        };
-        getMethod.setQueryString(query);
-
-        try {
-            String responseBody = getResponseBody(getMethod);
-            Booklist booklist = new Booklist();
-            JSONObject jsonObject = JSONObject.fromObject(responseBody);
-            JSONArray jsonArray = JSONArray.fromObject(
-                    jsonObject.get("contents"));
-            for (Object item : jsonArray) {
-                JSONObject bookObj = JSONObject.fromObject(item);
-                String title = bookObj.getString("title");
-                String author = bookObj.getString("author");
-                String marcNo = bookObj.getString("marc_no");
-                Book book = new Book();
-                book.setName(title);
-                book.setAuthor(author);
-                book.setMarcNo(marcNo);
-                booklist.getBooks().add(book);
-            }
-            return booklist;
-        } finally {
-            releaseConnection(getMethod);
+        });
+        Booklist booklist = new Booklist();
+        JSONObject jsonObject = JSONObject.fromObject(responseBody);
+        JSONArray jsonArray = JSONArray.fromObject(
+                jsonObject.get("contents"));
+        for (Object item : jsonArray) {
+            JSONObject bookObj = JSONObject.fromObject(item);
+            String title = bookObj.getString("title");
+            String author = bookObj.getString("author");
+            String marcNo = bookObj.getString("marc_no");
+            Book book = new Book();
+            book.setName(title);
+            book.setAuthor(author);
+            book.setMarcNo(marcNo);
+            booklist.getBooks().add(book);
         }
+        return booklist;
     }
 
     @Override
     public Book getBookByMarcNo(String marcNo) throws DataAccessException {
         Assert.notNull(marcNo);
 
-        GetMethod getMethod = newGetMethod(endPointUri);
-        NameValuePair[] query = new NameValuePair[] {
+        String responseBody = query(endPointUri, new NameValuePair[] {
                 new NameValuePair("control", "search_opac_detail"),
                 new NameValuePair("action", "user_check"),
                 new NameValuePair("marc_no", marcNo)
-        };
-        getMethod.setQueryString(query);
-        executeMethod(getMethod);
-
-        try {
-            String responseBody = getResponseBody(getMethod);
-            Book book = new Book();
-            JSONObject jsonObject = JSONObject.fromObject(responseBody);
-            String cnt1 = jsonObject.getString("cnt1");
-            String cnt2 = jsonObject.getString("cnt2");
-            // TODO parse html from cnt
-            book.setAuthor(null);
-            book.setName(null);
-            book.setHref(null);
-            book.setIsbn(null);
-            book.setPress(null);
-            return book;
-        } finally {
-            releaseConnection(getMethod);
-        }
+        });
+        Book book = new Book();
+        JSONObject jsonObject = JSONObject.fromObject(responseBody);
+        String cnt1 = jsonObject.getString("cnt1");
+        String cnt2 = jsonObject.getString("cnt2");
+        // TODO parse html from cnt
+        book.setAuthor(null);
+        book.setName(null);
+        book.setHref(null);
+        book.setIsbn(null);
+        book.setPress(null);
+        return book;
     }
 
     @Override
@@ -126,18 +110,17 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
         Assert.notNull(username);
         Assert.notNull(password);
 
-        GetMethod getMethod = newGetMethod(endPointUri);
-        NameValuePair[] query = new NameValuePair[] {
+        GetMethod getMethod = newGetMethod(endPointUri, new NameValuePair[] {
                 new NameValuePair("control", "CheckUser"),
                 new NameValuePair("action", "user_check"),
                 new NameValuePair("ui", username),
                 new NameValuePair("up", password)
-        };
-        getMethod.setQueryString(query);
+        });
         executeMethod(getMethod);
 
         try {
             String responseBody = getResponseBody(getMethod);
+            System.out.println("responseBody:\n" + responseBody);  // TODO
             JSONObject jsonObject = JSONObject.fromObject(responseBody);
             String status = jsonObject.getString("status");
             if ("fail!".equals(status)) { // not authenticated
@@ -163,6 +146,8 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
                         cookieStr));
             }
             return getUserWithToken(token);
+        } catch (Exception ex) {
+            throw new DataAccessException(ex);
         } finally {
             releaseConnection(getMethod);
         }
@@ -172,14 +157,11 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
     public User getUserWithToken(String token) throws DataAccessException {
         Assert.notNull(token);
 
-        GetMethod getMethod = newGetMethod(endPointUri);
-        NameValuePair[] query = new NameValuePair[] {
+        GetMethod getMethod = newGetMethod(endPointUri, new NameValuePair[] {
                 new NameValuePair("control", "redr_info"),
                 new NameValuePair("action", "user_check"),
                 new NameValuePair("act", "1")
-        };
-        getMethod.setQueryString(query);
-        addTokenToRequest(getMethod, token);
+        }, token);
         executeMethod(getMethod);
 
         try {
@@ -204,19 +186,70 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
     @Override
     public Booklist getBooksBorrowedByUser(String token)
             throws AuthenticationFailure, DataAccessException {
-        return null;
+        Assert.notNull(token);
+
+        GetMethod getMethod = newGetMethod(endPointUri, new NameValuePair[] {
+                new NameValuePair("control", "get_record"),
+                new NameValuePair("action", "user_check"),
+                new NameValuePair("act", "1")
+        }, token);
+        executeMethod(getMethod);
+
+        try {
+            String responseBody = getResponseBody(getMethod);
+            JSONObject jsonObject = JSONObject.fromObject(responseBody);
+            return toBooklist(jsonObject);
+        } catch (Exception ex) {
+            throw new DataAccessException(ex);
+        } finally {
+            releaseConnection(getMethod);
+        }
     }
 
     @Override
     public Booklist getBooksReservedByUser(String token)
             throws AuthenticationFailure, DataAccessException {
-        return null;
+        Assert.notNull(token);
+
+        GetMethod getMethod = newGetMethod(endPointUri, new NameValuePair[] {
+                new NameValuePair("control", "userpreg"),
+                new NameValuePair("action", "user_check"),
+                new NameValuePair("act", "3")
+        }, token);
+        executeMethod(getMethod);
+
+        try {
+            String responseBody = getResponseBody(getMethod);
+            JSONObject jsonObject = JSONObject.fromObject(responseBody);
+            return toBooklist(jsonObject);
+        } catch (Exception ex) {
+            throw new DataAccessException(ex);
+        } finally {
+            releaseConnection(getMethod);
+        }
     }
 
     @Override
     public Booklist getBorrowHistory(String token)
             throws AuthenticationFailure, DataAccessException {
-        return null;
+        Assert.notNull(token);
+
+        GetMethod getMethod = newGetMethod(endPointUri, new NameValuePair[] {
+                new NameValuePair("control", "get_record"),
+                new NameValuePair("action", "user_check"),
+                new NameValuePair("act", "3")
+        }, token);
+        executeMethod(getMethod);
+
+        try {
+            String responseBody = getResponseBody(getMethod);
+            JSONObject jsonObject = JSONObject.fromObject(responseBody);
+            return toBooklist(jsonObject);
+        } catch (Exception ex) {
+            throw new DataAccessException(ex);
+        } finally {
+            releaseConnection(getMethod);
+        }
     }
 
     @Override
@@ -231,9 +264,28 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
         return false;
     }
 
-    private void addTokenToRequest(HttpMethod httpMethod, String token) {
-        httpMethod.setRequestHeader("Cookie",
+    private GetMethod newGetMethod(String url,
+                                   NameValuePair[] nameValuePairs,
+                                   String token) {
+        GetMethod getMethod = newGetMethod(url, nameValuePairs);
+        getMethod.setRequestHeader("Cookie",
                 String.format("PHPSESSID=%s", token));
+        return getMethod;
+    }
 
+    private Booklist toBooklist(JSONObject booksObj) {
+        Assert.notNull(booksObj);
+
+        JSONArray bookArray = booksObj.getJSONArray("contents");
+        Booklist booklist = new Booklist();
+        for (int i = 0; i < bookArray.size(); ++i) {
+            JSONObject bookObj = bookArray.getJSONObject(i);
+            Book book = new Book();
+            book.setName(bookObj.getString("title"));
+            book.setAuthor(bookObj.getString("author"));
+            book.setMarcNo(bookObj.getString("marc_no"));
+            booklist.getBooks().add(book);
+        }
+        return booklist;
     }
 }

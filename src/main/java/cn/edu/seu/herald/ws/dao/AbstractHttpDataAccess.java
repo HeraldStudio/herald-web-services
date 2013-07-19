@@ -3,6 +3,7 @@ package cn.edu.seu.herald.ws.dao;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -48,9 +49,32 @@ abstract class AbstractHttpDataAccess {
         httpMethod.releaseConnection();
     }
 
+    protected String query(String endPointUri, NameValuePair[] nameValuePairs)
+            throws DataAccessException {
+        GetMethod getMethod = newGetMethod(endPointUri);
+        getMethod.setQueryString(nameValuePairs);
+        try {
+            executeMethod(getMethod);
+            return getMethod.getResponseBodyAsString();
+        } catch (IOException ex) {
+            throw new DataAccessException(ex);
+        } finally {
+            releaseConnection(getMethod);
+        }
+
+    }
+
     protected GetMethod newGetMethod(String url) {
         GetMethod getMethod = new GetMethod(url);
         getMethod.getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
+        return getMethod;
+    }
+
+    protected GetMethod newGetMethod(String url,
+                                     NameValuePair[] nameValuePairs) {
+        GetMethod getMethod = new GetMethod(url);
+        getMethod.getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
+        getMethod.setQueryString(nameValuePairs);
         return getMethod;
     }
 
