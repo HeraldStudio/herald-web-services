@@ -1,4 +1,4 @@
-package cn.edu.seu.herald.ws.dao;
+package cn.edu.seu.herald.ws.dao.impl;
 
 import org.springframework.util.Assert;
 

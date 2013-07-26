@@ -21,8 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package cn.edu.seu.herald.ws.dao;
+package cn.edu.seu.herald.ws.dao.impl;
 
+import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
+import cn.edu.seu.herald.ws.dao.impl.CurriculumDataAccessImpl;
 import junit.framework.TestCase;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.junit.*;

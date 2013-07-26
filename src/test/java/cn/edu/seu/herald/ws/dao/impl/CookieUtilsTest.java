@@ -1,4 +1,4 @@
-package cn.edu.seu.herald.ws.dao;
+package cn.edu.seu.herald.ws.dao.impl;
 
 import junit.framework.TestCase;
 import org.junit.After;

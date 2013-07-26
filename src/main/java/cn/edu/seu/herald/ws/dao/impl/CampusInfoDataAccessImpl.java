@@ -21,18 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package cn.edu.seu.herald.ws.dao;
+package cn.edu.seu.herald.ws.dao.impl;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.sql.DataSource;
+import cn.edu.seu.herald.ws.dao.CampusInfoDataAccess;
+import cn.edu.seu.herald.ws.dao.DataAccessException;
 import org.apache.wink.common.model.synd.SyndEntry;
 import org.apache.wink.common.model.synd.SyndFeed;
 import org.apache.wink.common.model.synd.SyndLink;
 import org.apache.wink.common.model.synd.SyndText;
+
+import javax.sql.DataSource;
+import java.sql.*;
 
 /**
  *

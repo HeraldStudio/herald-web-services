@@ -21,16 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package cn.edu.seu.herald.ws.dao;
+package cn.edu.seu.herald.ws.dao.impl;
 
-import cn.edu.seu.herald.ws.api.library.*;
+import cn.edu.seu.herald.ws.api.library.Book;
+import cn.edu.seu.herald.ws.api.library.Booklist;
+import cn.edu.seu.herald.ws.api.library.User;
+import cn.edu.seu.herald.ws.dao.*;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.springframework.util.Assert;
 
@@ -254,12 +255,14 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
     @Override
     public boolean reserveBookByMarcNo(String marcNo, String token)
             throws AuthenticationFailure, DataAccessException {
+        // TODO implement
         return false;
     }
 
     @Override
     public boolean renewBookByMarcNo(String marcNo, String token)
             throws AuthenticationFailure, DataAccessException {
+        // TODO implement
         return false;
     }
 

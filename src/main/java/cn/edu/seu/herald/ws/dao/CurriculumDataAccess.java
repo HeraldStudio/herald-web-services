@@ -25,7 +25,6 @@ package cn.edu.seu.herald.ws.dao;
 
 import cn.edu.seu.herald.ws.api.curriculum.Course;
 import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
-import cn.edu.seu.herald.ws.api.curriculum.StudentList;
 
 /**
  *

@@ -1,4 +1,4 @@
-package cn.edu.seu.herald.ws.dao;
+package cn.edu.seu.herald.ws.dao.impl;
 
 import cn.edu.seu.herald.ws.api.library.GenderType;
 import org.springframework.util.Assert;

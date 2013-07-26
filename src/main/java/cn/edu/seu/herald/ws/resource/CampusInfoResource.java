@@ -24,7 +24,6 @@
 package cn.edu.seu.herald.ws.resource;
 
 import cn.edu.seu.herald.ws.dao.CampusInfoDataAccess;
-import org.apache.wink.common.model.atom.AtomFeed;
 import org.apache.wink.common.model.rss.RssFeed;
 import org.apache.wink.common.model.synd.SyndFeed;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,6 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 
 /**

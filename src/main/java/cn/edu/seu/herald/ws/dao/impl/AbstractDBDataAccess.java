@@ -21,7 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package cn.edu.seu.herald.ws.dao;
+package cn.edu.seu.herald.ws.dao.impl;
+
+import cn.edu.seu.herald.ws.dao.DataAccessException;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -35,16 +35,16 @@
         <property name="validationQuery" value="SELECT 1;"/>
     </bean>
 
-    <bean id="curriculumDataAccess" class="cn.edu.seu.herald.ws.dao.CurriculumDataAccessImpl">
+    <bean id="curriculumDataAccess" class="cn.edu.seu.herald.ws.dao.impl.impl.CurriculumDataAccessImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
-    <bean id="campusInfoDataAccess" class="cn.edu.seu.herald.ws.dao.CampusInfoDataAccessImpl">
+    <bean id="campusInfoDataAccess" class="cn.edu.seu.herald.ws.dao.impl.impl.CampusInfoDataAccessImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
-    <bean id="classroomDataAccess" class="cn.edu.seu.herald.ws.dao.ClassroomDataAccessImpl">
+    <bean id="classroomDataAccess" class="cn.edu.seu.herald.ws.dao.impl.impl.ClassroomDataAccessImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
-    <bean id="libraryDataAccess" class="cn.edu.seu.herald.ws.dao.LibraryDataAccessImpl">
+    <bean id="libraryDataAccess" class="cn.edu.seu.herald.ws.dao.impl.impl.LibraryDataAccessImpl">
         <constructor-arg ref="httpClient"/>
     </bean>
 </beans>
