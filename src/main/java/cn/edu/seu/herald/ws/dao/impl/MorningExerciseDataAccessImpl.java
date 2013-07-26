@@ -21,6 +21,8 @@ public class MorningExerciseDataAccessImpl
 
     private DatatypeFactory datatypeFactory;
 
+
+    // TODO extends AbstractHttpDataAccess
     public MorningExerciseDataAccessImpl()
             throws DatatypeConfigurationException {
         datatypeFactory = DatatypeFactory.newInstance();
