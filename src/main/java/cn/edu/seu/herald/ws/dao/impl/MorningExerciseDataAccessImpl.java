@@ -41,7 +41,7 @@ public class MorningExerciseDataAccessImpl
             List<Date> dates = query.getLatestRecords();
             for (Date date : dates) {
                 XMLGregorianCalendar calendar = parseXMLGregorianCalendar(date);
-                runTime.getTimes().add(null);
+                runTime.getTimes().add(calendar);
             }
             return runTimesData;
         } catch (QueryFailure queryFailure) {
