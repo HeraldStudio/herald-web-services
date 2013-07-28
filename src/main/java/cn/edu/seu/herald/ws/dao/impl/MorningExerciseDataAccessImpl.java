@@ -4,28 +4,44 @@ import cn.edu.seu.herald.ws.api.exercise.RunTime;
 import cn.edu.seu.herald.ws.api.exercise.RunTimesData;
 import cn.edu.seu.herald.ws.dao.DataAccessException;
 import cn.edu.seu.herald.ws.dao.MorningExerciseDataAccess;
+import org.springframework.util.Assert;
+import org.springframework.web.context.ServletContextAware;
 
+import javax.servlet.ServletContext;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Copyright (c) 2013 Ray <predator.ray@gmail.com>
  */
 public class MorningExerciseDataAccessImpl
-        implements MorningExerciseDataAccess {
+        implements MorningExerciseDataAccess, ServletContextAware {
 
+    private static final String EXERCISE_INFO_PATH =
+            "/WEB-INF/morning-exercise.properties";
     private DatatypeFactory datatypeFactory;
+    private File morningExerciseInfo;
 
 
     // TODO extends AbstractHttpDataAccess
     public MorningExerciseDataAccessImpl()
             throws DatatypeConfigurationException {
         datatypeFactory = DatatypeFactory.newInstance();
+    }
+
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        morningExerciseInfo = new File(servletContext.getRealPath(
+                EXERCISE_INFO_PATH));
     }
 
     @Override
@@ -46,6 +62,71 @@ public class MorningExerciseDataAccessImpl
             return runTimesData;
         } catch (QueryFailure queryFailure) {
             throw new DataAccessException(queryFailure);
+        }
+    }
+
+    @Override
+    public int getRemainDays() throws DataAccessException {
+        Properties properties = new Properties();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(morningExerciseInfo);
+            properties.load(in);
+            String format = properties.getProperty("dateformat", "yyyy/MM/dd");
+            String firstDayStr = properties.getProperty("semeter.firstday");
+            String lastDayStr = properties.getProperty("semeter.lastday");
+            if (firstDayStr == null || lastDayStr == null) {
+                throw new DataAccessException("The properties are not valid");
+            }
+
+            DateFormat dateFormat = new SimpleDateFormat(format);
+            Date firstDay = dateFormat.parse(firstDayStr);
+            Date lastDay = dateFormat.parse(lastDayStr);
+
+
+            return workdaysBetween(firstDay, lastDay);
+        } catch (Exception ex) {
+            throw new DataAccessException(ex);
+        } finally {
+            safeClose(in);
+        }
+    }
+
+    private int workdaysBetween(Date from, Date to) {
+        Assert.notNull(from);
+        Assert.notNull(to);
+
+        if (from.after(to)) {
+            return workdaysBetween(to, from);
+        }
+
+        Calendar fromCal = Calendar.getInstance();
+        fromCal.setTime(from);
+        Calendar toCal = Calendar.getInstance();
+        toCal.setTime(to);
+
+        int fromDay = fromCal.get(Calendar.DAY_OF_WEEK);
+        int toDay = toCal.get(Calendar.DAY_OF_WEEK);
+
+        // TODO calculate working days
+        return 0;
+    }
+
+    private int daysBetween(long from, long to) {
+        return (int) (
+                (to - from) / (1000 * 60 * 60 * 24)
+        );
+    }
+
+    private void safeClose(InputStream in) throws DataAccessException {
+        if (in == null) {
+            return;
+        }
+
+        try {
+            in.close();
+        } catch (IOException ex) {
+            throw new DataAccessException(ex);
         }
     }
 

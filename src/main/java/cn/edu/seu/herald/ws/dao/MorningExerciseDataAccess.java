@@ -9,4 +9,6 @@ public interface MorningExerciseDataAccess {
 
     RunTimesData getRunTimesData(String username, String password)
             throws DataAccessException;
+
+    int getRemainDays() throws DataAccessException;
 }
