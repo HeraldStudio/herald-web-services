@@ -1,7 +1,5 @@
 package cn.edu.seu.herald.ws.dao.impl;
 
-
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;

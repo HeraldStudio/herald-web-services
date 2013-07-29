@@ -18,15 +18,7 @@ import java.net.URI;
  * Copyright (c) 2013 Ray <predator.ray@gmail.com>
  */
 @Aspect
-public class CurriculumResourceAspect implements ServletContextAware {
-
-    private String contextPath;
-
-    @Override
-    public void setServletContext(ServletContext servletContext) {
-        Assert.notNull(servletContext);
-        contextPath = servletContext.getContextPath();
-    }
+public class CurriculumResourceAspect {
 
     @AfterReturning(
             pointcut =
@@ -65,16 +57,14 @@ public class CurriculumResourceAspect implements ServletContextAware {
         if (studentList != null) {
             for (Student student : course.getStudents().getStudents()) {
                 URI uri = UriBuilder
-                        .fromPath(ResourceAspectUtils.linkPath(
-                                contextPath, "/curriculum"))
+                        .fromPath("./curriculum")
                         .queryParam("cardNumber", student.getCardNumber())
                         .build();
                 student.setCurriculum(uri.toString());
             }
         }
         URI uri = UriBuilder
-                .fromPath(ResourceAspectUtils.linkPath(
-                        contextPath, "/curriculum/course/{id}"))
+                .fromPath("./curriculum/course/{id}")
                 .build(course.getId());
         course.setHref(uri.toString());
     }

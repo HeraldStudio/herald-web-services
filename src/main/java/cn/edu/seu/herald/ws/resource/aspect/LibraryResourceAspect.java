@@ -19,15 +19,7 @@ import java.net.URI;
  * Copyright (c) 2013 Ray <predator.ray@gmail.com>
  */
 @Aspect
-public class LibraryResourceAspect implements ServletContextAware {
-
-    private String contextPath;
-
-    @Override
-    public void setServletContext(ServletContext servletContext) {
-        Assert.notNull(servletContext);
-        this.contextPath = servletContext.getContextPath();
-    }
+public class LibraryResourceAspect {
 
     @AfterReturning(
             pointcut =
@@ -71,8 +63,7 @@ public class LibraryResourceAspect implements ServletContextAware {
         Assert.notNull(book);
 
         String marcNo = book.getMarcNo();
-        URI uri = UriBuilder.fromPath(ResourceAspectUtils
-                .linkPath(contextPath, "/book/{id}")).build(marcNo);
+        URI uri = UriBuilder.fromPath("./book/{id}").build(marcNo);
         book.setHref(uri.toString());
     }
 
@@ -80,16 +71,15 @@ public class LibraryResourceAspect implements ServletContextAware {
         Assert.notNull(user);
 
         String token = user.getToken();
-        user.setBorrowed(getBooklistLinkType("/books/history", token));
-        user.setReserving(getBooklistLinkType("/books/reserved", token));
-        user.setBorrowing(getBooklistLinkType("/books/borrowing", token));
+        user.setBorrowed(getBooklistLinkType("./books/history", token));
+        user.setReserving(getBooklistLinkType("./books/reserved", token));
+        user.setBorrowing(getBooklistLinkType("./books/borrowing", token));
     }
 
     private BooklistLinkType getBooklistLinkType(String path, String token) {
         BooklistLinkType link = new BooklistLinkType();
         link.setType(LibraryResource.APPLICATION_VND_HERALD_LIB);
-        URI uri = UriBuilder.fromPath(ResourceAspectUtils
-                .linkPath(contextPath, path))
+        URI uri = UriBuilder.fromPath(path)
                 .queryParam("token", token)
                 .build();
         link.setHref(uri.toString());
