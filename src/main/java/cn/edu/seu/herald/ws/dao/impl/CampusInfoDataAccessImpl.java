@@ -32,6 +32,7 @@ import org.apache.wink.common.model.synd.SyndText;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.List;
 
 /**
  *
@@ -55,6 +56,8 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
             + "FROM `herald_campus_info`.`entry` WHERE feed_uuid=?";
     private static final String GET_LATEST_UUID_BY_NAME =
             "SELECT MAX(uuid) FROM `herald_campus_info`.`feed` WHERE name=?;";
+    private static final String GET_FEED_NAMES =
+            "SELECT title, name FROM `herald_campus_info`.`feed`;";
 
     public CampusInfoDataAccessImpl(DataSource dataSource) {
         super(dataSource);
@@ -127,6 +130,28 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
                 return null;
             }
             return rs.getString(1);
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    @Override
+    public SyndFeed getAvailableFeeds() throws DataAccessException {
+        Connection connection = getConnection();
+        try {
+            PreparedStatement ps = connection.prepareStatement(GET_FEED_NAMES);
+            ResultSet rs = ps.executeQuery();
+            SyndFeed feed = new SyndFeed();
+            List<SyndEntry> entries = feed.getEntries();
+            while (rs.next()) {
+                SyndEntry entry = new SyndEntry();
+                entry.setTitle(new SyndText(rs.getString("title")));
+                entry.setId(rs.getString("name"));
+                entries.add(entry);
+            }
+            return feed;
         } catch (SQLException ex) {
             throw new DataAccessException(ex);
         } finally {

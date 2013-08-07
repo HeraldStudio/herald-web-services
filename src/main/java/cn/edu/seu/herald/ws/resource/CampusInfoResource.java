@@ -51,6 +51,14 @@ public class CampusInfoResource {
     }
 
     @GET
+    @Path("/")
+    @Produces("application/rss+xml")
+    public RssFeed getAvailableFeeds() {
+        SyndFeed syndFeed = campusInfoDataAccess.getAvailableFeeds();
+        return new RssFeed(syndFeed);
+    }
+
+    @GET
     @Path("/{name}")
     @Produces("application/rss+xml")
     public RssFeed getRssFeedByName(@PathParam("name") String name,

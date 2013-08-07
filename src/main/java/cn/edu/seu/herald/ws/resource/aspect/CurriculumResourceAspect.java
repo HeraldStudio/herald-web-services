@@ -29,6 +29,9 @@ public class CurriculumResourceAspect {
             returning = "result"
     )
     public void afterReturningCourse(JoinPoint joinPoint, Object result) {
+        if (result == null) {
+            return;
+        }
         Assert.isInstanceOf(Course.class, result);
 
         Course course = (Course) result;
@@ -44,6 +47,9 @@ public class CurriculumResourceAspect {
             returning = "result"
     )
     public void afterReturningCurriculum(JoinPoint joinPoint, Object result) {
+        if (result == null) {
+            return;
+        }
         Assert.isInstanceOf(Curriculum.class, result);
 
         Curriculum curriculum = (Curriculum) result;

@@ -25,6 +25,8 @@ package cn.edu.seu.herald.ws.dao;
 
 import org.apache.wink.common.model.synd.SyndFeed;
 
+import java.util.List;
+
 /**
  *
  * @author rAy <predator.ray@gmail.com>
@@ -39,4 +41,6 @@ public interface CampusInfoDataAccess {
     boolean containsFeed(String name) throws DataAccessException;
 
     String getLatestUUID(String name) throws DataAccessException;
+
+    SyndFeed getAvailableFeeds() throws DataAccessException;
 }
