@@ -33,17 +33,23 @@ import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
+
+import javax.annotation.Resource;
 
 /**
  * Copyright (c) 2013 Ray <predator.ray@gmail.com>
  */
+@Repository("libraryDataAccess")
 public class LibraryDataAccessImpl extends AbstractHttpDataAccess
         implements LibraryDataAccess {
 
     private String endPointUri = "http://58.192.117.11:8989/" +
             "androidSchoolLibInterface/controller.php";
 
+    @Autowired
     public LibraryDataAccessImpl(HttpClient client) {
         super(client);
     }

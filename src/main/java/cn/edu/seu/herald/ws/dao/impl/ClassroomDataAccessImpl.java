@@ -26,6 +26,8 @@ package cn.edu.seu.herald.ws.dao.impl;
 import cn.edu.seu.herald.ws.api.curriculum.Day;
 import cn.edu.seu.herald.ws.dao.ClassroomDataAccess;
 import cn.edu.seu.herald.ws.dao.DataAccessException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,6 +41,7 @@ import javax.sql.DataSource;
  *
  * @author rAy <predator.ray@gmail.com>
  */
+@Repository("classroomDataAccess")
 public class ClassroomDataAccessImpl extends AbstractDBDataAccess
         implements ClassroomDataAccess {
 
@@ -53,6 +56,7 @@ public class ClassroomDataAccessImpl extends AbstractDBDataAccess
             + "(period_to<=? AND period_to>=?)"
             + ")));";
 
+    @Autowired
     public ClassroomDataAccessImpl(DataSource dataSource) {
         super(dataSource);
     }

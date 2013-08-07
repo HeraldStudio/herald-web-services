@@ -29,6 +29,8 @@ import org.apache.wink.common.model.synd.SyndEntry;
 import org.apache.wink.common.model.synd.SyndFeed;
 import org.apache.wink.common.model.synd.SyndLink;
 import org.apache.wink.common.model.synd.SyndText;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -38,6 +40,7 @@ import java.util.List;
  *
  * @author rAy <predator.ray@gmail.com>
  */
+@Repository("campusInfoDataAccess")
 public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
         implements CampusInfoDataAccess {
 
@@ -59,6 +62,7 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
     private static final String GET_FEED_NAMES =
             "SELECT title, name FROM `herald_campus_info`.`feed`;";
 
+    @Autowired
     public CampusInfoDataAccessImpl(DataSource dataSource) {
         super(dataSource);
     }

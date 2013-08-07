@@ -3,6 +3,7 @@ package cn.edu.seu.herald.ws.dao.impl;
 import cn.edu.seu.herald.ws.api.update.Update;
 import cn.edu.seu.herald.ws.dao.AndroidClientUpdateDataAccess;
 import cn.edu.seu.herald.ws.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
@@ -15,6 +16,7 @@ import java.util.Properties;
 /**
  * Copyright (c) 2013 Ray <predator.ray@gmail.com>
  */
+@Repository("androidClientUpdateDataAccess")
 public class AndroidClientUpdateDataAccessImpl
         implements AndroidClientUpdateDataAccess, ServletContextAware {
     private static final String UPDATE_INFO_PATH =

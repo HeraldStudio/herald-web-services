@@ -4,6 +4,7 @@ import cn.edu.seu.herald.ws.api.exercise.RunTime;
 import cn.edu.seu.herald.ws.api.exercise.RunTimesData;
 import cn.edu.seu.herald.ws.dao.DataAccessException;
 import cn.edu.seu.herald.ws.dao.MorningExerciseDataAccess;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 import org.springframework.web.context.ServletContextAware;
 
@@ -23,6 +24,7 @@ import java.util.*;
 /**
  * Copyright (c) 2013 Ray <predator.ray@gmail.com>
  */
+@Repository("morningExerciseDataAccess")
 public class MorningExerciseDataAccessImpl
         implements MorningExerciseDataAccess, ServletContextAware {
 

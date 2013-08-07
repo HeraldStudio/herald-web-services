@@ -26,6 +26,8 @@ package cn.edu.seu.herald.ws.dao.impl;
 import cn.edu.seu.herald.ws.api.curriculum.*;
 import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
 import cn.edu.seu.herald.ws.dao.DataAccessException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -46,6 +48,7 @@ import javax.sql.DataSource;
  *
  * @author rAy <predator.ray@gmail.com>
  */
+@Repository("curriculumDataAccess")
 public class CurriculumDataAccessImpl
         extends AbstractDBDataAccess
         implements CurriculumDataAccess {
@@ -98,6 +101,7 @@ public class CurriculumDataAccessImpl
             "SELECT COUNT(1) FROM `herald_curriculum`.`course` "
             + "WHERE course_id=? LIMIT 1;";
 
+    @Autowired
     public CurriculumDataAccessImpl(DataSource dataSource) {
         super(dataSource);
     }
