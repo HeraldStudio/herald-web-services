@@ -7,10 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -34,7 +31,8 @@ public class AndroidClientUpdateDataAccessImpl
         InputStream in = null;
         try {
             in = new FileInputStream(updateInfo);
-            properties.load(in);
+            InputStreamReader reader = new InputStreamReader(in, "utf-8");
+            properties.load(reader);
             String version = properties.getProperty(
                     "ezherald.version", "unknown");
             String uri = properties.getProperty("ezherald.uri", "unknown");
