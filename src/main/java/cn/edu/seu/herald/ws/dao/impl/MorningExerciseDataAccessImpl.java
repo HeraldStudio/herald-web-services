@@ -73,8 +73,8 @@ public class MorningExerciseDataAccessImpl
             in = new FileInputStream(morningExerciseInfo);
             properties.load(in);
             String format = properties.getProperty("dateformat", "yyyy/MM/dd");
-            String firstDayStr = properties.getProperty("semeter.firstday");
-            String lastDayStr = properties.getProperty("semeter.lastday");
+            String firstDayStr = properties.getProperty("semester.firstday");
+            String lastDayStr = properties.getProperty("semester.lastday");
             if (firstDayStr == null || lastDayStr == null) {
                 throw new DataAccessException("The properties are not valid");
             }

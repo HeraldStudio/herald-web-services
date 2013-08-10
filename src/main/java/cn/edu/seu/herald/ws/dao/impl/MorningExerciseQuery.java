@@ -43,8 +43,8 @@ class MorningExerciseQuery {
             String htmlCode = step2(sessionCookie);
             times = step3(htmlCode);
             step4(htmlCode);
-        } catch (Exception e) {
-            throw new QueryFailure();
+        } catch (Exception ex) {
+            throw new QueryFailure(ex);
         }
     }
 

@@ -11,4 +11,8 @@ public class QueryFailure extends Exception {
         super("morning exercise query failed");
     }
 
+    public QueryFailure(Exception ex) {
+        super("morning exercise query failed", ex);
+    }
+
 }
