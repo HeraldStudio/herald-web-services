@@ -9,6 +9,7 @@
 
 # Idea Project Files #
 /.idea/
+*.iml
 
 # Mac System Files #
 .DS_Store
