@@ -102,12 +102,7 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
         JSONObject jsonObject = JSONObject.fromObject(responseBody);
         String cnt1 = jsonObject.getString("cnt1");
         String cnt2 = jsonObject.getString("cnt2");
-        // TODO parse html from cnt
-        book.setAuthor(null);
-        book.setName(null);
-        book.setHref(null);
-        book.setIsbn(null);
-        book.setPress(null);
+        new BookParser(cnt1, cnt2).parse(book);
         return book;
     }
 
