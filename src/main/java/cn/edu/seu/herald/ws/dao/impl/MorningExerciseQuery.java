@@ -37,15 +37,11 @@ class MorningExerciseQuery {
         latestRecords = new ArrayList<Date>(5);
     }
 
-    public void execute() throws QueryFailure {
-        try {
-            String sessionCookie = step1(username, password);
-            String htmlCode = step2(sessionCookie);
-            times = step3(htmlCode);
-            step4(htmlCode);
-        } catch (Exception ex) {
-            throw new QueryFailure(ex);
-        }
+    public void execute() throws IOException, QueryFailure {
+        String sessionCookie = step1(username, password);
+        String htmlCode = step2(sessionCookie);
+        times = step3(htmlCode);
+        step4(htmlCode);
     }
 
     public int getTimes() {

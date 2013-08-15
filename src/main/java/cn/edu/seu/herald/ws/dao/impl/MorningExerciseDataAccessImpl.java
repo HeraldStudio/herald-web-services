@@ -2,6 +2,7 @@ package cn.edu.seu.herald.ws.dao.impl;
 
 import cn.edu.seu.herald.ws.api.exercise.RunTime;
 import cn.edu.seu.herald.ws.api.exercise.RunTimesData;
+import cn.edu.seu.herald.ws.dao.AuthenticationFailure;
 import cn.edu.seu.herald.ws.dao.DataAccessException;
 import cn.edu.seu.herald.ws.dao.MorningExerciseDataAccess;
 import org.springframework.stereotype.Repository;
@@ -46,7 +47,7 @@ public class MorningExerciseDataAccessImpl
 
     @Override
     public RunTimesData getRunTimesData(String username, String password)
-            throws DataAccessException {
+            throws AuthenticationFailure, DataAccessException {
         MorningExerciseQuery query = new MorningExerciseQuery(
                 username, password);
         try {
@@ -61,7 +62,9 @@ public class MorningExerciseDataAccessImpl
             }
             return runTimesData;
         } catch (QueryFailure queryFailure) {
-            throw new DataAccessException(queryFailure);
+            throw new AuthenticationFailure();
+        } catch (IOException ex) {
+            throw new DataAccessException(ex);
         }
     }
 

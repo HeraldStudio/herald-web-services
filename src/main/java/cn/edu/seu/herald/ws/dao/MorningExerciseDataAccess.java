@@ -8,7 +8,7 @@ import cn.edu.seu.herald.ws.api.exercise.RunTimesData;
 public interface MorningExerciseDataAccess {
 
     RunTimesData getRunTimesData(String username, String password)
-            throws DataAccessException;
+            throws DataAccessException, AuthenticationFailure;
 
     int getRemainDays() throws DataAccessException;
 }
