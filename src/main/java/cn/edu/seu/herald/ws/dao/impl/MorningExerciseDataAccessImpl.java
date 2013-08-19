@@ -87,38 +87,12 @@ public class MorningExerciseDataAccessImpl
             Date lastDay = dateFormat.parse(lastDayStr);
 
 
-            return workdaysBetween(firstDay, lastDay);
+            return DateUtils.workdaysBetween(firstDay, lastDay);
         } catch (Exception ex) {
             throw new DataAccessException(ex);
         } finally {
             safeClose(in);
         }
-    }
-
-    private int workdaysBetween(Date from, Date to) {
-        Assert.notNull(from);
-        Assert.notNull(to);
-
-        if (from.after(to)) {
-            return workdaysBetween(to, from);
-        }
-
-        Calendar fromCal = Calendar.getInstance();
-        fromCal.setTime(from);
-        Calendar toCal = Calendar.getInstance();
-        toCal.setTime(to);
-
-        int fromDay = fromCal.get(Calendar.DAY_OF_WEEK);
-        int toDay = toCal.get(Calendar.DAY_OF_WEEK);
-
-        // TODO calculate working days
-        return 0;
-    }
-
-    private int daysBetween(long from, long to) {
-        return (int) (
-                (to - from) / (1000 * 60 * 60 * 24)
-        );
     }
 
     private void safeClose(InputStream in) throws DataAccessException {
