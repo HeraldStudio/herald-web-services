@@ -24,6 +24,7 @@
 package cn.edu.seu.herald.ws.resource;
 
 import cn.edu.seu.herald.ws.dao.CampusInfoDataAccess;
+import com.sun.jersey.api.NotFoundException;
 import org.apache.wink.common.model.rss.RssFeed;
 import org.apache.wink.common.model.synd.SyndFeed;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,14 +66,12 @@ public class CampusInfoResource {
             @HeaderParam("If-None-Match") String clientUUID,
             @Context HttpServletResponse response) throws IOException {
         if (!campusInfoDataAccess.containsFeed(name)) {
-            response.sendError(404);
-            return null;
+            throw new NotFoundException();
         }
         String latestUUID = campusInfoDataAccess.getLatestUUID(name);
         boolean match = (latestUUID != null) && latestUUID.equals(clientUUID);
         if (match) {
-            response.sendError(304);
-            return null;
+            throw new WebApplicationException(304);
         }
 
         SyndFeed syndFeed = (clientUUID == null)

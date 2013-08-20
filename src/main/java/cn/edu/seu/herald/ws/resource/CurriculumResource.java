@@ -26,12 +26,11 @@ package cn.edu.seu.herald.ws.resource;
 import cn.edu.seu.herald.ws.api.curriculum.Course;
 import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
 import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
+import com.sun.jersey.api.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import java.io.IOException;
 
 /**
@@ -55,12 +54,11 @@ public class CurriculumResource {
     @Produces("application/vnd.herald.curriculum+xml")
     public Curriculum getCurriculum(
             @QueryParam("cardNumber") String cardNumber,
-            @QueryParam("term") String term,
-            @Context HttpServletResponse response) throws IOException {
+            @QueryParam("term") String term) throws IOException {
         if (!curriculumDataAccess.containsStudent(cardNumber)) {
-            response.sendError(404, "Curriculum not found");
-            return null;
+            throw new NotFoundException("Curriculum not found");
         }
+
         Curriculum curriculum = (term == null)
                 ? curriculumDataAccess.getCurriculum(cardNumber)
                 : curriculumDataAccess.getCurriculum(cardNumber, term);
@@ -70,12 +68,11 @@ public class CurriculumResource {
     @GET
     @Path("/course/{id}")
     @Produces("application/vnd.herald.curriculum+xml")
-    public Course getCourseById(@PathParam("id") int id,
-            @Context HttpServletResponse response) throws IOException {
+    public Course getCourseById(@PathParam("id") int id) throws IOException {
         if (!curriculumDataAccess.containsCourse(id)) {
-            response.sendError(404, "Course not found");
-            return null;
+            throw new NotFoundException("Course not found");
         }
+
         Course course = curriculumDataAccess.getCourseById(id);
         return course;
     }
