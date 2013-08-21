@@ -41,7 +41,7 @@ import java.io.IOException;
  */
 @Component
 @Path("/campus")
-public class CampusInfoResource {
+public class CampusInfoResource extends AbstractResource {
 
     @Autowired
     private CampusInfoDataAccess campusInfoDataAccess;
@@ -65,6 +65,8 @@ public class CampusInfoResource {
     public RssFeed getRssFeedByName(@PathParam("name") String name,
             @HeaderParam("If-None-Match") String clientUUID,
             @Context HttpServletResponse response) throws IOException {
+        checkParamNotNull(name);
+
         if (!campusInfoDataAccess.containsFeed(name)) {
             throw new NotFoundException();
         }

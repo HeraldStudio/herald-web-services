@@ -109,7 +109,6 @@ public class MorningExerciseDataAccessImpl
             Date firstDay = dateFormat.parse(firstDayStr);
             Date lastDay = dateFormat.parse(lastDayStr);
 
-
             return workdaysBetween(firstDay, lastDay);
         } catch (Exception ex) {
             throw new DataAccessException(ex);

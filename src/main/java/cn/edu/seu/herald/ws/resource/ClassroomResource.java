@@ -37,7 +37,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Path("/classroom")
-public class ClassroomResource {
+public class ClassroomResource extends AbstractResource {
 
     @Autowired
     private ClassroomDataAccess classroomDataAccess;
@@ -50,6 +50,8 @@ public class ClassroomResource {
             @QueryParam("day") Day day,
             @DefaultValue("1") @QueryParam("from") int from,
             @DefaultValue("13") @QueryParam("to") int to) {
+        checkParamNotNull(day);
+
         List<String> classrooms = classroomDataAccess
                 .getClassroomsUnused(day, from, to);
         return csvBuilder.getCsv(classrooms);

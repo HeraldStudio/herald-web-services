@@ -40,7 +40,7 @@ import java.io.IOException;
  */
 @Component
 @Path("/library")
-public class LibraryResource {
+public class LibraryResource extends AbstractResource {
 
     public static final String APPLICATION_VND_HERALD_LIB =
             "application/vnd.herald.library+xml";
@@ -155,13 +155,6 @@ public class LibraryResource {
                     : Response.status(Response.Status.NOT_ACCEPTABLE).build();
         } catch (AuthenticationFailure failure) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
-        }
-    }
-
-    private void checkParamNotNull(Object param)
-            throws WebApplicationException {
-        if (param == null) {
-            throw new WebApplicationException(400);
         }
     }
 }

@@ -48,8 +48,7 @@ public class AndroidClientUpdateResource {
     @GET
     @Path("/")
     @Produces(APPLICATION_VND_HERALD_UPDATE)
-    public Update getUpdateInfo()
-            throws IOException {
+    public Update getUpdateInfo() throws IOException {
         return androidClientUpdateDataAccess.getUpdateInfo();
     }
 }

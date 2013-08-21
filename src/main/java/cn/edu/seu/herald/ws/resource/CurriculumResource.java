@@ -39,7 +39,7 @@ import java.io.IOException;
  */
 @Component
 @Path("/curriculum")
-public class CurriculumResource {
+public class CurriculumResource extends AbstractResource {
 
     @Autowired
     private CurriculumDataAccess curriculumDataAccess;
@@ -55,6 +55,8 @@ public class CurriculumResource {
     public Curriculum getCurriculum(
             @QueryParam("cardNumber") String cardNumber,
             @QueryParam("term") String term) throws IOException {
+        checkParamNotNull(cardNumber);
+
         if (!curriculumDataAccess.containsStudent(cardNumber)) {
             throw new NotFoundException("Curriculum not found");
         }
@@ -68,7 +70,10 @@ public class CurriculumResource {
     @GET
     @Path("/course/{id}")
     @Produces("application/vnd.herald.curriculum+xml")
-    public Course getCourseById(@PathParam("id") int id) throws IOException {
+    public Course getCourseById(@PathParam("id") Integer id)
+            throws IOException {
+        checkParamNotNull(id);
+
         if (!curriculumDataAccess.containsCourse(id)) {
             throw new NotFoundException("Course not found");
         }
