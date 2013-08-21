@@ -29,7 +29,6 @@ import cn.edu.seu.herald.ws.dao.AuthenticationFailure;
 import cn.edu.seu.herald.ws.dao.DataAccessException;
 import cn.edu.seu.herald.ws.dao.MorningExerciseDataAccess;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.Assert;
 import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
@@ -43,7 +42,10 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * Copyright (c) 2013 Ray <predator.ray@gmail.com>
@@ -109,38 +111,13 @@ public class MorningExerciseDataAccessImpl
             Date firstDay = dateFormat.parse(firstDayStr);
             Date lastDay = dateFormat.parse(lastDayStr);
 
-            return workdaysBetween(firstDay, lastDay);
+
+            return DateUtils.workdaysBetween(firstDay, lastDay);
         } catch (Exception ex) {
             throw new DataAccessException(ex);
         } finally {
             safeClose(in);
         }
-    }
-
-    private int workdaysBetween(Date from, Date to) {
-        Assert.notNull(from);
-        Assert.notNull(to);
-
-        if (from.after(to)) {
-            return workdaysBetween(to, from);
-        }
-
-        Calendar fromCal = Calendar.getInstance();
-        fromCal.setTime(from);
-        Calendar toCal = Calendar.getInstance();
-        toCal.setTime(to);
-
-        int fromDay = fromCal.get(Calendar.DAY_OF_WEEK);
-        int toDay = toCal.get(Calendar.DAY_OF_WEEK);
-
-        // TODO calculate working days
-        return 0;
-    }
-
-    private int daysBetween(long from, long to) {
-        return (int) (
-                (to - from) / (1000 * 60 * 60 * 24)
-        );
     }
 
     private void safeClose(InputStream in) throws DataAccessException {
