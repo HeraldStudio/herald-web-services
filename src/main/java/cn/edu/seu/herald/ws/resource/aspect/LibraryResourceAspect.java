@@ -86,7 +86,7 @@ public class LibraryResourceAspect {
         Assert.notNull(book);
 
         String marcNo = book.getMarcNo();
-        URI uri = UriBuilder.fromPath("./book/{id}").build(marcNo);
+        URI uri = UriBuilder.fromPath("/library/book/{id}").build(marcNo);
         book.setHref(uri.toString());
     }
 
@@ -94,9 +94,12 @@ public class LibraryResourceAspect {
         Assert.notNull(user);
 
         String token = user.getToken();
-        user.setBorrowed(getBooklistLinkType("./books/history", token));
-        user.setReserving(getBooklistLinkType("./books/reserved", token));
-        user.setBorrowing(getBooklistLinkType("./books/borrowing", token));
+        user.setBorrowed(getBooklistLinkType("/library/books/history",
+                token));
+        user.setReserving(getBooklistLinkType("/library/books/reserved",
+                token));
+        user.setBorrowing(getBooklistLinkType("/library/books/borrowing",
+                token));
     }
 
     private BooklistLinkType getBooklistLinkType(String path, String token) {
