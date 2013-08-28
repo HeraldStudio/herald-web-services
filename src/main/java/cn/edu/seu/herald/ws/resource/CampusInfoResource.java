@@ -33,6 +33,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 
 /**
@@ -51,9 +52,13 @@ public class CampusInfoResource extends AbstractResource {
         this.campusInfoDataAccess = campusInfoDataAccess;
     }
 
+    /**
+     * 获取所有可用的订阅目录
+     * @return
+     */
     @GET
     @Path("/")
-    @Produces("application/rss+xml")
+    @Produces({"application/rss+xml", MediaType.APPLICATION_XML})
     public RssFeed getAvailableFeeds() {
         SyndFeed syndFeed = campusInfoDataAccess.getAvailableFeeds();
         return new RssFeed(syndFeed);
@@ -61,25 +66,22 @@ public class CampusInfoResource extends AbstractResource {
 
     @GET
     @Path("/{name}")
-    @Produces("application/rss+xml")
-    public RssFeed getRssFeedByName(@PathParam("name") String name,
-            @HeaderParam("If-None-Match") String clientUUID,
-            @Context HttpServletResponse response) throws IOException {
+    @Produces({"application/rss+xml", MediaType.APPLICATION_XML})
+    public RssFeed getRssFeedByNameBefore(
+            @PathParam("name") String name,
+            @QueryParam("before") String before,
+            @QueryParam("after") String after,
+            @QueryParam("limit") @DefaultValue("10") int limit)
+            throws IOException {
         checkParamNotNull(name);
+        checkIsAvailable(name);
 
-        if (!campusInfoDataAccess.containsFeed(name)) {
+        return null;
+    }
+
+    private void checkIsAvailable(String feedName) {
+        if (!campusInfoDataAccess.containsFeed(feedName)) {
             throw new NotFoundException();
         }
-        String latestUUID = campusInfoDataAccess.getLatestUUID(name);
-        boolean match = (latestUUID != null) && latestUUID.equals(clientUUID);
-        if (match) {
-            throw new WebApplicationException(304);
-        }
-
-        SyndFeed syndFeed = (clientUUID == null)
-                ? campusInfoDataAccess.getFeedByName(name)
-                : campusInfoDataAccess.getFeedByName(name, clientUUID);
-        response.setHeader("ETag", latestUUID);
-        return new RssFeed(syndFeed);
     }
 }

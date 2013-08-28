@@ -32,6 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 
@@ -49,7 +50,10 @@ public class LibraryResource extends AbstractResource {
 
     @POST
     @Path("/user")
-    @Produces(APPLICATION_VND_HERALD_LIB)
+    @Produces({
+            APPLICATION_VND_HERALD_LIB,
+            MediaType.APPLICATION_XML
+    })
     public User login(@QueryParam("username") String username,
                       @QueryParam("password") String password)
             throws IOException {
@@ -63,7 +67,10 @@ public class LibraryResource extends AbstractResource {
 
     @GET
     @Path("/books")
-    @Produces(APPLICATION_VND_HERALD_LIB)
+    @Produces({
+            APPLICATION_VND_HERALD_LIB,
+            MediaType.APPLICATION_XML
+    })
     public Booklist searchBooks(@QueryParam("keyword") String keyword,
                                 @QueryParam("page")
                                 @DefaultValue("1") int page)
@@ -75,7 +82,10 @@ public class LibraryResource extends AbstractResource {
 
     @GET
     @Path("/books/borrowed")
-    @Produces(APPLICATION_VND_HERALD_LIB)
+    @Produces({
+            APPLICATION_VND_HERALD_LIB,
+            MediaType.APPLICATION_XML
+    })
     public Booklist getBooksBorrowed(@QueryParam("token") String token)
             throws IOException {
         checkParamNotNull(token);
@@ -89,7 +99,10 @@ public class LibraryResource extends AbstractResource {
 
     @GET
     @Path("/books/reserved")
-    @Produces(APPLICATION_VND_HERALD_LIB)
+    @Produces({
+            APPLICATION_VND_HERALD_LIB,
+            MediaType.APPLICATION_XML
+    })
     public Booklist getBooksReserved(@QueryParam("token") String token)
             throws IOException {
         checkParamNotNull(token);
@@ -103,7 +116,10 @@ public class LibraryResource extends AbstractResource {
 
     @GET
     @Path("/books/history")
-    @Produces(APPLICATION_VND_HERALD_LIB)
+    @Produces({
+            APPLICATION_VND_HERALD_LIB,
+            MediaType.APPLICATION_XML
+    })
     public Booklist getBorrowHistory(@QueryParam("token") String token)
             throws IOException {
         checkParamNotNull(token);
@@ -117,7 +133,10 @@ public class LibraryResource extends AbstractResource {
 
     @GET
     @Path("/book/{id}")
-    @Produces(APPLICATION_VND_HERALD_LIB)
+    @Produces({
+            APPLICATION_VND_HERALD_LIB,
+            MediaType.APPLICATION_XML
+    })
     public Book getBook(@PathParam("id") String id) throws IOException {
         checkParamNotNull(id);
 
@@ -126,6 +145,10 @@ public class LibraryResource extends AbstractResource {
 
     @POST
     @Path("/book/{id}/reservation")
+    @Produces({
+            APPLICATION_VND_HERALD_LIB,
+            MediaType.APPLICATION_XML
+    })
     public Response reserve(@PathParam("id") String id,
                         @QueryParam("token") String token) throws IOException {
         checkParamNotNull(id);
@@ -143,6 +166,10 @@ public class LibraryResource extends AbstractResource {
 
     @POST
     @Path("/book/{id}/renewal")
+    @Produces({
+            APPLICATION_VND_HERALD_LIB,
+            MediaType.APPLICATION_XML
+    })
     public Response renew(@PathParam("id") String id,
                       @QueryParam("token") String token) throws IOException {
         checkParamNotNull(id);

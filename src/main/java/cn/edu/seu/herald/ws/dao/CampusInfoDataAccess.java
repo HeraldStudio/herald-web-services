@@ -33,14 +33,15 @@ import java.util.List;
  */
 public interface CampusInfoDataAccess {
 
-    SyndFeed getFeedByName(String name) throws DataAccessException;
+    SyndFeed getFeedByName(String name, int limit) throws DataAccessException;
 
-    SyndFeed getFeedByName(String name, String afterUUID)
+    SyndFeed getFeedBeforeByName(String name, String beforeUUID, int limit)
+            throws DataAccessException;
+
+    SyndFeed getFeedAfterByName(String name, String afterUUID, int limit)
             throws DataAccessException;
 
     boolean containsFeed(String name) throws DataAccessException;
-
-    String getLatestUUID(String name) throws DataAccessException;
 
     SyndFeed getAvailableFeeds() throws DataAccessException;
 }

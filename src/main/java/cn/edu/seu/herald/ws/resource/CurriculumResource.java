@@ -31,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 
 /**
@@ -51,7 +52,10 @@ public class CurriculumResource extends AbstractResource {
 
     @GET
     @Path("/")
-    @Produces("application/vnd.herald.curriculum+xml")
+    @Produces({
+            "application/vnd.herald.curriculum+xml",
+            MediaType.APPLICATION_XML
+    })
     public Curriculum getCurriculum(
             @QueryParam("cardNumber") String cardNumber,
             @QueryParam("term") String term) throws IOException {
@@ -69,7 +73,10 @@ public class CurriculumResource extends AbstractResource {
 
     @GET
     @Path("/course/{id}")
-    @Produces("application/vnd.herald.curriculum+xml")
+    @Produces({
+            "application/vnd.herald.curriculum+xml",
+            MediaType.APPLICATION_XML
+    })
     public Course getCourseById(@PathParam("id") Integer id)
             throws IOException {
         checkParamNotNull(id);

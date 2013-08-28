@@ -48,7 +48,10 @@ public class MorningExerciseResource {
 
     @GET
     @Path("/runtimes")
-    @Produces(APPLICATION_VND_HERALD_EXCS)
+    @Produces({
+            APPLICATION_VND_HERALD_EXCS,
+            MediaType.APPLICATION_XML
+    })
     public RunTimesData getRunTimesData(
             @QueryParam("username") String username,
             @QueryParam("password") String password) throws IOException {

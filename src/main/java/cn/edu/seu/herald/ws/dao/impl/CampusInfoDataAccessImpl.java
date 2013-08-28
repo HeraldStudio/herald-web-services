@@ -67,21 +67,8 @@ import java.util.List;
 public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
         implements CampusInfoDataAccess {
 
-    private static final String GET_FEED_BY_NAME =
-            "SELECT uuid, title, url, updated "
-            + "FROM `herald_campus_info`.`feed` WHERE name=?;";
-    private static final String GET_FEED_BY_NAME_AFTER_UUID =
-            "SELECT uuid, title, url, updated "
-            + "FROM `herald_campus_info`.`feed` "
-            + "WHERE name=? AND updated > ("
-            + "SELECT updated FROM `herald_campus_info`.`feed` WHERE uuid=?);";
     private static final String CONTAINS_FEED =
             "SELECT COUNT(1) FROM `herald_campus_info`.`feed` WHERE name=?";
-    private static final String GET_ENTRIES_BY_FEED_UUID =
-            "SELECT uuid, title, url, updated, summary "
-            + "FROM `herald_campus_info`.`entry` WHERE feed_uuid=?";
-    private static final String GET_LATEST_UUID_BY_NAME =
-            "SELECT MAX(uuid) FROM `herald_campus_info`.`feed` WHERE name=?;";
     private static final String GET_FEED_NAMES =
             "SELECT title, name FROM `herald_campus_info`.`feed`;";
 
@@ -91,39 +78,23 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
     }
 
     @Override
-    public SyndFeed getFeedByName(String name) throws DataAccessException {
-        Connection connection = getConnection();
-        try {
-            PreparedStatement ps1 = connection.prepareStatement(
-                    GET_FEED_BY_NAME);
-            ps1.setString(1, name);
-            PreparedStatement ps2 = connection.prepareStatement(
-                    GET_ENTRIES_BY_FEED_UUID);
-            return getSyndFeed(ps1, ps2);
-        } catch (SQLException ex) {
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
-        }
+    public SyndFeed getFeedByName(String name, int limit)
+            throws DataAccessException {
+        return null;
     }
 
     @Override
-    public SyndFeed getFeedByName(String name, String afterUUID)
+    public SyndFeed getFeedBeforeByName(String name, String beforeUUID,
+                                        int limit)
             throws DataAccessException {
-        Connection connection = getConnection();
-        try {
-            PreparedStatement ps1 = connection.prepareStatement(
-                    GET_FEED_BY_NAME_AFTER_UUID);
-            ps1.setString(1, name);
-            ps1.setString(2, afterUUID);
-            PreparedStatement ps2 = connection.prepareStatement(
-                    GET_ENTRIES_BY_FEED_UUID);
-            return getSyndFeed(ps1, ps2);
-        } catch (SQLException ex) {
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
-        }
+        return null;
+    }
+
+    @Override
+    public SyndFeed getFeedAfterByName(String name, String afterUUID,
+                                       int limit)
+            throws DataAccessException {
+        return null;
     }
 
     @Override
@@ -138,25 +109,6 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
                 throw new DataAccessException("No result set returned");
             }
             return rs.getInt(1) > 0;
-        } catch (SQLException ex) {
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
-        }
-    }
-
-    @Override
-    public String getLatestUUID(String name) throws DataAccessException {
-        Connection connection = getConnection();
-        try {
-            PreparedStatement ps = connection.prepareStatement(
-                    GET_LATEST_UUID_BY_NAME);
-            ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
-            if (!rs.next()) {
-                return null;
-            }
-            return rs.getString(1);
         } catch (SQLException ex) {
             throw new DataAccessException(ex);
         } finally {

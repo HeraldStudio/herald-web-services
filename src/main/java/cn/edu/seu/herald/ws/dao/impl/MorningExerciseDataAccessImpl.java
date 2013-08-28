@@ -104,15 +104,20 @@ public class MorningExerciseDataAccessImpl
             String firstDayStr = properties.getProperty("semester.firstday");
             String lastDayStr = properties.getProperty("semester.lastday");
             if (firstDayStr == null || lastDayStr == null) {
-                throw new DataAccessException("The properties are not valid");
+                throw new DataAccessException("The properties are not valid.");
             }
 
             DateFormat dateFormat = new SimpleDateFormat(format);
             Date firstDay = dateFormat.parse(firstDayStr);
             Date lastDay = dateFormat.parse(lastDayStr);
+            Date today = new Date();
 
+            // during a winter or summer vacation
+            if (today.after(lastDay) || today.before(firstDay)) {
+                return -1;
+            }
 
-            return DateUtils.workdaysBetween(firstDay, lastDay);
+            return DateUtils.workdaysBetween(today, lastDay);
         } catch (Exception ex) {
             throw new DataAccessException(ex);
         } finally {

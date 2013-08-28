@@ -31,6 +31,7 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 
 /**
@@ -47,7 +48,7 @@ public class AndroidClientUpdateResource {
 
     @GET
     @Path("/")
-    @Produces(APPLICATION_VND_HERALD_UPDATE)
+    @Produces({APPLICATION_VND_HERALD_UPDATE, MediaType.APPLICATION_XML})
     public Update getUpdateInfo() throws IOException {
         return androidClientUpdateDataAccess.getUpdateInfo();
     }
