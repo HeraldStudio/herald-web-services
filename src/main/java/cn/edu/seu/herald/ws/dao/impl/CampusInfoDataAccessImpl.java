@@ -71,6 +71,27 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
             "SELECT COUNT(1) FROM `herald_campus_info`.`feed` WHERE name=?";
     private static final String GET_FEED_NAMES =
             "SELECT title, name FROM `herald_campus_info`.`feed`;";
+    private static final String GET_FEED_BY_NAME =
+            "SELECT uuid, name, title, url, updated " +
+                    "FROM `herald_campus_info`.`feed` WHERE name=?;";
+    private static final String GET_ENTRIES_BY_FEED_UUID =
+            "SELECT uuid, title, url, updated, summary " +
+                    "FROM `herald_campus_info`.`entry`" +
+                    "WHERE feed_uuid=? LIMIT ?";
+    private static final String GET_ENTRIES_BEFORE_UUID =
+            "SELECT uuid, title, url, updated, summary " +
+                    "FROM `herald_campus_info`.`entry` " +
+                    "WHERE feed_uuid=? AND updated < (" +
+                    "SELECT updated FROM `herald_campus_info`.`entry` " +
+                    "WHERE uuid=?" +
+                    ") ORDER BY updated DESC LIMIT ?";
+    private static final String GET_ENTRIES_AFTER_UUID =
+            "SELECT uuid, title, url, updated, summary " +
+                    "FROM `herald_campus_info`.`entry` " +
+                    "WHERE feed_uuid=? AND updated > (" +
+                    "SELECT updated FROM `herald_campus_info`.`entry` " +
+                    "WHERE uuid=?" +
+                    ") ORDER BY updated ASC LIMIT ?";
 
     @Autowired
     public CampusInfoDataAccessImpl(DataSource dataSource) {
@@ -80,21 +101,62 @@ public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
     @Override
     public SyndFeed getFeedByName(String name, int limit)
             throws DataAccessException {
-        return null;
+        Connection connection = getConnection();
+        try {
+            PreparedStatement feedPs = connection.prepareStatement(
+                    GET_FEED_BY_NAME);
+            feedPs.setString(1, name);
+            PreparedStatement entriesPs = connection.prepareStatement(
+                    GET_ENTRIES_BY_FEED_UUID);
+            entriesPs.setInt(2, limit);
+            return getSyndFeed(feedPs, entriesPs);
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
+        }
     }
 
     @Override
     public SyndFeed getFeedBeforeByName(String name, String beforeUUID,
                                         int limit)
             throws DataAccessException {
-        return null;
+        Connection connection = getConnection();
+        try {
+            PreparedStatement feedPs = connection.prepareStatement(
+                    GET_FEED_BY_NAME);
+            feedPs.setString(1, name);
+            PreparedStatement entriesPs = connection.prepareStatement(
+                    GET_ENTRIES_BEFORE_UUID);
+            entriesPs.setString(2, beforeUUID);
+            entriesPs.setInt(3, limit);
+            return getSyndFeed(feedPs, entriesPs);
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
+        }
     }
 
     @Override
     public SyndFeed getFeedAfterByName(String name, String afterUUID,
                                        int limit)
             throws DataAccessException {
-        return null;
+        Connection connection = getConnection();
+        try {
+            PreparedStatement feedPs = connection.prepareStatement(
+                    GET_FEED_BY_NAME);
+            feedPs.setString(1, name);
+            PreparedStatement entriesPs = connection.prepareStatement(
+                    GET_ENTRIES_AFTER_UUID);
+            entriesPs.setString(2, afterUUID);
+            entriesPs.setInt(3, limit);
+            return getSyndFeed(feedPs, entriesPs);
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex);
+        } finally {
+            closeConnection(connection);
+        }
     }
 
     @Override

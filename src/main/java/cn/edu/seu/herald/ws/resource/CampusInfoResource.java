@@ -76,7 +76,25 @@ public class CampusInfoResource extends AbstractResource {
         checkParamNotNull(name);
         checkIsAvailable(name);
 
-        return null;
+        if (before != null && after == null) {
+            SyndFeed syndFeed = campusInfoDataAccess.getFeedBeforeByName(
+                    name, before, limit);
+            return new RssFeed(syndFeed);
+        }
+
+        if (before == null && after != null) {
+            SyndFeed syndFeed = campusInfoDataAccess.getFeedAfterByName(
+                    name, after, limit);
+            return new RssFeed(syndFeed);
+        }
+
+        if (before == null && after == null) {
+            SyndFeed syndFeed = campusInfoDataAccess.getFeedByName(
+                    name, limit);
+            return new RssFeed(syndFeed);
+        }
+
+        throw new WebApplicationException(400);
     }
 
     private void checkIsAvailable(String feedName) {

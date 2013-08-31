@@ -40,7 +40,11 @@
 
     <bean class="cn.edu.seu.herald.ws.resource.aspect.CurriculumResourceAspect"/>
 
-    <bean id="httpClient" class="org.apache.commons.httpclient.HttpClient"/>
+    <bean id="httpClient" class="org.apache.commons.httpclient.HttpClient">
+        <constructor-arg>
+            <bean class="org.apache.commons.httpclient.MultiThreadedHttpConnectionManager"/>
+        </constructor-arg>
+    </bean>
 
     <bean class="cn.edu.seu.herald.ws.resource.aspect.CampusInfoResourceAspect"/>
     <bean class="cn.edu.seu.herald.ws.resource.aspect.CurriculumResourceAspect"/>

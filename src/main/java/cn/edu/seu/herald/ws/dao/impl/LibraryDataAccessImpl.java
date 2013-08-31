@@ -37,8 +37,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
-import javax.annotation.Resource;
-
 /**
  * Copyright (c) 2013 Ray <predator.ray@gmail.com>
  */
@@ -100,8 +98,14 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
         });
         Book book = new Book();
         JSONObject jsonObject = JSONObject.fromObject(responseBody);
-        String cnt1 = jsonObject.getString("cnt1");
-        String cnt2 = jsonObject.getString("cnt2");
+        JSONArray jsonArray = jsonObject.getJSONArray("contents");
+        if (jsonArray.size() < 1) {
+            return book;
+        }
+
+        JSONObject contentObj = jsonArray.getJSONObject(0);
+        String cnt1 = contentObj.getString("cnt1");
+        String cnt2 = contentObj.getString("cnt2");
         new BookParser(cnt1, cnt2).parse(book);
         return book;
     }
