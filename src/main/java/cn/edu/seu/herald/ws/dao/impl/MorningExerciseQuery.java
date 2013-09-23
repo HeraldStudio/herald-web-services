@@ -40,10 +40,10 @@ import java.util.regex.Pattern;
 class MorningExerciseQuery {
 
     private static final String POST_URL =
-            "http://58.192.114.239:8080/studentLogin.do";
+            "http://58.192.114.239:8088/studentLogin.do";
 
     private static final String INFO_URL =
-            "http://58.192.114.239:8080/studentQueryListChecks.do" +
+            "http://58.192.114.239:8088/studentQueryListChecks.do" +
                     "?method=listChecks";
 
     private String username;
