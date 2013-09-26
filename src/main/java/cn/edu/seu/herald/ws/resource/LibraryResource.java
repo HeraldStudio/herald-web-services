@@ -28,6 +28,7 @@ import cn.edu.seu.herald.ws.api.library.Booklist;
 import cn.edu.seu.herald.ws.api.library.User;
 import cn.edu.seu.herald.ws.dao.AuthenticationFailure;
 import cn.edu.seu.herald.ws.dao.LibraryDataAccess;
+import com.sun.jersey.api.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -140,7 +141,12 @@ public class LibraryResource extends AbstractResource {
     public Book getBook(@PathParam("id") String id) throws IOException {
         checkParamNotNull(id);
 
-        return libraryDataAccess.getBookByMarcNo(id);
+        Book book = libraryDataAccess.getBookByMarcNo(id);
+        if (book == null) {
+            throw new NotFoundException(String.format(
+                    "Book (macro: %s) not found", id));
+        }
+        return book;
     }
 
     @POST
