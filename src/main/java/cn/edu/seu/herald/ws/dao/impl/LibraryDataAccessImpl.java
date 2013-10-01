@@ -75,6 +75,9 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
                 jsonObject.get("contents"));
         for (Object item : jsonArray) {
             JSONObject bookObj = JSONObject.fromObject(item);
+            if (bookObj.isNullObject()) {
+                continue;
+            }
             String title = bookObj.getString("title");
             String author = bookObj.getString("author");
             String marcNo = bookObj.getString("marc_no");
@@ -105,7 +108,13 @@ public class LibraryDataAccessImpl extends AbstractHttpDataAccess
 
         JSONObject contentObj = jsonArray.getJSONObject(0);
         String cnt1 = contentObj.getString("cnt1");
+        if (cnt1.length() <= 0) {  // doesn't contain the book
+            return null;
+        }
         String cnt2 = contentObj.getString("cnt2");
+        if (cnt2.length() <= 0) {  // error
+            throw new DataAccessException("Cannot parse the book content");
+        }
         new BookParser(cnt1, cnt2).parse(book);
         return book;
     }
