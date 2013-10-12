@@ -65,7 +65,7 @@ public class CampusInfoResource extends AbstractResource {
     @GET
     @Path("/{name}")
     @Produces({"application/rss+xml", MediaType.APPLICATION_XML})
-    public RssFeed getRssFeedByNameBefore(
+    public RssFeed getRssFeedByName(
             @PathParam("name") String name,
             @QueryParam("before") String before,
             @QueryParam("after") String after,
