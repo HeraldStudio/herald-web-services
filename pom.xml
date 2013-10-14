@@ -51,6 +51,20 @@
         <aopalliance.version>1.0</aopalliance.version>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <dbcp.driverClassName>com.mysql.jdbc.Driver</dbcp.driverClassName>
+                <dbcp.url>jdbc:mysql://127.0.0.1:3306/?useUnicode=true&amp;characterEncoding=UTF-8</dbcp.url>
+                <dbcp.username>root</dbcp.username>
+                <dbcp.password>root</dbcp.password>
+                <dbcp.initialSize>1</dbcp.initialSize>
+                <dbcp.maxActive>5</dbcp.maxActive>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>com.sun.jersey</groupId>
@@ -186,12 +200,6 @@
         <dependency>
             <groupId>com.googlecode.jmockit</groupId>
             <artifactId>jmockit</artifactId>
-            <version>1.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.jmockit</groupId>
-            <artifactId>jmockit</artifactId>
             <version>0.999.12</version>
         </dependency>
         <dependency>
@@ -204,6 +212,12 @@
 
     <build>
         <finalName>${tomcat.context}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

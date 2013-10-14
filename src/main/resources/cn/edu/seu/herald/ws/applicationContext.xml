@@ -50,11 +50,6 @@
     <bean class="cn.edu.seu.herald.ws.resource.aspect.CurriculumResourceAspect"/>
     <bean class="cn.edu.seu.herald.ws.resource.aspect.LibraryResourceAspect"/>
 
-    <bean id="dbcpPropertyConfigurer"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:cn/edu/seu/herald/ws/dbcp.properties" />
-    </bean>
-
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${dbcp.driverClassName}"/>
         <property name="url" value="${dbcp.url}"/>
