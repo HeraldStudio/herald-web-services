@@ -94,7 +94,7 @@ public class Book {
     @XmlSchemaType(name = "anyURI")
     protected String href;
     @javax.xml.bind.annotation.XmlTransient
-    private static String marcNo;
+    private String marcNo;
 
     /**
      * Gets the value of the name property.
