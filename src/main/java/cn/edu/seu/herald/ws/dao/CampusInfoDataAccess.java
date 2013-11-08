@@ -23,9 +23,7 @@
  */
 package cn.edu.seu.herald.ws.dao;
 
-import org.apache.wink.common.model.synd.SyndFeed;
-
-import java.util.List;
+import net.sf.json.JSONObject;
 
 /**
  *
@@ -33,15 +31,5 @@ import java.util.List;
  */
 public interface CampusInfoDataAccess {
 
-    SyndFeed getFeedByName(String name, int limit) throws DataAccessException;
-
-    SyndFeed getFeedBeforeByName(String name, String beforeUUID, int limit)
-            throws DataAccessException;
-
-    SyndFeed getFeedAfterByName(String name, String afterUUID, int limit)
-            throws DataAccessException;
-
-    boolean containsFeed(String name) throws DataAccessException;
-
-    SyndFeed getAvailableFeeds() throws DataAccessException;
+    JSONObject getJwcFeed() throws DataAccessException;
 }

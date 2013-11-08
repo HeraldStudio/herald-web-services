@@ -48,195 +48,43 @@ package cn.edu.seu.herald.ws.dao.impl;
 
 import cn.edu.seu.herald.ws.dao.CampusInfoDataAccess;
 import cn.edu.seu.herald.ws.dao.DataAccessException;
-import org.apache.wink.common.model.synd.SyndEntry;
-import org.apache.wink.common.model.synd.SyndFeed;
-import org.apache.wink.common.model.synd.SyndLink;
-import org.apache.wink.common.model.synd.SyndText;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
-import java.sql.*;
-import java.util.List;
+import java.io.IOException;
 
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
 @Repository("campusInfoDataAccess")
-public class CampusInfoDataAccessImpl extends AbstractDBDataAccess
-        implements CampusInfoDataAccess {
-
-    private static final String CONTAINS_FEED =
-            "SELECT COUNT(1) FROM `herald_campus_info`.`feed` WHERE name=?";
-    private static final String GET_FEED_NAMES =
-            "SELECT title, name FROM `herald_campus_info`.`feed`;";
-    private static final String GET_FEED_BY_NAME =
-            "SELECT uuid, name, title, url, updated " +
-                    "FROM `herald_campus_info`.`feed` WHERE name=?;";
-    private static final String GET_ENTRIES_BY_FEED_UUID =
-            "SELECT uuid, title, url, updated, summary " +
-                    "FROM `herald_campus_info`.`entry`" +
-                    "WHERE feed_uuid=? LIMIT ?";
-    private static final String GET_ENTRIES_BEFORE_UUID =
-            "SELECT uuid, title, url, updated, summary " +
-                    "FROM `herald_campus_info`.`entry` " +
-                    "WHERE feed_uuid=? AND updated < (" +
-                    "SELECT updated FROM `herald_campus_info`.`entry` " +
-                    "WHERE uuid=?" +
-                    ") ORDER BY updated DESC LIMIT ?";
-    private static final String GET_ENTRIES_AFTER_UUID =
-            "SELECT uuid, title, url, updated, summary " +
-                    "FROM `herald_campus_info`.`entry` " +
-                    "WHERE feed_uuid=? AND updated > (" +
-                    "SELECT updated FROM `herald_campus_info`.`entry` " +
-                    "WHERE uuid=?" +
-                    ") ORDER BY updated ASC LIMIT ?";
-
-    @Autowired
-    public CampusInfoDataAccessImpl(DataSource dataSource) {
-        super(dataSource);
-    }
+public class CampusInfoDataAccessImpl implements CampusInfoDataAccess {
 
     @Override
-    public SyndFeed getFeedByName(String name, int limit)
-            throws DataAccessException {
-        Connection connection = getConnection();
+    public JSONObject getJwcFeed() throws DataAccessException {
         try {
-            PreparedStatement feedPs = connection.prepareStatement(
-                    GET_FEED_BY_NAME);
-            feedPs.setString(1, name);
-            PreparedStatement entriesPs = connection.prepareStatement(
-                    GET_ENTRIES_BY_FEED_UUID);
-            entriesPs.setInt(2, limit);
-            return getSyndFeed(feedPs, entriesPs);
-        } catch (SQLException ex) {
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
-        }
-    }
-
-    @Override
-    public SyndFeed getFeedBeforeByName(String name, String beforeUUID,
-                                        int limit)
-            throws DataAccessException {
-        Connection connection = getConnection();
-        try {
-            PreparedStatement feedPs = connection.prepareStatement(
-                    GET_FEED_BY_NAME);
-            feedPs.setString(1, name);
-            PreparedStatement entriesPs = connection.prepareStatement(
-                    GET_ENTRIES_BEFORE_UUID);
-            entriesPs.setString(2, beforeUUID);
-            entriesPs.setInt(3, limit);
-            return getSyndFeed(feedPs, entriesPs);
-        } catch (SQLException ex) {
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
-        }
-    }
-
-    @Override
-    public SyndFeed getFeedAfterByName(String name, String afterUUID,
-                                       int limit)
-            throws DataAccessException {
-        Connection connection = getConnection();
-        try {
-            PreparedStatement feedPs = connection.prepareStatement(
-                    GET_FEED_BY_NAME);
-            feedPs.setString(1, name);
-            PreparedStatement entriesPs = connection.prepareStatement(
-                    GET_ENTRIES_AFTER_UUID);
-            entriesPs.setString(2, afterUUID);
-            entriesPs.setInt(3, limit);
-            return getSyndFeed(feedPs, entriesPs);
-        } catch (SQLException ex) {
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
-        }
-    }
-
-    @Override
-    public boolean containsFeed(String name) throws DataAccessException {
-        Connection connection = getConnection();
-        try {
-            PreparedStatement ps = connection.prepareStatement(
-                    CONTAINS_FEED);
-            ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
-            if (!rs.next()) {
-                throw new DataAccessException("No result set returned");
+            Document jwcDoc = Jsoup.connect("http://jwc.seu.edu.cn/").get();
+            Elements infoElements = jwcDoc.select(
+                    "#__01 > tbody > tr > td:nth-child(2) a[title][href]");
+            JSONObject json = new JSONObject();
+            JSONArray infoArr = new JSONArray();
+            for (Element element : infoElements) {
+                String title = element.attr("title");
+                String href = element.attr("href");
+                JSONObject each = new JSONObject();
+                each.put("title", title);
+                each.put("href", "http://jwc.seu.edu.cn" + href);
+                infoArr.add(each);
             }
-            return rs.getInt(1) > 0;
-        } catch (SQLException ex) {
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
+            json.put("info", infoArr);
+            return json;
+        } catch (IOException e) {
+            throw new DataAccessException(e);
         }
-    }
-
-    @Override
-    public SyndFeed getAvailableFeeds() throws DataAccessException {
-        Connection connection = getConnection();
-        try {
-            PreparedStatement ps = connection.prepareStatement(GET_FEED_NAMES);
-            ResultSet rs = ps.executeQuery();
-            SyndFeed feed = new SyndFeed();
-            List<SyndEntry> entries = feed.getEntries();
-            while (rs.next()) {
-                SyndEntry entry = new SyndEntry();
-                entry.setTitle(new SyndText(rs.getString("title")));
-                entry.setId(rs.getString("name"));
-                entries.add(entry);
-            }
-            return feed;
-        } catch (SQLException ex) {
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
-        }
-    }
-
-    private SyndFeed getSyndFeed(PreparedStatement feed,
-                                 PreparedStatement entries)
-            throws SQLException {
-        ResultSet feedRs = feed.executeQuery();
-        if (!feedRs.next()) {
-            return null;
-        }
-        String uuid = feedRs.getString("uuid");
-        String title = feedRs.getString("title");
-        String url = feedRs.getString("url");
-        Date updated = feedRs.getDate("updated");
-
-        SyndFeed syndFeed = new SyndFeed();
-        syndFeed.setId(uuid);
-        syndFeed.setTitle(new SyndText(title));
-        syndFeed.setUpdated(updated);
-        syndFeed.addLink(getAltLink(url));
-
-        entries.setString(1, uuid);
-        ResultSet entriesRs = entries.executeQuery();
-        while (entriesRs.next()) {
-            SyndEntry entry = new SyndEntry();
-            entry.setId(getUrnUuid(entriesRs.getString("uuid")));
-            entry.setTitle(new SyndText(entriesRs.getString("title")));
-            entry.addLink(getAltLink(entriesRs.getString("url")));
-            entry.setPublished(entriesRs.getDate("updated"));
-            entry.setSummary(new SyndText(entriesRs.getString("summary")));
-            syndFeed.addEntry(entry);
-        }
-        return syndFeed;
-    }
-
-    private String getUrnUuid(String uuid) {
-        return uuid;
-    }
-
-    private SyndLink getAltLink(String url) {
-        return new SyndLink("alternate", "text/html", url);
     }
 }

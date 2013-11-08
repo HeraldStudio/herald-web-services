@@ -23,15 +23,13 @@
  */
 package cn.edu.seu.herald.ws.resource;
 
-import cn.edu.seu.herald.ws.api.curriculum.Course;
-import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
+import cn.edu.seu.herald.ws.api.curriculum.Day;
 import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
-import com.sun.jersey.api.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 
 /**
@@ -51,41 +49,38 @@ public class CurriculumResource extends AbstractResource {
     }
 
     @GET
-    @Path("/")
-    @Produces({
-            "application/vnd.herald.curriculum+xml",
-            MediaType.APPLICATION_XML
-    })
-    public Curriculum getCurriculum(
-            @QueryParam("cardNumber") String cardNumber,
+    @Path("/{cardNumber}")
+    @Produces("text/json")
+    public Response getCurriculumOfWeek(
+            @PathParam("cardNumber") String cardNumber,
             @QueryParam("term") String term) throws IOException {
         checkParamNotNull(cardNumber);
 
-        if (!curriculumDataAccess.containsStudent(cardNumber)) {
-            throw new NotFoundException("Curriculum not found");
-        }
-
-        Curriculum curriculum = (term == null)
-                ? curriculumDataAccess.getCurriculum(cardNumber)
-                : curriculumDataAccess.getCurriculum(cardNumber, term);
-        return curriculum;
+        String curriJsonArr = (term == null)
+                ? curriculumDataAccess.getCurriculumOfWeek(
+                cardNumber).toString()
+                : curriculumDataAccess.getCurriculumOfWeek(
+                cardNumber, term).toString();
+        return Response.status(200).expires(dateOfNextHour())
+                .entity(curriJsonArr).build();
     }
 
     @GET
-    @Path("/course/{id}")
-    @Produces({
-            "application/vnd.herald.curriculum+xml",
-            MediaType.APPLICATION_XML
-    })
-    public Course getCourseById(@PathParam("id") Integer id)
-            throws IOException {
-        checkParamNotNull(id);
+    @Path("/{cardNumber}/{day}")
+    @Produces("text/json")
+    public Response getCurriculumOfDay(
+            @PathParam("cardNumber") String cardNumber,
+            @PathParam("day") Day day,
+            @QueryParam("term") String term) throws IOException {
+        checkParamNotNull(cardNumber);
+        checkParamNotNull(day);
 
-        if (!curriculumDataAccess.containsCourse(id)) {
-            throw new NotFoundException("Course not found");
-        }
-
-        Course course = curriculumDataAccess.getCourseById(id);
-        return course;
+        String curriJson = (term == null)
+                ? curriculumDataAccess.getCurriculumOfDay(
+                cardNumber, day).toString()
+                : curriculumDataAccess.getCurriculumOfDay(
+                cardNumber, day, term).toString();
+        return Response.status(200).expires(dateOfNextHour())
+                .entity(curriJson).build();
     }
 }

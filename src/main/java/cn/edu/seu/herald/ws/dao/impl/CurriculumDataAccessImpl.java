@@ -26,339 +26,157 @@ package cn.edu.seu.herald.ws.dao.impl;
 import cn.edu.seu.herald.ws.api.curriculum.*;
 import cn.edu.seu.herald.ws.dao.CurriculumDataAccess;
 import cn.edu.seu.herald.ws.dao.DataAccessException;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.sql.DataSource;
+import java.io.IOException;
 
 /**
  *
  * @author rAy <predator.ray@gmail.com>
  */
 @Repository("curriculumDataAccess")
-public class CurriculumDataAccessImpl
-        extends AbstractDBDataAccess
-        implements CurriculumDataAccess {
+public class CurriculumDataAccessImpl implements CurriculumDataAccess {
 
-    private static final Logger LOGGER = Logger.getLogger(
-            CurriculumDataAccessImpl.class.getName());
-    private static final String GET_COURSES_1 =
-            "SELECT * FROM `herald_curriculum`.`course` NATURAL JOIN "
-            + "`herald_curriculum`.`select` "
-            + "WHERE card_no=? AND term=(SELECT MAX(term) FROM "
-            + "`herald_curriculum`.`select`);";
-    private static final String GET_ATTENDS_1 =
-            "SELECT name, day, strategy, place, period_from, period_to "
-            + "FROM `herald_curriculum`.`attend` "
-            + "NATURAL JOIN `herald_curriculum`.`select` "
-            + "NATURAL JOIN `herald_curriculum`.`course` "
-            + "WHERE select_id IN ("
-            + "SELECT select_id FROM `herald_curriculum`.`select` "
-            + "NATURAL JOIN `herald_curriculum`.`course` "
-            + "WHERE card_no=? AND term=("
-            + "SELECT MAX(term) FROM `herald_curriculum`.`select`));";
-    private static final String GET_MAX_TERM =
-            "SELECT MAX(term) FROM `herald_curriculum`.`select`;";
-    private static final String GET_COURSES_2 =
-            "SELECT * FROM `herald_curriculum`.`course` "
-            + "NATURAL JOIN `herald_curriculum`.`select` "
-            + "WHERE card_no=? AND term=?;";
-    private static final String GET_ATTENDS_2 =
-            "SELECT name, day, strategy, place, period_from, period_to "
-            + "FROM `herald_curriculum`.`attend` "
-            + "NATURAL JOIN `herald_curriculum`.`select` "
-            + "NATURAL JOIN `herald_curriculum`.`course` "
-            + "WHERE select_id IN ("
-            + "SELECT select_id FROM `herald_curriculum`.`select` "
-            + "NATURAL JOIN `herald_curriculum`.`course` "
-            + "WHERE card_no=? AND term=?);";
-    private static final String CONTAINS_CARD_NO =
-            "SELECT COUNT(1) FROM `herald_curriculum`.`student` "
-            + "WHERE card_no=? LIMIT 1;";
-    private static final String GET_STUDENTS_OF_COURSE =
-            "SELECT card_no, student_no, name "
-            + "FROM `herald_curriculum`.`student` NATURAL JOIN ("
-            + "SELECT card_no FROM `herald_curriculum`.`select` "
-            + "WHERE course_id = ?"
-            + ") AS t;";
-    private static final String GET_COURSE_BY_ID =
-            "SELECT course_id, name, lecturer, credit, week_from, week_to "
-            + "FROM `herald_curriculum`.`course` WHERE course_id=?";
-    private static final String CONTAINS_COURSE =
-            "SELECT COUNT(1) FROM `herald_curriculum`.`course` "
-            + "WHERE course_id=? LIMIT 1;";
-
-    @Autowired
-    public CurriculumDataAccessImpl(DataSource dataSource) {
-        super(dataSource);
-    }
+    private static final String CURRI_ENTRY_URL =
+            "http://xk.urp.seu.edu.cn/jw_service/service/stuCurriculum.action";
+    private static final String CURRI_QUERY_HOME =
+            "http://xk.urp.seu.edu.cn/jw_service/service/lookCurriculum.action";
+    private static final String CURRI_SELECTOR = "table[cellpadding=0]" +
+            "[cellspacing=0][valign=top][class=tableline] " +
+            "tr:nth-child(%d) > td:nth-child(%d)";
+    private static final String AVA_TERM_SELECTOR =
+            "#stuCurriculum_queryAcademicYear > option";
+    private static final int MORNING = 2;
+    private static final int AFTERNOON = 7;
+    private static final int EVENING = 12;
 
     @Override
-    public Curriculum getCurriculum(String cardNumber)
+    public JSONArray getCurriculumOfWeek(String cardNumber)
             throws DataAccessException {
-        int cardNo = Integer.valueOf(cardNumber);
-        Connection connection = getConnection();
         try {
-            // get courses selected
-            PreparedStatement ps4Courses =
-                    connection.prepareStatement(GET_COURSES_1);
-            ps4Courses.setInt(1, cardNo);
-            ResultSet rs1 = ps4Courses.executeQuery();
-            List<Course> courseList = getCoursesFromResultSet(rs1);
-            ps4Courses.close();
-
-            // get schedules
-            PreparedStatement ps4Schedules =
-                    connection.prepareStatement(GET_ATTENDS_1);
-            ps4Schedules.setInt(1, cardNo);
-            ResultSet rs2 = ps4Schedules.executeQuery();
-            TimeTable timeTable = getTimeTableFromResultSet(rs2);
-
-            // get max term
-            PreparedStatement ps4MaxTerm =
-                    connection.prepareStatement(GET_MAX_TERM);
-            ResultSet rs3 = ps4MaxTerm.executeQuery();
-            String term = getMaxTermFromResultSet(rs3);
-
-            Curriculum curr = new Curriculum();
-            curr.setCardNumber(cardNumber);
-            curr.setTerm(term);
-            Courses courses = new Courses();
-            courses.setCourses(courseList);
-            curr.setCourses(courses);
-            curr.setTimeTable(timeTable);
-            return curr;
-        } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
+            return getCurriculumOfWeek(cardNumber, getCurrentTerm());
+        } catch (IOException e) {
+            throw new DataAccessException(e);
         }
     }
 
     @Override
-    public Curriculum getCurriculum(String cardNumber, String term)
+    public JSONArray getCurriculumOfWeek(String cardNumber, String term)
             throws DataAccessException {
-        int cardNo = Integer.valueOf(cardNumber);
-        Connection connection = getConnection();
         try {
-            // get courses selected
-            PreparedStatement ps4Courses =
-                    connection.prepareStatement(GET_COURSES_2);
-            ps4Courses.setInt(1, cardNo);
-            ps4Courses.setString(2, term);
-            ResultSet rs1 = ps4Courses.executeQuery();
-            List<Course> courseList = getCoursesFromResultSet(rs1);
-            ps4Courses.close();
-
-            // get schedules
-            PreparedStatement ps4Schedules =
-                    connection.prepareStatement(GET_ATTENDS_2);
-            ps4Schedules.setInt(1, cardNo);
-            ps4Schedules.setString(2, term);
-            ResultSet rs2 = ps4Schedules.executeQuery();
-            TimeTable timeTable = getTimeTableFromResultSet(rs2);
-
-            Curriculum curr = new Curriculum();
-            curr.setCardNumber(cardNumber);
-            curr.setTerm(term);
-            Courses courses = new Courses();
-            courses.setCourses(courseList);
-            curr.setTimeTable(timeTable);
-            return curr;
-        } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
-        }
-    }
-
-    @Override
-    public boolean containsCourse(int courseId) throws DataAccessException {
-        Connection connection = getConnection();
-        try {
-            PreparedStatement ps =
-                    connection.prepareStatement(CONTAINS_COURSE);
-            ps.setInt(1, courseId);
-            ResultSet rs = ps.executeQuery();
-            if (!rs.next()) {
-                throw new DataAccessException();
+            Document curriDoc = Jsoup.connect(CURRI_ENTRY_URL)
+                    .timeout(0)
+                    .data("queryStudentId", cardNumber)
+                    .data("queryAcademicYear", term).post();
+            JSONArray curriculum = new JSONArray();
+            for (Day workDay : getWorkDays()) {
+                JSONObject workDayCourses = getCourseJsonOfDay(
+                        workDay, curriDoc);
+                curriculum.add(workDayCourses);
             }
-            int count = rs.getInt(1);
-            return (count >= 1);
-        } catch (SQLException ex) {
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
+            return curriculum;
+        } catch (IOException e) {
+            throw new DataAccessException(e);
         }
     }
 
     @Override
-    public Course getCourseById(int courseId)
+    public JSONObject getCurriculumOfDay(String cardNumber, Day day)
             throws DataAccessException {
-        Connection connection = getConnection();
         try {
-            PreparedStatement ps1 =
-                    connection.prepareStatement(GET_STUDENTS_OF_COURSE);
-            ps1.setInt(1, courseId);
-            ResultSet rs1 = ps1.executeQuery();
-            StudentList studentList = getStudentListFromResultSet(rs1);
-
-            PreparedStatement ps2 =
-                    connection.prepareStatement(GET_COURSE_BY_ID);
-            ps2.setInt(1, courseId);
-            ResultSet rs2 = ps2.executeQuery();
-            if (!rs2.next()) {
-                throw new DataAccessException();
-            }
-
-            Course course = getCourseFromResultSet(rs2);
-            course.setStudents(studentList);
-            return course;
-        } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
+            return getCurriculumOfDay(cardNumber, day, getCurrentTerm());
+        } catch (IOException e) {
+            throw new DataAccessException(e);
         }
+    }
+
+    private String getCurrentTerm() throws IOException {
+        Document queryHome = Jsoup.connect(CURRI_QUERY_HOME)
+                .timeout(5000).get();
+        Elements options = queryHome.select(AVA_TERM_SELECTOR);
+        Assert.state(options != null && !options.isEmpty()
+                && options.get(0) != null);
+        Element firstOpt = options.get(0);
+        return firstOpt.attr("value");
     }
 
     @Override
-    public boolean containsStudent(String cardNumber) throws DataAccessException {
-        Connection connection = getConnection();
+    public JSONObject getCurriculumOfDay(String cardNumber, Day day, String term)
+            throws DataAccessException {
         try {
-            PreparedStatement ps =
-                    connection.prepareStatement(CONTAINS_CARD_NO);
-            ps.setString(1, cardNumber);
-            ResultSet rs = ps.executeQuery();
-            if (!rs.next()) {
-                throw new DataAccessException();
-            }
-            int count = rs.getInt(1);
-            return (count >= 1);
-        } catch (SQLException ex) {
-            throw new DataAccessException(ex);
-        } finally {
-            closeConnection(connection);
+            Document curriDoc = Jsoup.connect(CURRI_ENTRY_URL)
+                    .timeout(0)
+                    .data("queryStudentId", cardNumber)
+                    .data("queryAcademicYear", term).post();
+            return getCourseJsonOfDay(day, curriDoc);
+        } catch (IOException e) {
+            throw new DataAccessException(e);
         }
     }
 
-    private Course getCourseFromResultSet(ResultSet rs) throws SQLException {
-        int id = rs.getInt("course_id");
-        String courseName = rs.getString("name");
-        String lecturer = rs.getString("lecturer");
-        double credit = rs.getDouble("credit");
-        int weekFrom = rs.getInt("week_from");
-        int weekTo = rs.getInt("week_to");
-        Period p = new Period();
-        p.setFrom(BigInteger.valueOf(weekFrom));
-        p.setTo(BigInteger.valueOf(weekTo));
-        Course course = new Course();
-        course.setId(id);
-        course.setName(courseName);
-        course.setCredit(BigDecimal.valueOf(credit));
-        course.setLecturer(lecturer);
-        course.setWeek(p);
-        return course;
+    private JSONObject getCourseJsonOfDay(Day day, Document curriDoc) {
+        int tdIndex = getTdIndex(day);
+        Elements morning = curriDoc.select(String.format(
+                CURRI_SELECTOR, MORNING, tdIndex));
+        assertCurriElements(morning);
+        Elements afternoon = curriDoc.select(String.format(
+                CURRI_SELECTOR, AFTERNOON, tdIndex));
+        assertCurriElements(afternoon);
+        Elements evening = curriDoc.select(String.format(
+                CURRI_SELECTOR, EVENING, tdIndex));
+        assertCurriElements(evening);
+
+        JSONArray morningCourses = new CourseParser()
+                .getEachCourseFromElement(morning.get(0));
+        JSONArray afternoonCourses = new CourseParser()
+                .getEachCourseFromElement(afternoon.get(0));
+        JSONArray eveningCourses = new CourseParser()
+                .getEachCourseFromElement(evening.get(0));
+        JSONArray courses = new JSONArray();
+        courses.addAll(morningCourses);
+        courses.addAll(afternoonCourses);
+        courses.addAll(eveningCourses);
+
+        JSONObject curri = new JSONObject();
+        curri.put("day", day.toString());
+        curri.put("courses", courses);
+        return curri;
     }
 
-    private List<Course> getCoursesFromResultSet(ResultSet rs)
-            throws SQLException {
-        List<Course> courses = new LinkedList<Course>();
-        while (rs.next()) {
-            Course course = getCourseFromResultSet(rs);
-            courses.add(course);
+    private void assertCurriElements(Elements elements) {
+        Assert.state(elements != null && elements.size() == 1);
+    }
+
+    private Day[] getWorkDays() {
+        return new Day[] {Day.MON, Day.TUE, Day.WED, Day.THU, Day.FRI};
+    }
+
+    private int getTdIndex(Day day) {
+        switch (day) {
+            case MON:
+                return 3;
+            case TUE:
+                return 4;
+            case WED:
+                return 5;
+            case THU:
+                return 6;
+            case FRI:
+                return 7;
+            // not sure
+            case SAT:
+                return 8;
+            case SUN:
+                return 9;
         }
-        return courses;
+        throw new IllegalStateException(String.format(
+                "Day[%s] is not acceptable here.", day));
     }
-
-    private Attendance getAttendanceFromResultSet(ResultSet rs)
-            throws SQLException {
-        String courseName = rs.getString("name");
-        Day day = Day.valueOf(rs.getString("day"));
-        String place = rs.getString("place");
-        Strategy str = Strategy.valueOf(rs.getString("strategy"));
-        int from = rs.getInt("period_from");
-        int to = rs.getInt("period_to");
-        Period p = new Period();
-        p.setFrom(BigInteger.valueOf(from));
-        p.setTo(BigInteger.valueOf(to));
-        Attendance att = new Attendance();
-        att.setCourseName(courseName);
-        att.setPeriod(p);
-        att.setPlace(place);
-        att.setStrategy(str);
-        return att;
-    }
-
-    private TimeTable getTimeTableFromResultSet(ResultSet rs)
-            throws SQLException {
-        Map<Day, List<Attendance>> atts = new HashMap<Day, List<Attendance>>();
-        while (rs.next()) {
-            Day day = Day.valueOf(rs.getString("day"));
-            if (!atts.containsKey(day)) {
-                atts.put(day, new LinkedList<Attendance>());
-            }
-            atts.get(day).add(getAttendanceFromResultSet(rs));
-        }
-
-        List<Schedule> schLst = new LinkedList<Schedule>();
-        for (Entry<Day, List<Attendance>> ent : atts.entrySet()) {
-            Day day = ent.getKey();
-            List<Attendance> attLst = ent.getValue();
-            Schedule sch = new Schedule();
-            sch.setAttendances(attLst);
-            sch.setDay(day);
-            schLst.add(sch);
-        }
-
-        TimeTable tt = new TimeTable();
-        tt.setSchedules(schLst);
-        return tt;
-    }
-
-    private String getMaxTermFromResultSet(ResultSet rs)
-            throws SQLException, DataAccessException {
-        if (!rs.next()) {
-            throw new DataAccessException();
-        }
-        String term = rs.getString(1);
-        return term;
-    }
-
-    private StudentList getStudentListFromResultSet(ResultSet rs)
-            throws SQLException, DataAccessException {
-        StudentList studentList = new StudentList();
-        while (rs.next()) {
-            studentList.getStudents().add(getStudentFromResultSet(rs));
-        }
-        return studentList;
-    }
-
-    private Student getStudentFromResultSet(ResultSet rs)
-            throws SQLException, DataAccessException {
-        String cardNo = rs.getString("card_no");
-        String studentNo = rs.getString("student_no");
-        String name = rs.getString("name");
-        Student student = new Student();
-        student.setCardNumber(cardNo);
-        student.setStudentNumber(studentNo);
-        student.setName(name);
-        return student;
-    }
-
 }

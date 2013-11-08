@@ -24,15 +24,13 @@
 package cn.edu.seu.herald.ws.resource;
 
 import cn.edu.seu.herald.ws.dao.CampusInfoDataAccess;
-import com.sun.jersey.api.NotFoundException;
-import org.apache.wink.common.model.rss.RssFeed;
-import org.apache.wink.common.model.synd.SyndFeed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import java.io.IOException;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -50,54 +48,13 @@ public class CampusInfoResource extends AbstractResource {
         this.campusInfoDataAccess = campusInfoDataAccess;
     }
 
-    /**
-     * 获取所有可用的订阅目录
-     * @return
-     */
     @GET
-    @Path("/")
-    @Produces({"application/rss+xml", MediaType.APPLICATION_XML})
-    public RssFeed getAvailableFeeds() {
-        SyndFeed syndFeed = campusInfoDataAccess.getAvailableFeeds();
-        return new RssFeed(syndFeed);
-    }
-
-    @GET
-    @Path("/{name}")
-    @Produces({"application/rss+xml", MediaType.APPLICATION_XML})
-    public RssFeed getRssFeedByName(
-            @PathParam("name") String name,
-            @QueryParam("before") String before,
-            @QueryParam("after") String after,
-            @QueryParam("limit") @DefaultValue("10") int limit)
-            throws IOException {
-        checkParamNotNull(name);
-        checkIsAvailable(name);
-
-        if (before != null && after == null) {
-            SyndFeed syndFeed = campusInfoDataAccess.getFeedBeforeByName(
-                    name, before, limit);
-            return new RssFeed(syndFeed);
-        }
-
-        if (before == null && after != null) {
-            SyndFeed syndFeed = campusInfoDataAccess.getFeedAfterByName(
-                    name, after, limit);
-            return new RssFeed(syndFeed);
-        }
-
-        if (before == null && after == null) {
-            SyndFeed syndFeed = campusInfoDataAccess.getFeedByName(
-                    name, limit);
-            return new RssFeed(syndFeed);
-        }
-
-        throw new WebApplicationException(400);
-    }
-
-    private void checkIsAvailable(String feedName) {
-        if (!campusInfoDataAccess.containsFeed(feedName)) {
-            throw new NotFoundException();
-        }
+    @Path("/jwc")
+    @Produces("text/json")
+    public Response getJwcFeed() {
+        return Response.status(200)
+                .entity(campusInfoDataAccess.getJwcFeed().toString())
+                .expires(dateOfNextHour())
+                .build();
     }
 }

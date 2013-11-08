@@ -38,17 +38,13 @@
 
     <aop:aspectj-autoproxy />
 
-    <bean class="cn.edu.seu.herald.ws.resource.aspect.CurriculumResourceAspect"/>
+    <bean class="cn.edu.seu.herald.ws.resource.aspect.LibraryResourceAspect"/>
 
     <bean id="httpClient" class="org.apache.commons.httpclient.HttpClient">
         <constructor-arg>
             <bean class="org.apache.commons.httpclient.MultiThreadedHttpConnectionManager"/>
         </constructor-arg>
     </bean>
-
-    <bean class="cn.edu.seu.herald.ws.resource.aspect.CampusInfoResourceAspect"/>
-    <bean class="cn.edu.seu.herald.ws.resource.aspect.CurriculumResourceAspect"/>
-    <bean class="cn.edu.seu.herald.ws.resource.aspect.LibraryResourceAspect"/>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${dbcp.driverClassName}"/>

@@ -23,8 +23,9 @@
  */
 package cn.edu.seu.herald.ws.dao;
 
-import cn.edu.seu.herald.ws.api.curriculum.Course;
-import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
+import cn.edu.seu.herald.ws.api.curriculum.Day;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  *
@@ -32,14 +33,15 @@ import cn.edu.seu.herald.ws.api.curriculum.Curriculum;
  */
 public interface CurriculumDataAccess {
 
-    boolean containsStudent(String cardNumber) throws DataAccessException;
-
-    Curriculum getCurriculum(String cardNumber) throws DataAccessException;
-
-    Curriculum getCurriculum(String cardNumber, String term)
+    JSONArray getCurriculumOfWeek(String cardNumber)
             throws DataAccessException;
 
-    boolean containsCourse(int courseId) throws DataAccessException;
+    JSONArray getCurriculumOfWeek(String cardNumber, String term)
+            throws DataAccessException;
 
-    Course getCourseById(int courseId) throws DataAccessException;
+    JSONObject getCurriculumOfDay(String cardNumber, Day day)
+            throws DataAccessException;
+
+    JSONObject getCurriculumOfDay(String cardNumber, Day day, String term)
+            throws DataAccessException;
 }
