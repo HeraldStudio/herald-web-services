@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -50,7 +51,7 @@ public class CampusInfoResource extends AbstractResource {
 
     @GET
     @Path("/jwc")
-    @Produces("text/json")
+    @Produces({MediaType.WILDCARD, "text/json"})
     public Response getJwcFeed() {
         return Response.status(200)
                 .entity(campusInfoDataAccess.getJwcFeed().toString())
