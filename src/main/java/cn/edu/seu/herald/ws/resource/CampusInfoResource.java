@@ -59,19 +59,19 @@ public class CampusInfoResource extends AbstractResource {
                 .build();
     }
 
-    @GET
-    @Path("/jwc")
-    @Produces("application/javascript")
-    public Response getJwcFeed(@QueryParam("callback") String callback) {
-        try {
-            String json = campusInfoDataAccess.getJwcFeed().toString();
-            String jsonp = jsonpParser.jsonp(callback, json);
-            return Response.status(200)
-                    .entity(jsonp)
-                    .expires(dateOfNextHour())
-                    .build();
-        } catch (IllegalArgumentException ex) {
-            throw new WebApplicationException(400);
-        }
-    }
+//    @GET
+//    @Path("/jwc")
+//    @Produces("application/javascript")
+//    public Response getJwcFeed(@QueryParam("callback") String callback) {
+//        try {
+//            String json = campusInfoDataAccess.getJwcFeed().toString();
+//            String jsonp = jsonpParser.jsonp(callback, json);
+//            return Response.status(200)
+//                    .entity(jsonp)
+//                    .expires(dateOfNextHour())
+//                    .build();
+//        } catch (IllegalArgumentException ex) {
+//            throw new WebApplicationException(400);
+//        }
+//    }
 }
