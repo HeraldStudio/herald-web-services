@@ -53,6 +53,12 @@ public class CurriculumDataAccessImpl implements CurriculumDataAccess {
             "tr:nth-child(%d) > td:nth-child(%d)";
     private static final String AVA_TERM_SELECTOR =
             "#stuCurriculum_queryAcademicYear > option";
+    private static final String SAT_CURRI_SELECTOR =
+            "table[cellpadding=0][cellspacing=0][valign=top][class=tableline]" +
+                    " tr:nth-child(14) > td:nth-child(2)";
+    private static final String SUN_CURRI_SELECTOR =
+            "table[cellpadding=0][cellspacing=0][valign=top][class=tableline]" +
+                    " tr:nth-child(16) > td:nth-child(2)";
     private static final int MORNING = 2;
     private static final int AFTERNOON = 7;
     private static final int EVENING = 12;
@@ -108,7 +114,8 @@ public class CurriculumDataAccessImpl implements CurriculumDataAccess {
     }
 
     @Override
-    public JSONObject getCurriculumOfDay(String cardNumber, Day day, String term)
+    public JSONObject getCurriculumOfDay(String cardNumber, Day day,
+                                         String term)
             throws DataAccessException {
         try {
             Document curriDoc = Jsoup.connect(CURRI_ENTRY_URL)
@@ -122,28 +129,33 @@ public class CurriculumDataAccessImpl implements CurriculumDataAccess {
     }
 
     private JSONObject getCourseJsonOfDay(Day day, Document curriDoc) {
-        int tdIndex = getTdIndex(day);
-        Elements morning = curriDoc.select(String.format(
-                CURRI_SELECTOR, MORNING, tdIndex));
-        assertCurriElements(morning);
-        Elements afternoon = curriDoc.select(String.format(
-                CURRI_SELECTOR, AFTERNOON, tdIndex));
-        assertCurriElements(afternoon);
-        Elements evening = curriDoc.select(String.format(
-                CURRI_SELECTOR, EVENING, tdIndex));
-        assertCurriElements(evening);
+        switch (day) {
+            case SAT:
+                return getCurriculumBySeletors(curriDoc, day,
+                        SAT_CURRI_SELECTOR);
+            case SUN:
+                return getCurriculumBySeletors(curriDoc, day,
+                        SUN_CURRI_SELECTOR);
+            default:
+                int tdIndex = getTdIndex(day);
+                return getCurriculumBySeletors(curriDoc, day,
+                        String.format(CURRI_SELECTOR, MORNING, tdIndex),
+                        String.format(CURRI_SELECTOR, AFTERNOON, tdIndex),
+                        String.format(CURRI_SELECTOR, EVENING, tdIndex));
+        }
+    }
 
-        JSONArray morningCourses = new CourseParser()
-                .getEachCourseFromElement(morning.get(0));
-        JSONArray afternoonCourses = new CourseParser()
-                .getEachCourseFromElement(afternoon.get(0));
-        JSONArray eveningCourses = new CourseParser()
-                .getEachCourseFromElement(evening.get(0));
+    private JSONObject getCurriculumBySeletors(Document curriDoc,
+                                               Day day,
+                                               String ...selectors) {
         JSONArray courses = new JSONArray();
-        courses.addAll(morningCourses);
-        courses.addAll(afternoonCourses);
-        courses.addAll(eveningCourses);
-
+        for (String selector : selectors) {
+            Elements elements = curriDoc.select(selector);
+            assertCurriElements(elements);
+            JSONArray eachCourses = new CourseParser()
+                    .getEachCourseFromElement(elements.get(0));
+            courses.addAll(eachCourses);
+        }
         JSONObject curri = new JSONObject();
         curri.put("day", day.toString());
         curri.put("courses", courses);

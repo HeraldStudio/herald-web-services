@@ -27,9 +27,7 @@ import cn.edu.seu.herald.ws.dao.CampusInfoDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 /**
@@ -42,6 +40,8 @@ public class CampusInfoResource extends AbstractResource {
 
     @Autowired
     private CampusInfoDataAccess campusInfoDataAccess;
+    @Autowired
+    private JsonpParser jsonpParser;
 
     public void setCampusInfoDataAccess(
             CampusInfoDataAccess campusInfoDataAccess) {
@@ -56,5 +56,21 @@ public class CampusInfoResource extends AbstractResource {
                 .entity(campusInfoDataAccess.getJwcFeed().toString())
                 .expires(dateOfNextHour())
                 .build();
+    }
+
+    @GET
+    @Path("/jwc")
+    @Produces("application/javascript")
+    public Response getJwcFeed(@QueryParam("callback") String callback) {
+        try {
+            String json = campusInfoDataAccess.getJwcFeed().toString();
+            String jsonp = jsonpParser.jsonp(callback, json);
+            return Response.status(200)
+                    .entity(jsonp)
+                    .expires(dateOfNextHour())
+                    .build();
+        } catch (IllegalArgumentException ex) {
+            throw new WebApplicationException(400);
+        }
     }
 }
