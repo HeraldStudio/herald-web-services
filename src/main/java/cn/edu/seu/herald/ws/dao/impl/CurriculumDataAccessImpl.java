@@ -82,7 +82,7 @@ public class CurriculumDataAccessImpl implements CurriculumDataAccess {
                     .data("queryStudentId", cardNumber)
                     .data("queryAcademicYear", term).post();
             JSONArray curriculum = new JSONArray();
-            for (Day workDay : getWorkDays()) {
+            for (Day workDay : getAllDays()) {
                 JSONObject workDayCourses = getCourseJsonOfDay(
                         workDay, curriDoc);
                 curriculum.add(workDayCourses);
@@ -166,8 +166,8 @@ public class CurriculumDataAccessImpl implements CurriculumDataAccess {
         Assert.state(elements != null && elements.size() == 1);
     }
 
-    private Day[] getWorkDays() {
-        return new Day[] {Day.MON, Day.TUE, Day.WED, Day.THU, Day.FRI};
+    private Day[] getAllDays() {
+        return new Day[] {Day.MON, Day.TUE, Day.WED, Day.THU, Day.FRI, Day.SAT, Day.SUN};
     }
 
     private int getTdIndex(Day day) {
@@ -182,7 +182,6 @@ public class CurriculumDataAccessImpl implements CurriculumDataAccess {
                 return 6;
             case FRI:
                 return 7;
-            // not sure
             case SAT:
                 return 8;
             case SUN:
